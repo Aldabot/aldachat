@@ -1,15 +1,17 @@
 import Vue from 'vue';
 import BotUI from 'botui';
 import apiai from 'apiai';
+import Promise from 'bluebird';
 const dialogflow = apiai('906971596e7544718f320847dde0d15a');
 const botui = BotUI('aldabot', { vue: Vue });
 
+// bot configuration
 const messageDelay = 500;
 
 class BotApi {
-    static sendTextMessage(text) {
+    static sendTextMessage(text, delay) {
         return botui.message.add({
-            delay: messageDelay,
+            delay: delay,
             content: text
         });
     }
@@ -22,22 +24,30 @@ class BotApi {
 
     static handleTextInput(input) {
         const inputText = input.value;
-        return DialogflowV1.textRequest(inputText);
+        return DialogflowV1.handleInputText(inputText)
+            .then(BotApi.sendTextInputField)
+            .then(BotApi.handleTextInput);
     }
 
-    static startBot = (text) => {
-        return BotApi.sendTextMessage(text)
+    static startBot = (initialMessageText) => {
+        return BotApi.sendTextMessage(initialMessageText, messageDelay)
             .then(BotApi.sendTextInputField)
-            .then(BotApi.handleTextInput)
-            .then((responseText) => {
-                return BotApi.startBot(responseText);
-            });
+            .then(BotApi.handleTextInput);
     };
 }
 
 class DialogflowV1 {
-    constructor(dialogflowJSON) {
-        this.messages = dialogflowJSON.result.fulfillment.messages;
+    static async handleInputText(inputText) {
+        return DialogflowV1.textRequest(inputText)
+            .then((response) => {
+                const messages = response.result.fulfillment.messages;
+                let delay = 0;
+                return Promise.map(messages, (message) => {
+                    const speech = message.speech;
+                    delay += messageDelay;
+                    return BotApi.sendTextMessage(speech, delay);
+                });
+            });
     }
 
     // wrap Apiai V1 Node API into Promise
@@ -46,9 +56,7 @@ class DialogflowV1 {
             const request = dialogflow.textRequest(text, { sessionId: '1' });
 
             request.on('response', function(dialogflowResponse) {
-                console.log(dialogflowResponse);
-                const response = dialogflowResponse.result.fulfillment.speech;
-                resolve(response);
+                resolve(dialogflowResponse);
             });
 
             request.on('error', (error) => {
