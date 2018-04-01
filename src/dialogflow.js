@@ -4,47 +4,63 @@ import apiai from 'apiai';
 const dialogflow = apiai('906971596e7544718f320847dde0d15a');
 const botui = BotUI('aldabot', { vue: Vue });
 
-const textRequest = (text) => {
-    return new Promise((resolve, reject) => {
-        const request = dialogflow.textRequest(text, { sessionId: '1' });
+const messageDelay = 500;
 
-        request.on('response', function(dialogflowResponse) {
-            console.log(dialogflowResponse);
-            const response = dialogflowResponse.result.fulfillment.speech;
-            resolve(response);
+class BotApi {
+    static sendTextMessage(text) {
+        return botui.message.add({
+            delay: messageDelay,
+            content: text
         });
+    }
 
-        request.on('error', (error) => {
-            console.log(error);
-            reject(error);
-        });
-
-        request.end();
-    });
-};
-
-const respond = (text) => {
-    return botui.message.add({
-        delay: 500,
-        content: text
-    }).then(() => {
+    static sendTextInputField() {
         return botui.action.text({
             action: { placeholder: 'Escribe aqui' }
         });
-    }).then((input) => {
-        const inputText = input.value;
-        return textRequest(inputText);
-    }).then((responseText) => {
-        return respond(responseText);
-    });
-};
+    }
 
-respond('Hola');
+    static handleTextInput(input) {
+        const inputText = input.value;
+        return DialogflowV1.textRequest(inputText);
+    }
+
+    static startBot = (text) => {
+        return BotApi.sendTextMessage(text)
+            .then(BotApi.sendTextInputField)
+            .then(BotApi.handleTextInput)
+            .then((responseText) => {
+                return BotApi.startBot(responseText);
+            });
+    };
+}
 
 class DialogflowV1 {
     constructor(dialogflowJSON) {
         this.messages = dialogflowJSON.result.fulfillment.messages;
     }
 
-    
+    // wrap Apiai V1 Node API into Promise
+    static textRequest = (text) => {
+        return new Promise((resolve, reject) => {
+            const request = dialogflow.textRequest(text, { sessionId: '1' });
+
+            request.on('response', function(dialogflowResponse) {
+                console.log(dialogflowResponse);
+                const response = dialogflowResponse.result.fulfillment.speech;
+                resolve(response);
+            });
+
+            request.on('error', (error) => {
+                console.log(error);
+                reject(error);
+            });
+
+            request.end();
+        });
+    };
 }
+
+
+BotApi.startBot('Hola');
+
