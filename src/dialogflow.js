@@ -7,6 +7,7 @@ const botui = BotUI('aldabot', { vue: Vue });
 
 // bot configuration
 const messageDelay = 500;
+const platform = 'facebook';
 
 class BotApi {
     static sendTextMessage(text, delay) {
@@ -20,6 +21,25 @@ class BotApi {
         return botui.action.text({
             action: { placeholder: 'Escribe aqui' }
         });
+    }
+
+    static sendQuickReplies(title, quickReplies, delay) {
+        return BotApi.sendTextMessage(title, delay)
+            .then(() => {
+                delay += messageDelay;
+                const botUIButtons = quickReplies.map((quickReply) => {
+                    return {
+                        text: quickReply,
+                        value: quickReply
+                    };
+                });
+                return botui.action.button({ action: botUIButtons });
+            }).then((selectedQuickReply) => BotApi.handleQuickReply(selectedQuickReply));
+    }
+
+    static handleQuickReply(selectedQuickReply) {
+        const { value } = selectedQuickReply;
+        return BotApi.handleTextInput({ value });
     }
 
     static handleTextInput(input) {
@@ -37,17 +57,34 @@ class BotApi {
 }
 
 class DialogflowV1 {
-    static async handleInputText(inputText) {
+    static handleInputText(inputText) {
         return DialogflowV1.textRequest(inputText)
             .then((response) => {
                 const messages = response.result.fulfillment.messages;
                 let delay = 0;
                 return Promise.map(messages, (message) => {
-                    const speech = message.speech;
                     delay += messageDelay;
-                    return BotApi.sendTextMessage(speech, delay);
+                    return DialogflowV1.handleMessage(message, delay);
                 });
             });
+    }
+
+    static handleMessage(message, delay) {
+        if (message.platform && message.platform === platform) {
+            const type = message.type;
+            switch(type) {
+            case 0:
+                const speech = message.speech;
+                return BotApi.sendTextMessage(speech, delay);
+            case 2:
+                const title = message.title;
+                const quickReplies = message.replies;
+                return BotApi.sendQuickReplies(title, quickReplies, delay);
+            default:
+                return null;
+            }
+        }
+        return null;
     }
 
     // wrap Apiai V1 Node API into Promise
