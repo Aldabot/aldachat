@@ -51,8 +51,14 @@ class BotApi {
 
     static startBot = (initialMessageText) => {
         return BotApi.sendTextMessage(initialMessageText, messageDelay)
-            .then(BotApi.sendTextInputField)
-            .then(BotApi.handleTextInput);
+            .then(() => {
+                return botui.message.add({
+                    loading: true
+                });
+            });
+            // .then(() => {
+            //     return BotApi.sendTextInputField();
+            // }).then(BotApi.handleTextInput);
     };
 }
 

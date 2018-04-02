@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
-/* import logo from './logo.svg'; */
+
+// Components
+import Chat from './component/Chat.js'
+
+// Styling
 import './App.css';
-import './dialogflow.js';
+import 'antd/dist/antd.css';
+
 
 class App extends Component {
   render() {
     return (
       <div className="App">
+        <Chat />
         {/* <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
             <h1 className="App-title">Welcome to React</h1>
