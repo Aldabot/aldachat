@@ -19,7 +19,14 @@ const storeInitialState = {
   }, {
     content: 'Hola Alda',
     human: true
-  }]
+  }],
+  input: {
+    text: {
+      size: 30,
+      placeholder: 'Write here ...',
+    },
+    show: true
+  }
 };
 
 const store = createStore(

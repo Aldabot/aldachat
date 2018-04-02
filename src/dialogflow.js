@@ -62,7 +62,7 @@ class BotApi {
     };
 }
 
-class DialogflowV1 {
+export class DialogflowV1 {
     static handleInputText(inputText) {
         return DialogflowV1.textRequest(inputText)
             .then((response) => {
@@ -81,7 +81,7 @@ class DialogflowV1 {
             switch(type) {
             case 0:
                 const speech = message.speech;
-                return BotApi.sendTextMessage(speech, delay);
+                return speech;
             case 2:
                 const title = message.title;
                 const quickReplies = message.replies;
@@ -113,5 +113,5 @@ class DialogflowV1 {
 }
 
 
-BotApi.startBot('Hola');
+// BotApi.startBot('Hola');
 

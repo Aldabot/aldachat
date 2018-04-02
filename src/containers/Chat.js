@@ -21,9 +21,23 @@ const HumanMessage = BotMessage.extend`
   background-color: red;
 `;
 
+const InputText = styled.input`
+  float: left
+`
+
 class Chat extends React.Component {
+  _handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      this.props.addMessageWithDelay({
+        content: e.target.value,
+        human: true
+      });
+    }
+  }
+
   render() {
-    const { messages, addMessageWithDelay } = this.props;
+    console.log(this.props);
+    const { messages, input } = this.props;
 
     const messageRows = messages.map((message, index) => {
       const { content, human } = message;
@@ -40,15 +54,20 @@ class Chat extends React.Component {
       );
     });
 
-    const exampleMsg = {
-      content: 'jojoo',
-      human: true
-    }
+    const actionRow = (input.show) ? (
+      <Row type="flex" justify="center">
+        <Col span={12}>
+          <InputText type="text" placeholder={input.text.placeholder} autoFocus onKeyPress={this._handleKeyPress} />
+        </Col>
+      </Row>
+    ) : (
+      null
+    );
 
     return (
       <div>
         {messageRows}
-        <button onClick={() => { addMessageWithDelay(exampleMsg) }}>add</button>
+        {actionRow}
       </div>
     );
   }
