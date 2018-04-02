@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addMessage } from '../actions/index.js';
+import { addMessageWithDelay } from '../actions/index.js';
 import { Row, Col } from 'antd';
 import styled from 'styled-components';
 
@@ -23,7 +23,7 @@ const HumanMessage = BotMessage.extend`
 
 class Chat extends React.Component {
   render() {
-    const { messages, addMessage } = this.props;
+    const { messages, addMessageWithDelay } = this.props;
 
     const messageRows = messages.map((message, index) => {
       const { content, human } = message;
@@ -40,10 +40,15 @@ class Chat extends React.Component {
       );
     });
 
+    const exampleMsg = {
+      content: 'jojoo',
+      human: true
+    }
+
     return (
       <div>
         {messageRows}
-        <button onClick={() => { addMessage('hoa') }}>add</button>
+        <button onClick={() => { addMessageWithDelay(exampleMsg) }}>add</button>
       </div>
     );
   }
@@ -55,7 +60,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addMessage: text => { dispatch(addMessage(text)) }
+    addMessageWithDelay: msg => { dispatch(addMessageWithDelay(msg)) }
   };
 }
 

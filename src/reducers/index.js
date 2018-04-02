@@ -3,13 +3,12 @@ import { ADD_MESSAGE } from '../actions/index';
 
 
 function messages(state = [], action) {
+    console.log('msgReducer', action);
     switch (action.type) {
     case ADD_MESSAGE:
         return [
             ...state,
-            {
-                content: "test"
-            }
+            action.msg
         ];
     default:
         return state;

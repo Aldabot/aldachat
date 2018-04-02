@@ -8,6 +8,11 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import logger from 'redux-logger';
 import chatApp from './reducers/index';
+// Sagas
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './sagas/index.js';
+const sagaMiddleware = createSagaMiddleware();
+
 const storeInitialState = {
   messages: [{
     content: 'Hola Dirk'
@@ -20,8 +25,13 @@ const storeInitialState = {
 const store = createStore(
   chatApp,
   storeInitialState,
-  applyMiddleware(logger)
+  applyMiddleware(
+    sagaMiddleware,
+    logger
+  )
 );
+
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>
