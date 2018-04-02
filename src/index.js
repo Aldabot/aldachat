@@ -5,9 +5,23 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 // Redux
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import logger from 'redux-logger';
 import chatApp from './reducers/index';
-const store = createStore(chatApp);
+const storeInitialState = {
+  messages: [{
+    content: 'Hola Dirk'
+  }, {
+    content: 'Hola Alda',
+    human: true
+  }]
+};
+
+const store = createStore(
+  chatApp,
+  storeInitialState,
+  applyMiddleware(logger)
+);
 
 ReactDOM.render(
   <Provider store={store}>

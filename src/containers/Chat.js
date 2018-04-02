@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { addMessage } from '../actions/index.js';
 import { Row, Col } from 'antd';
 import styled from 'styled-components';
 
@@ -19,30 +21,9 @@ const HumanMessage = BotMessage.extend`
   background-color: red;
 `;
 
-export default class Chat extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      messages: [{
-        content: 'Text'
-      }, {
-        content: 'Text',
-        human: true
-      }]
-    }
-
-    this.addMessage = this.addMessage.bind(this);
-  }
-
-  addMessage(msg) {
-    const { messages } = this.state;
-    messages.push(msg);
-    this.setState(messages);
-  }
-
+class Chat extends React.Component {
   render() {
-    const { messages } = this.state;
+    const { messages, addMessage } = this.props;
 
     const messageRows = messages.map((message, index) => {
       const { content, human } = message;
@@ -62,8 +43,25 @@ export default class Chat extends React.Component {
     return (
       <div>
         {messageRows}
-        <button onClick={() => { this.addMessage({ content: "added" }) }}>add</button>
+        <button onClick={() => { addMessage('hoa') }}>add</button>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return state;
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addMessage: text => { dispatch(addMessage(text)) }
+  };
+}
+
+const ConnectedChat = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Chat);
+
+export default ConnectedChat;

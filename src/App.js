@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // Components
-import Chat from './component/Chat.js'
+import Chat from './containers/Chat.js'
 
 // Styling
 import './App.css';
