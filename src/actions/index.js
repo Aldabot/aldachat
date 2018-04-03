@@ -7,6 +7,7 @@ export const ADD_MESSAGE_WITH_DELAY = 'ADD_MESSAGE_WITH_DELAY';
 export const SHOW_INPUT = 'SHOW_INPUT';
 export const HIDE_INPUT = 'HIDE_INPUT';
 export const UPDATE_INPUT = 'UPDATE_INPUT';
+export const SET_INPUT_TYPE_TO_TEXT = 'SET_INPUT_TYPE_TO_TEXT';
 
 
 /*
@@ -26,5 +27,8 @@ export function hideInput() {
     return { type: HIDE_INPUT };
 }
 export function updateInput(input) {
-    return { type: UPDATE_INPUT };
+    return { type: UPDATE_INPUT, input };
+}
+export function setInputTypeToText() {
+    return { type: SET_INPUT_TYPE_TO_TEXT };
 }

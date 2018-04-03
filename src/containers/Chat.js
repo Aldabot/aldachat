@@ -40,6 +40,13 @@ class Chat extends React.Component {
     }
   }
 
+  _handleButtonPress(text) {
+    this.props.addMessageWithDelay({
+      content: text,
+      human: true
+    });
+  }
+
   _renderInputRow() {
     const { input } = this.props;
     const { show, type, buttons } = input;
@@ -50,7 +57,7 @@ class Chat extends React.Component {
           const quickReplies = buttons.map((button, index) => {
             const { text } = button;
             return (
-                <QuickReply key={index}>{text}</QuickReply>
+                <QuickReply onClick={() => {this._handleButtonPress(text)}} key={index}>{text}</QuickReply>
             );
           })
           return (

@@ -1,6 +1,12 @@
 import { delay } from 'redux-saga';
 import { call, put, takeEvery, all } from 'redux-saga/effects';
-import { addMessage, hideInput, showInput } from '../actions/index.js';
+import {
+    addMessage,
+    hideInput,
+    showInput,
+    updateInput,
+    setInputTypeToText
+} from '../actions/index.js';
 import Promise from 'bluebird';
 import apiai from 'apiai';
 const dialogflow = apiai('906971596e7544718f320847dde0d15a');
@@ -19,9 +25,16 @@ function* messageGenerator(message) {
         yield put(addMessage(msg));
         break;
     case 2:
-        const title = message.title;
-        const quickReplies = message.replies;
-        // return BotApi.sendQuickReplies(title, quickReplies, delay);
+        yield put(addMessage({ content: message.title}));
+        const quickReplies = message.replies.map((quickReply) => {
+            return { text: quickReply };
+        });
+        const input = {
+            type: "button",
+            buttons: quickReplies
+        };
+        yield delay(500);
+        yield put(updateInput(input));
     default:
         return null;
     }
@@ -47,9 +60,9 @@ function dialogflowV1Request(text) {
 
 export function* addMessageWithDelay(action) {
     yield put(hideInput());
+    yield put(setInputTypeToText());
     yield put(addMessage(action.msg));
     const dialogflowV1Response = yield call(dialogflowV1Request, action.msg.content);
-    console.log(dialogflowV1Response);
     const messages = dialogflowV1Response.result.fulfillment.messages;
     for (const message of messages) {
         if (message.platform && message.platform === platform) {
@@ -57,6 +70,7 @@ export function* addMessageWithDelay(action) {
             yield messageGenerator(message);
         }
     }
+    yield delay(500);
     yield put(showInput());
 }
 
