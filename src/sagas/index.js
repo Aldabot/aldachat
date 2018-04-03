@@ -1,18 +1,62 @@
 import { delay } from 'redux-saga';
 import { call, put, takeEvery, all } from 'redux-saga/effects';
 import { addMessage, hideInput, showInput } from '../actions/index.js';
-import { DialogflowV1 } from '../dialogflow.js';
+import Promise from 'bluebird';
+import apiai from 'apiai';
+const dialogflow = apiai('906971596e7544718f320847dde0d15a');
+
+// configuration
+const messageDelay = 500;
+const platform = 'facebook';
+
+function* messageGenerator(message) {
+    const type = message.type;
+    switch(type) {
+    case 0:
+        const msg = {
+            content: message.speech
+        };
+        yield put(addMessage(msg));
+        break;
+    case 2:
+        const title = message.title;
+        const quickReplies = message.replies;
+        // return BotApi.sendQuickReplies(title, quickReplies, delay);
+    default:
+        return null;
+    }
+};
+
+// wrap Apiai V1 Node API into Promise
+function dialogflowV1Request(text) {
+    return new Promise((resolve, reject) => {
+        const request = dialogflow.textRequest(text, { sessionId: '1' });
+
+        request.on('response', function(dialogflowResponse) {
+            resolve(dialogflowResponse);
+        });
+
+        request.on('error', (error) => {
+            console.log(error);
+            reject(error);
+        });
+
+        request.end();
+    });
+};
 
 export function* addMessageWithDelay(action) {
     yield put(hideInput());
     yield put(addMessage(action.msg));
-    yield delay(500);
-    const speech = yield call(DialogflowV1.handleInputText, action.msg.content);
-    const msg = {
-        content: speech
-    };
-    yield put(addMessage(msg));
-    yield delay(500);
+    const dialogflowV1Response = yield call(dialogflowV1Request, action.msg.content);
+    console.log(dialogflowV1Response);
+    const messages = dialogflowV1Response.result.fulfillment.messages;
+    for (const message of messages) {
+        if (message.platform && message.platform === platform) {
+            yield delay(500);
+            yield messageGenerator(message);
+        }
+    }
     yield put(showInput());
 }
 

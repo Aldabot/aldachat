@@ -62,6 +62,8 @@ class BotApi {
     };
 }
 
+
+
 export class DialogflowV1 {
     static handleInputText(inputText) {
         return DialogflowV1.textRequest(inputText)
@@ -85,6 +87,7 @@ export class DialogflowV1 {
             case 2:
                 const title = message.title;
                 const quickReplies = message.replies;
+                
                 return BotApi.sendQuickReplies(title, quickReplies, delay);
             default:
                 return null;
@@ -112,6 +115,24 @@ export class DialogflowV1 {
     };
 }
 
+const dialogflowV1Request = (text) => {
+    return new Promise((resolve, reject) => {
+        const request = dialogflow.textRequest(text, { sessionId: '1' });
+
+        request.on('response', function(dialogflowResponse) {
+            resolve(dialogflowResponse);
+        });
+
+        request.on('error', (error) => {
+            console.log(error);
+            reject(error);
+        });
+
+        request.end();
+    });
+};
+
+export default dialogflowV1Request;
 
 // BotApi.startBot('Hola');
 

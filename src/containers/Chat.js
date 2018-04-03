@@ -22,8 +22,13 @@ const HumanMessage = BotMessage.extend`
 `;
 
 const InputText = styled.input`
-  float: left
-`
+  float: left;
+`;
+
+const QuickReply = styled.button`
+  margin-right: 20px;
+  float: left;
+`;
 
 class Chat extends React.Component {
   _handleKeyPress = (e) => {
@@ -35,40 +40,61 @@ class Chat extends React.Component {
     }
   }
 
+  _renderInputRow() {
+    const { input } = this.props;
+    const { show, type, buttons } = input;
+
+    if ( show ) {
+      switch(type) {
+        case "button":
+          const quickReplies = buttons.map((button, index) => {
+            const { text } = button;
+            return (
+                <QuickReply key={index}>{text}</QuickReply>
+            );
+          })
+          return (
+            <Row type="flex" justify="left">
+              <Col span={12}>
+                {quickReplies}
+              </Col>
+            </Row>
+          );
+        default:
+          return (
+            <Row type="flex" justify="center">
+              <Col span={12}>
+                <InputText type="text" placeholder={input.text.placeholder} autoFocus onKeyPress={this._handleKeyPress} />
+              </Col>
+            </Row>
+          );
+      }
+    }
+  }
+
   render() {
-    console.log(this.props);
-    const { messages, input } = this.props;
+    const { messages } = this.props;
 
     const messageRows = messages.map((message, index) => {
       const { content, human } = message;
       const messageOutput = (!human) ? <BotMessage>{content}</BotMessage> : <HumanMessage>{content}</HumanMessage>;
 
       return (
-        <div key={index}>
-          <Row type="flex" justify="center">
-            <Col span={12}>
-              {messageOutput}
-            </Col>
-          </Row>
-        </div>
+        <Row key={index} type="flex" justify="center">
+          <Col span={24}>
+            {messageOutput}
+          </Col>
+        </Row>
       );
     });
 
-    const actionRow = (input.show) ? (
+    return (
       <Row type="flex" justify="center">
         <Col span={12}>
-          <InputText type="text" placeholder={input.text.placeholder} autoFocus onKeyPress={this._handleKeyPress} />
+          {messageRows}
+          {this._renderInputRow()}
         </Col>
       </Row>
-    ) : (
-      null
-    );
-
-    return (
-      <div>
-        {messageRows}
-        {actionRow}
-      </div>
     );
   }
 }

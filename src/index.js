@@ -21,6 +21,14 @@ const storeInitialState = {
     human: true
   }],
   input: {
+    type: 'text',
+    buttons: [{
+      text: 'button 1',
+      value: 'b1'
+    }, {
+      text: 'button 2',
+      value: 'b2'
+    }],
     text: {
       size: 30,
       placeholder: 'Write here ...',

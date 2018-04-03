@@ -2,7 +2,8 @@ import { combineReducers } from 'redux';
 import {
     ADD_MESSAGE,
     SHOW_INPUT,
-    HIDE_INPUT
+    HIDE_INPUT,
+    UPDATE_INPUT
 } from '../actions/index';
 
 function messages(state = [], action) {
@@ -29,10 +30,15 @@ function input(state = [], action) {
             ...state,
             show: false
         };
+    case UPDATE_INPUT:
+        return {
+            ...state,
+            ...action.input
+        };
     default:
         return state;
     }
-}
+};
 
 const chatApp = combineReducers({
     messages,

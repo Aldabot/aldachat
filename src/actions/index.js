@@ -6,6 +6,7 @@ export const ADD_MESSAGE = 'ADD_MESSAGE';
 export const ADD_MESSAGE_WITH_DELAY = 'ADD_MESSAGE_WITH_DELAY';
 export const SHOW_INPUT = 'SHOW_INPUT';
 export const HIDE_INPUT = 'HIDE_INPUT';
+export const UPDATE_INPUT = 'UPDATE_INPUT';
 
 
 /*
@@ -23,4 +24,7 @@ export function showInput() {
 }
 export function hideInput() {
     return { type: HIDE_INPUT };
+}
+export function updateInput(input) {
+    return { type: UPDATE_INPUT };
 }
