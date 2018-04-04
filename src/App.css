@@ -1,11 +1,14 @@
+body {
+  /* background: linear-gradient(#00c6ff, #0072ff); */
+}
+
 .App {
   text-align: center;
-  background-color: gray;
 }
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  height: 80px
 }
 
 .App-header {

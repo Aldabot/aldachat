@@ -3,30 +3,33 @@ import { connect } from 'react-redux';
 import { addMessageWithDelay } from '../actions/index.js';
 import { Row, Col, Card } from 'antd';
 import styled from 'styled-components';
-// carousel arrows from react-slick (slick-carousel package)
-/* import 'slick-carousel/slick/slick.css'; */
-import 'slick-carousel/slick/slick-theme.css';
 const { Meta } = Card;
 
 const BotMessage = styled.div`
-  margin: 10px 0;
+  font-size: 14px;
+  margin: 2px 0;
   min-height: 30px;
   max-width: 85%;
   text-align: left;
   padding: 7px 13px;
   border-radius: 15px;
   color: black;
-  background-color: yellow;
+  background-color: #f1f0f0;
   float: left;
 `;
 
 const HumanMessage = BotMessage.extend`
   float: right;
-  background-color: red;
+  color: white;
+  background-color: #0072ff;
 `;
 
 const InputText = styled.input`
-  float: left;
+  font-size: 14px;
+  margin-top: 10px;
+  width: 100%;
+  border-width: 0 0 1px 0;
+  border-bottom-color: #0072ff;
 `;
 
 const QuickReply = styled.button`
@@ -72,11 +75,11 @@ class Chat extends React.Component {
             </Row>
           );
         case "card":
-          return this._renderCardCarousel();
+          return this._renderCards();
         default:
           return (
             <Row type="flex" justify="center">
-              <Col span={12}>
+              <Col span={24}>
                 <InputText type="text" placeholder={input.text.placeholder} autoFocus onKeyPress={this._handleKeyPress} />
               </Col>
             </Row>
@@ -85,7 +88,7 @@ class Chat extends React.Component {
     }
   }
 
-  _renderCardCarousel() {
+  _renderCards() {
     const { cards } = this.props.input;
     const renderedCards = cards.map((card, index) => {
       const { title, subtitle, imageUrl, buttons } = card;
@@ -133,7 +136,7 @@ class Chat extends React.Component {
 
     return (
       <Row type="flex" justify="center">
-        <Col span={12}>
+        <Col span={8}>
           {messageRows}
           {this._renderInputRow()}
         </Col>
