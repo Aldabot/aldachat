@@ -1,8 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addMessageWithDelay } from '../actions/index.js';
-import { Row, Col } from 'antd';
+import { Row, Col, Card } from 'antd';
 import styled from 'styled-components';
+// carousel arrows from react-slick (slick-carousel package)
+/* import 'slick-carousel/slick/slick.css'; */
+import 'slick-carousel/slick/slick-theme.css';
+const { Meta } = Card;
 
 const BotMessage = styled.div`
   margin: 10px 0;
@@ -67,6 +71,8 @@ class Chat extends React.Component {
               </Col>
             </Row>
           );
+        case "card":
+          return this._renderCardCarousel();
         default:
           return (
             <Row type="flex" justify="center">
@@ -77,6 +83,36 @@ class Chat extends React.Component {
           );
       }
     }
+  }
+
+  _renderCardCarousel() {
+    const { cards } = this.props.input;
+    const renderedCards = cards.map((card, index) => {
+      const { title, subtitle, imageUrl, buttons } = card;
+
+      const renderButtons = buttons.map((button, index) => {
+        const { text } = button;
+        return <button key={index} onClick={() => {this._handleButtonPress(text)}}>{text}</button>
+      });
+      return (
+        <Col span={7} key={index} style={{ marginBottom: '4.16%' }}>
+          <Card
+            cover={<img alt="example" src={imageUrl} />}
+            actions={[renderButtons]}
+          >
+            <Meta
+              title={title}
+              description={subtitle}
+            />
+          </Card>
+        </Col>
+      )
+    });
+    return (
+      <Row type="flex" justify="space-around">
+          {renderedCards}
+      </Row>
+    );
   }
 
   render() {

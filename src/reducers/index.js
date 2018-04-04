@@ -4,6 +4,7 @@ import {
     SHOW_INPUT,
     HIDE_INPUT,
     UPDATE_INPUT,
+    SET_INPUT_CARDS,
     SET_INPUT_TYPE_TO_TEXT
 } from '../actions/index';
 
@@ -35,6 +36,12 @@ function input(state = [], action) {
         return {
             ...state,
             type: 'text'
+        };
+    case SET_INPUT_CARDS:
+        return {
+            ...state,
+            type: 'card',
+            cards: action.cards
         };
     case UPDATE_INPUT:
         console.log(action);

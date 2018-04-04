@@ -22,6 +22,10 @@ const storeInitialState = {
   }],
   input: {
     type: 'text',
+    text: {
+      size: 30,
+      placeholder: 'Write here ...',
+    },
     buttons: [{
       text: 'button 1',
       value: 'b1'
@@ -29,10 +33,15 @@ const storeInitialState = {
       text: 'button 2',
       value: 'b2'
     }],
-    text: {
-      size: 30,
-      placeholder: 'Write here ...',
-    },
+    cards: [{
+      title: 'Card 1',
+    }, {
+      title: 'Cards 2'
+    }, {
+      title: 'Card 1',
+    }, {
+      title: 'Cards 2'
+    }],
     show: true
   }
 };
