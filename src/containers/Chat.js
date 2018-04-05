@@ -28,13 +28,23 @@ const InputText = styled.input`
   font-size: 14px;
   margin-top: 10px;
   width: 100%;
+  outline: none;
   border-width: 0 0 1px 0;
   border-bottom-color: #0072ff;
 `;
 
 const QuickReply = styled.button`
-  margin-right: 20px;
+  border-radius: 15px;
+  border-color: #0072ff;
+  color: #0072ff;
+  background-color: white;
+  margin: 2px 10px 0 0;
   float: left;
+  &:hover {
+    color: white;
+    background-color: #0072ff;
+    cursor: pointer;
+  }
 `;
 
 class Chat extends React.Component {
