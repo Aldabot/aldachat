@@ -17,7 +17,6 @@ const messageDelay = 500;
 const platform = 'facebook';
 
 function* messageGenerator(message) {
-    console.log(message);
     const type = message.type;
     switch(type) {
     case 0:
@@ -27,7 +26,6 @@ function* messageGenerator(message) {
         yield put(addMessage(msg));
         break;
     case 1:
-        console.log("cards");
         yield put(setInputCards(message.cards));
         break;
     case 2:
@@ -69,7 +67,6 @@ export function* addMessageWithDelay(action) {
     yield put(setInputTypeToText());
     yield put(addMessage(action.msg));
     const dialogflowV1Response = yield call(dialogflowV1Request, action.msg.content);
-    console.log(dialogflowV1Response);
     const messages = dialogflowV1Response.result.fulfillment.messages;
     const cardMessage = {
         type: 1,
@@ -78,12 +75,8 @@ export function* addMessageWithDelay(action) {
     for (const message of messages) {
         if (message.platform && message.platform === platform) {
             // if card, gather and send as one message
-            console.log(message);
             if (message.type === 1) {
-                console.log("yay cards message");
                 cardMessage.cards.push(message);
-                console.log("card message");
-                console.log(cardMessage);
             } else {
                 if (cardMessage.cards.length > 0) {
                     yield delay(500);

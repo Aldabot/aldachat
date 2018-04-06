@@ -44,7 +44,6 @@ function input(state = [], action) {
             cards: action.cards
         };
     case UPDATE_INPUT:
-        console.log(action);
         return {
             ...state,
             ...action.input

@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "antd": "^3.4.0",
-    "apiai": "^4.0.3",
+    "apiai": "https://github.com/Aldabot/dialogflow-nodejs-client",
     "autoprefixer": "7.1.6",
     "babel-core": "6.26.0",
     "babel-eslint": "7.2.3",
@@ -39,6 +39,7 @@
     "react": "^16.3.0",
     "react-dev-utils": "^5.0.0",
     "react-dom": "^16.3.0",
+    "react-motion": "^0.5.2",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",

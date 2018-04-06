@@ -2,8 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addMessageWithDelay } from '../actions/index.js';
 import { Row, Col, Card } from 'antd';
-import styled from 'styled-components';
+import styled, { ThemeProvider }from 'styled-components';
 const { Meta } = Card;
+
+const theme = {
+  main: '#0072ff',
+  gray: 'e9e9e9',
+};
 
 const BotMessage = styled.div`
   font-size: 14px;
@@ -40,6 +45,45 @@ const QuickReply = styled.button`
   background-color: white;
   margin: 2px 10px 0 0;
   float: left;
+  &:hover {
+    color: white;
+    background-color: #0072ff;
+    cursor: pointer;
+  }
+`;
+
+const AldaCard = styled(Card)`
+  & .ant-card-cover img {
+    border-radius: 15px 15px 0 0 !important;
+  }
+  border-radius: 15px !important;
+  & ul {
+    border-radius: 15px;
+  }
+  & ul li {
+    display: block;
+    width: 100% !important;
+    margin: 0;
+  }
+  & ul li span {
+    width: 100%;
+  }
+  & ul li:last-child span button {
+    border-radius: 0 0 15px 15px !important;
+  }
+`;
+
+const CardButton = styled.button`
+  display: block;
+  width: 100%;
+  font-size: 20px;
+  color: ${props => props.theme.main};
+  border-width: 0 0 1px 0;
+  border-color: ${props => props.theme.gray};
+  background-color: white;
+  & < span {
+    width: 100%;
+  }
   &:hover {
     color: white;
     background-color: #0072ff;
@@ -105,19 +149,19 @@ class Chat extends React.Component {
 
       const renderButtons = buttons.map((button, index) => {
         const { text } = button;
-        return <button key={index} onClick={() => {this._handleButtonPress(text)}}>{text}</button>
+        return <CardButton key={index} onClick={() => {this._handleButtonPress(text)}}>{text}</CardButton>
       });
       return (
-        <Col span={7} key={index} style={{ marginBottom: '4.16%' }}>
-          <Card
+        <Col span={11} key={index} style={{ marginBottom: '4.16%' }}>
+          <AldaCard
             cover={<img alt="example" src={imageUrl} />}
-            actions={[renderButtons]}
+            actions={renderButtons}
           >
             <Meta
               title={title}
               description={subtitle}
             />
-          </Card>
+          </AldaCard>
         </Col>
       )
     });
@@ -145,12 +189,14 @@ class Chat extends React.Component {
     });
 
     return (
+      <ThemeProvider theme={theme}>
       <Row type="flex" justify="center">
-        <Col span={8}>
-          {messageRows}
-          {this._renderInputRow()}
-        </Col>
-      </Row>
+      <Col span={8}>
+      {messageRows}
+      {this._renderInputRow()}
+              </Col>
+            </Row>
+      </ThemeProvider>
     );
   }
 }

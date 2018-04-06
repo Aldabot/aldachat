@@ -203,9 +203,9 @@ anymatch@^2.0.0:
     micromatch "^3.1.4"
     normalize-path "^2.1.1"
 
-apiai@^4.0.3:
+"apiai@https://github.com/Aldabot/dialogflow-nodejs-client":
   version "4.0.3"
-  resolved "https://registry.yarnpkg.com/apiai/-/apiai-4.0.3.tgz#2d1aa3bad1fd9418deaada509369e84e011efaf8"
+  resolved "https://github.com/Aldabot/dialogflow-nodejs-client#e50af96800aae43bfa9f61f6e720127779485828"
 
 append-transform@^0.4.0:
   version "0.4.0"
@@ -5746,7 +5746,7 @@ querystringify@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-1.0.0.tgz#6286242112c5b712fa654e526652bf6a13ff05cb"
 
-raf@3.4.0:
+raf@3.4.0, raf@^3.1.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/raf/-/raf-3.4.0.tgz#a28876881b4bc2ca9117d4138163ddb80f781575"
   dependencies:
@@ -6163,6 +6163,14 @@ react-lazy-load@^3.0.12:
     lodash.debounce "^4.0.0"
     lodash.throttle "^4.0.0"
     prop-types "^15.5.8"
+
+react-motion@^0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/react-motion/-/react-motion-0.5.2.tgz#0dd3a69e411316567927917c6626551ba0607316"
+  dependencies:
+    performance-now "^0.2.0"
+    prop-types "^15.5.8"
+    raf "^3.1.0"
 
 react-redux@^5.0.7:
   version "5.0.7"
