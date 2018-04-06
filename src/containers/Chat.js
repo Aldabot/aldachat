@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { addMessageWithDelay } from '../actions/index.js';
 import { Row, Col, Card } from 'antd';
 import styled, { ThemeProvider }from 'styled-components';
+import { Motion, spring } from 'react-motion';
 const { Meta } = Card;
 
 const theme = {
@@ -11,6 +12,7 @@ const theme = {
 };
 
 const BotMessage = styled.div`
+  margin-left: ${props => props.x};
   font-size: 14px;
   margin: 2px 0;
   min-height: 30px;
@@ -177,7 +179,15 @@ class Chat extends React.Component {
 
     const messageRows = messages.map((message, index) => {
       const { content, human } = message;
-      const messageOutput = (!human) ? <BotMessage>{content}</BotMessage> : <HumanMessage>{content}</HumanMessage>;
+      const messageOutput = (!human) ? (
+        <Motion defaultStyle={{x: -100, y:0}} style={{x: spring(0, {stiffness: 90, damping: 10}), y: spring(1, {stiffness: 70, damping: 17})}}>
+          {motionState => <BotMessage style={{transform: `translate3d(${motionState.x}px, 0, 0)`, opacity: motionState.y}}>{content}</BotMessage>}
+        </Motion>
+      ) : (
+        <Motion defaultStyle={{x: 100, y:0}} style={{x: spring(0, {stiffness: 90, damping: 10}), y: spring(1, {stiffness: 70, damping: 17})}}>
+          {motionState => <HumanMessage style={{transform: `translate3d(${motionState.x}px, 0, 0)`, opacity: motionState.y}}>{content}</HumanMessage>}
+        </Motion>
+      );
 
       return (
         <Row key={index} type="flex" justify="center">
@@ -190,12 +200,12 @@ class Chat extends React.Component {
 
     return (
       <ThemeProvider theme={theme}>
-      <Row type="flex" justify="center">
-      <Col span={8}>
-      {messageRows}
-      {this._renderInputRow()}
-              </Col>
-            </Row>
+        <Row type="flex" justify="center">
+          <Col span={8}>
+            {messageRows}
+            {this._renderInputRow()}
+          </Col>
+        </Row>
       </ThemeProvider>
     );
   }
