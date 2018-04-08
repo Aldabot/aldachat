@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addMessageWithDelay } from '../actions/index.js';
-import { Row, Col, Card, Button } from 'antd';
+import { Row, Col, Card, Button, InputNumber } from 'antd';
 import styled, { ThemeProvider }from 'styled-components';
 import { Motion, spring } from 'react-motion';
 import ReactMarkdown from 'react-markdown';
@@ -51,6 +51,10 @@ const InputButton = styled(Button)`
   &:hover span {
     color: ${props => props.theme.primaryColor};
   }
+`;
+
+const InputNumberStyled = styled(InputNumber)`
+  width: 100% !important;
 `;
 
 const QuickReply = styled.button`
@@ -118,6 +122,8 @@ class Chat extends React.Component {
     this.state = {
       inputText: ''
     }
+
+    this._handleNumberInputOnChange = this._handleNumberInputOnChange.bind(this);
   }
 
   _sendHumanMessage(text) {
@@ -128,6 +134,10 @@ class Chat extends React.Component {
       });
       this.setState({inputText: ''});
     }
+  }
+
+  _handleNumberInputOnChange(value) {
+    this.setState({ inputText: value+'€' });
   }
 
   _handleTextInputOnChange = (e) => {
@@ -172,12 +182,29 @@ class Chat extends React.Component {
               </Col>
             </Row>
           );
+        case "number":
+          return (
+            <InputRow type="flex" justify="center">
+              <Col span={16}>
+                <InputNumberStyled
+                  defaultValue={0}
+                  formatter={value => `${value}€`}
+                  parser={value => value.replace('€', '')}
+                  onChange={this._handleNumberInputOnChange}
+                  onKeyPress={this._handleInputOnKeyPress}
+                />
+              </Col>
+              <Col span={4}>
+                <InputButton onClick={() => {this._sendHumanMessage(inputText)}}>Enviar</InputButton>
+              </Col>
+            </InputRow>
+          );
         case "card":
           return this._renderCards();
         default:
           return (
             <InputRow type="flex" justify="center">
-              <Col span={20}>
+              <Col span={16}>
                 <InputText type="text" value={inputText} placeholder={input.text.placeholder} autoFocus
                   onChange={this._handleTextInputOnChange} onKeyPress={this._handleTextInputOnKeyPress} />
               </Col>

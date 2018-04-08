@@ -21,7 +21,7 @@ const storeInitialState = {
     human: true
   }],
   input: {
-    type: 'button',
+    type: 'number',
     text: {
       size: 30,
       placeholder: 'Escribe aqui ...',
