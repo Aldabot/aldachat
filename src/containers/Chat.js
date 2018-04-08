@@ -1,20 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addMessageWithDelay } from '../actions/index.js';
-import { Row, Col, Card } from 'antd';
+import { Row, Col, Card, Button } from 'antd';
 import styled, { ThemeProvider }from 'styled-components';
 import { Motion, spring } from 'react-motion';
 import ReactMarkdown from 'react-markdown';
 const { Meta } = Card;
 
 const theme = {
-  main: '#0072ff',
+  fontSize: '20px',
+  primaryColor: '#0072ff',
   gray: 'e9e9e9',
 };
 
 const BotMessage = styled.div`
   margin-left: ${props => props.x};
-  font-size: 14px;
+  font-size: ${props => props.theme.fontSize};
   margin: 2px 0;
   min-height: 30px;
   max-width: 85%;
@@ -32,16 +33,28 @@ const HumanMessage = BotMessage.extend`
   background-color: #0072ff;
 `;
 
-const InputText = styled.input`
-  font-size: 14px;
+const InputRow = styled(Row)`
   margin-top: 10px;
+`;
+
+const InputText = styled.input`
+  font-size: ${props => props.theme.fontSize};
   width: 100%;
   outline: none;
   border-width: 0 0 1px 0;
   border-bottom-color: #0072ff;
 `;
+const InputButton = styled(Button)`
+                & span {
+                  font-size: ${props => props.theme.fontSize};
+                }
+  &:hover span {
+    color: ${props => props.theme.primaryColor};
+  }
+`;
 
 const QuickReply = styled.button`
+  font-size: ${props => props.theme.fontSize};
   border-radius: 15px;
   border-color: #0072ff;
   color: #0072ff;
@@ -80,7 +93,7 @@ const CardButton = styled.button`
   display: block;
   width: 100%;
   font-size: 20px;
-  color: ${props => props.theme.main};
+  color: ${props => props.theme.primaryColor};
   border-width: 0 0 1px 0;
   border-color: ${props => props.theme.gray};
   background-color: white;
@@ -99,20 +112,36 @@ const ContinueButton = QuickReply.extend`
 `;
 
 class Chat extends React.Component {
-  _handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      inputText: ''
+    }
+  }
+
+  _sendHumanMessage(text) {
+    if (text !== '') {
       this.props.addMessageWithDelay({
-        content: e.target.value,
+        content: text,
         human: true
       });
+      this.setState({inputText: ''});
+    }
+  }
+
+  _handleTextInputOnChange = (e) => {
+    this.setState({inputText: e.target.value});
+  }
+
+  _handleTextInputOnKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      this._sendHumanMessage(this.state.inputText);
     }
   }
 
   _handleButtonPress(text) {
-    this.props.addMessageWithDelay({
-      content: text,
-      human: true
-    });
+    this._sendHumanMessage(text);
   }
 
   _handleCardButtonPress(text, postback) {
@@ -123,6 +152,7 @@ class Chat extends React.Component {
   }
 
   _renderInputRow() {
+    const { inputText } = this.state;
     const { input } = this.props;
     const { show, type, buttons } = input;
 
@@ -146,11 +176,15 @@ class Chat extends React.Component {
           return this._renderCards();
         default:
           return (
-            <Row type="flex" justify="center">
-              <Col span={24}>
-                <InputText type="text" placeholder={input.text.placeholder} autoFocus onKeyPress={this._handleKeyPress} />
+            <InputRow type="flex" justify="center">
+              <Col span={20}>
+                <InputText type="text" value={inputText} placeholder={input.text.placeholder} autoFocus
+                  onChange={this._handleTextInputOnChange} onKeyPress={this._handleTextInputOnKeyPress} />
               </Col>
-            </Row>
+              <Col span={4}>
+                <InputButton onClick={() => {this._sendHumanMessage(inputText)}}>Enviar</InputButton>
+              </Col>
+            </InputRow>
           );
       }
     }
@@ -171,7 +205,7 @@ class Chat extends React.Component {
       });
 
       return (
-        <Col span={11} key={index} style={{ marginBottom: '4.16%' }}>
+        <Col span={24} md={11} key={index} style={{ marginBottom: '4.16%' }}>
           <AldaCard
             cover={<img alt="example" src={imageUrl} />}
             actions={renderButtons}
@@ -224,7 +258,7 @@ class Chat extends React.Component {
     return (
       <ThemeProvider theme={theme}>
         <Row type="flex" justify="center">
-          <Col span={10}>
+          <Col span={24} md={10} >
             {messageRows}
             {this._renderInputRow()}
           </Col>

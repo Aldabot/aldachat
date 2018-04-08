@@ -24,13 +24,13 @@ const storeInitialState = {
     type: 'button',
     text: {
       size: 30,
-      placeholder: 'Write here ...',
+      placeholder: 'Escribe aqui ...',
     },
     buttons: [{
       text: 'De que servicios ofreces?',
       value: 'b1'
     }, {
-      text: 'Quiero hablar ya...',
+      text: 'Quiero hablar...',
       value: 'b2'
     }],
     cards: [{
