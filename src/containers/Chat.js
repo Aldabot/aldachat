@@ -92,7 +92,11 @@ const CardButton = styled.button`
     background-color: #0072ff;
     cursor: pointer;
   }
-`
+`;
+
+const ContinueButton = QuickReply.extend`
+  width: 100%;
+`;
 
 class Chat extends React.Component {
   _handleKeyPress = (e) => {
@@ -109,6 +113,13 @@ class Chat extends React.Component {
       content: text,
       human: true
     });
+  }
+
+  _handleCardButtonPress(text, postback) {
+    console.log('postback', postback);
+    if(postback !== 'url') {
+      this.handleButtonPress(text);
+    }
   }
 
   _renderInputRow() {
@@ -151,13 +162,14 @@ class Chat extends React.Component {
       const { title, subtitle, imageUrl, buttons } = card;
 
       const renderButtons = buttons.map((button, index) => {
-        const { text } = button;
+        const { text, postback } = button;
         return (
-          <CardButton key={index} onClick={() => {this._handleButtonPress(text)}}>
+          <CardButton key={index} onClick={() => {this._handleCardButtonPress(text, postback)}}>
             <ReactMarkdown source={text}   renderers={{link : props => <a href={props.href} target="_blank">{props.children}</a>}} />
           </CardButton>
         );
       });
+
       return (
         <Col span={11} key={index} style={{ marginBottom: '4.16%' }}>
           <AldaCard
@@ -166,15 +178,21 @@ class Chat extends React.Component {
           >
             <Meta
               title={title}
-              description={subtitle}
+              description={<ReactMarkdown source={subtitle} />}
             />
           </AldaCard>
         </Col>
       )
     });
+
     return (
-      <Row type="flex" justify="space-around">
+      <Row type="flex" justify="space-around" align="middle">
           {renderedCards}
+          <Col span={24}>
+            <ContinueButton onClick={() => {this._handleButtonPress('Vale, gracias Alda! En que mas me podrias ayudar?')}}>
+              Vale Gracias Alda! En que mas me podrias ayudar?
+            </ContinueButton>
+          </Col>
       </Row>
     );
   }
@@ -206,7 +224,7 @@ class Chat extends React.Component {
     return (
       <ThemeProvider theme={theme}>
         <Row type="flex" justify="center">
-          <Col span={8}>
+          <Col span={10}>
             {messageRows}
             {this._renderInputRow()}
           </Col>

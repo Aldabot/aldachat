@@ -21,16 +21,16 @@ const storeInitialState = {
     human: true
   }],
   input: {
-    type: 'text',
+    type: 'button',
     text: {
       size: 30,
       placeholder: 'Write here ...',
     },
     buttons: [{
-      text: 'button 1',
+      text: 'De que servicios ofreces?',
       value: 'b1'
     }, {
-      text: 'button 2',
+      text: 'Quiero hablar ya...',
       value: 'b2'
     }],
     cards: [{
