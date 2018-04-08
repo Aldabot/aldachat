@@ -4,6 +4,7 @@ import { addMessageWithDelay } from '../actions/index.js';
 import { Row, Col, Card } from 'antd';
 import styled, { ThemeProvider }from 'styled-components';
 import { Motion, spring } from 'react-motion';
+import ReactMarkdown from 'react-markdown';
 const { Meta } = Card;
 
 const theme = {
@@ -91,7 +92,7 @@ const CardButton = styled.button`
     background-color: #0072ff;
     cursor: pointer;
   }
-`;
+`
 
 class Chat extends React.Component {
   _handleKeyPress = (e) => {
@@ -151,7 +152,11 @@ class Chat extends React.Component {
 
       const renderButtons = buttons.map((button, index) => {
         const { text } = button;
-        return <CardButton key={index} onClick={() => {this._handleButtonPress(text)}}>{text}</CardButton>
+        return (
+          <CardButton key={index} onClick={() => {this._handleButtonPress(text)}}>
+            <ReactMarkdown source={text}   renderers={{link : props => <a href={props.href} target="_blank">{props.children}</a>}} />
+          </CardButton>
+        );
       });
       return (
         <Col span={11} key={index} style={{ marginBottom: '4.16%' }}>
