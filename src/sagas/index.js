@@ -10,7 +10,8 @@ import {
 } from '../actions/index.js';
 import Promise from 'bluebird';
 import apiai from 'apiai';
-const dialogflow = apiai('906971596e7544718f320847dde0d15a');
+const dialogflow = apiai('9f8ab0fe92fa4de0bc4a47bb586cbb19');
+// const dialogflow = apiai('906971596e7544718f320847dde0d15a');
 
 // configuration
 const messageDelay = 500;
@@ -39,6 +40,11 @@ function* messageGenerator(message) {
         };
         yield delay(500);
         yield put(updateInput(input));
+    case 'custom_payload':
+        console.log(message);
+        // if (message.payload.input && message.payload.input === 'input') {
+        //     yield put(updateInput({ type: 'nuber' }));
+        // }
     default:
         return null;
     }
@@ -67,6 +73,7 @@ export function* addMessageWithDelay(action) {
     yield put(setInputTypeToText());
     yield put(addMessage(action.msg));
     const dialogflowV1Response = yield call(dialogflowV1Request, action.msg.content);
+    console.log(dialogflowV1Response);
     const messages = dialogflowV1Response.result.fulfillment.messages;
     const cardMessage = {
         type: 1,
