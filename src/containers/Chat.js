@@ -104,10 +104,19 @@ const CardButton = styled.button`
   & < span {
     width: 100%;
   }
+  & div p a {
+    width: 100%;
+    color: ${props => props.theme.primaryColor} !important;
+    display: block;
+    padding-top: 15px;
+  }
   &:hover {
     color: white;
     background-color: #0072ff;
     cursor: pointer;
+  }
+  &:hover div p a {
+    color: white !important;
   }
 `;
 

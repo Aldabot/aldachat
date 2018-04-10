@@ -10,7 +10,7 @@ import {
 } from '../actions/index.js';
 import Promise from 'bluebird';
 import apiai from 'apiai';
-const dialogflow = apiai('9f8ab0fe92fa4de0bc4a47bb586cbb19');
+const dialogflow = apiai('9f8ab0fe92fa4de0bc4a47bb586cbb19', { language: 'es' });
 // const dialogflow = apiai('906971596e7544718f320847dde0d15a');
 
 // configuration
@@ -80,7 +80,7 @@ export function* addMessageWithDelay(action) {
         cards: []
     };
     for (const message of messages) {
-        if (message.platform && message.platform === platform) {
+        // if (message.platform && message.platform === platform) {
             // if card, gather and send as one message
             if (message.type === 1) {
                 cardMessage.cards.push(message);
@@ -93,7 +93,7 @@ export function* addMessageWithDelay(action) {
                 yield delay(500);
                 yield messageGenerator(message);
             }
-        }
+        // }
     }
     if (cardMessage.cards.length > 0) {
         yield delay(500);

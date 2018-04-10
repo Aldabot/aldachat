@@ -15,7 +15,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const storeInitialState = {
   messages: [{
-    content: 'Hola Dirk'
+    content: 'Hola'
   }, {
     content: 'Hola Alda',
     human: true
@@ -27,7 +27,7 @@ const storeInitialState = {
       placeholder: 'Escribe aqui ...',
     },
     buttons: [{
-      text: 'De que servicios ofreces?',
+      text: 'Que servicios ofreces?',
       value: 'b1'
     }, {
       text: 'Quiero hablar...',
