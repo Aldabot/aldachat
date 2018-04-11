@@ -8,6 +8,7 @@ import ReactMarkdown from 'react-markdown';
 const { Meta } = Card;
 
 const theme = {
+  fontSizeSmall: '16px',
   fontSize: '20px',
   primaryColor: '#0072ff',
   gray: 'e9e9e9',
@@ -90,6 +91,12 @@ const AldaCard = styled(Card)`
   }
   & ul li:last-child span button {
     border-radius: 0 0 15px 15px !important;
+  }
+
+  & table {
+    width: 100%;
+    margin-top: 10px;
+    font-size: ${props => props.theme.fontSizeSmall};
   }
 `;
 
@@ -186,7 +193,7 @@ class Chat extends React.Component {
           })
           return (
             <Row type="flex" justify="left">
-              <Col span={12}>
+              <Col span={20}>
                 {quickReplies}
               </Col>
             </Row>
