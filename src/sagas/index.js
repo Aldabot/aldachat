@@ -10,8 +10,19 @@ import {
 } from '../actions/index.js';
 import Promise from 'bluebird';
 import apiai from 'apiai';
-const dialogflow = apiai('9f8ab0fe92fa4de0bc4a47bb586cbb19', { language: 'es' });
-// const dialogflow = apiai('906971596e7544718f320847dde0d15a');
+
+// Select language of Dialogflow from browser settings
+var browserLanguage = window.navigator.userLanguage || window.navigator.language;
+let language;
+switch(browserLanguage) {
+case 'es-ES':
+    language = 'es';
+    break;
+default:
+    language = 'en';
+}
+
+const dialogflow = apiai('9f8ab0fe92fa4de0bc4a47bb586cbb19', { language });
 
 // configuration
 const messageDelay = 500;
