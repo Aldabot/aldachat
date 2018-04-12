@@ -5,6 +5,8 @@ import { Row, Col, Card, Button, InputNumber, Icon } from 'antd';
 import styled, { ThemeProvider }from 'styled-components';
 import { Motion, spring } from 'react-motion';
 import ReactMarkdown from 'react-markdown';
+// Intl
+import { intlShape, injectIntl, defineMessages } from 'react-intl';
 const { Meta } = Card;
 
 const theme = {
@@ -136,6 +138,14 @@ const ContinueButton = QuickReply.extend`
   width: 100%;
 `;
 
+// Intl
+const messages = defineMessages({
+  textInputPlaceholder: {
+    id: 'chat.textInputPlaceholder',
+    defaultMessage: 'Write here...',
+  },
+});
+
 class Chat extends React.Component {
   constructor(props) {
     super(props);
@@ -226,7 +236,7 @@ class Chat extends React.Component {
           return (
             <InputRow type="flex" justify="center">
               <Col span={16}>
-                <InputText type="text" value={inputText} placeholder={input.text.placeholder} autoFocus
+                <InputText type="text" value={inputText} placeholder={this.props.intl.formatMessage(messages.textInputPlaceholder)} autoFocus
                   onChange={this._handleTextInputOnChange} onKeyPress={this._handleTextInputOnKeyPress} />
               </Col>
               <Col span={4}>
@@ -303,6 +313,7 @@ class Chat extends React.Component {
       );
     });
 
+    console.log(this.props);
     return (
       <ThemeProvider theme={theme}>
         <Row type="flex" justify="center">
@@ -331,4 +342,4 @@ const ConnectedChat = connect(
   mapDispatchToProps
 )(Chat);
 
-export default ConnectedChat;
+export default injectIntl(ConnectedChat);
