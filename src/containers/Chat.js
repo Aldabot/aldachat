@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addMessageWithDelay } from '../actions/index.js';
-import { Row, Col, Card, Button, InputNumber } from 'antd';
+import { Row, Col, Card, Button, InputNumber, Icon } from 'antd';
 import styled, { ThemeProvider }from 'styled-components';
 import { Motion, spring } from 'react-motion';
 import ReactMarkdown from 'react-markdown';
@@ -13,6 +13,11 @@ const theme = {
   primaryColor: '#0072ff',
   gray: 'e9e9e9',
 };
+
+const AldaIcon = styled(Icon)`
+  font-size: ${props => props.theme.fontSize};
+  padding: 5px;
+`;
 
 const BotMessage = styled.div`
   margin-left: ${props => props.x};
@@ -211,7 +216,7 @@ class Chat extends React.Component {
                 />
               </Col>
               <Col span={4}>
-                <InputButton onClick={() => {this._sendHumanMessage(inputText)}}>Enviar</InputButton>
+                <InputButton onClick={() => {this._sendHumanMessage(inputText)}}><AldaIcon type="mail" /></InputButton>
               </Col>
             </InputRow>
           );
@@ -225,7 +230,7 @@ class Chat extends React.Component {
                   onChange={this._handleTextInputOnChange} onKeyPress={this._handleTextInputOnKeyPress} />
               </Col>
               <Col span={4}>
-                <InputButton onClick={() => {this._sendHumanMessage(inputText)}}>Enviar</InputButton>
+                <InputButton onClick={() => {this._sendHumanMessage(inputText)}}><AldaIcon type="mail" /></InputButton>
               </Col>
             </InputRow>
           );

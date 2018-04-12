@@ -15,13 +15,10 @@ const sagaMiddleware = createSagaMiddleware();
 
 const storeInitialState = {
   messages: [{
-    content: 'Hola'
-  }, {
-    content: 'Hola Alda',
-    human: true
+    content: 'Hey'
   }],
   input: {
-    type: 'button',
+    type: 'text',
     text: {
       size: 30,
       placeholder: 'Escribe aqui ...',
