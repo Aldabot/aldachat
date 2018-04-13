@@ -6,7 +6,7 @@ import styled, { ThemeProvider }from 'styled-components';
 import { Motion, spring } from 'react-motion';
 import ReactMarkdown from 'react-markdown';
 // Intl
-import { intlShape, injectIntl, defineMessages } from 'react-intl';
+import { injectIntl, defineMessages } from 'react-intl';
 const { Meta } = Card;
 
 const theme = {
@@ -141,9 +141,11 @@ const ContinueButton = QuickReply.extend`
 // Intl
 const messages = defineMessages({
   textInputPlaceholder: {
-    id: 'chat.textInputPlaceholder',
-    defaultMessage: 'Write here...',
+    id: 'chat.textInputPlaceholder'
   },
+  cardInputContinue: {
+    id: 'chat.cardInputContinue'
+  }
 });
 
 class Chat extends React.Component {
@@ -281,8 +283,8 @@ class Chat extends React.Component {
       <Row type="flex" justify="space-around" align="middle">
           {renderedCards}
           <Col span={24}>
-            <ContinueButton onClick={() => {this._handleButtonPress('Vale, gracias Alda! En que mas me podrias ayudar?')}}>
-              Vale Gracias Alda! En que mas me podrias ayudar?
+            <ContinueButton onClick={() => {this._handleButtonPress(this.props.intl.formatMessage(messages.cardInputContinue))}}>
+              {this.props.intl.formatMessage(messages.cardInputContinue)}
             </ContinueButton>
           </Col>
       </Row>
@@ -313,7 +315,6 @@ class Chat extends React.Component {
       );
     });
 
-    console.log(this.props);
     return (
       <ThemeProvider theme={theme}>
         <Row type="flex" justify="center">

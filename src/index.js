@@ -19,10 +19,12 @@ const sagaMiddleware = createSagaMiddleware();
 
 addLocaleData([...en, ...es]);
 const enDict = {
-  "chat.textInputPlaceholder": "Write here..."
+  "chat.textInputPlaceholder": "Write here...",
+  "chat.cardInputContinue": "Thanks Alda! What else do you offer?"
 };
 const esDict = {
-  "chat.textInputPlaceholder": "Escribe aqui..."
+  "chat.textInputPlaceholder": "Escribe aqui...",
+  "chat.cardInputContinue": "Gracias Alda! Qué más ofreces?"
 };
 var browserLanguage = window.navigator.userLanguage || window.navigator.language;
 let language;
