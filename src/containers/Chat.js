@@ -26,7 +26,7 @@ const BotMessage = styled.div`
   font-size: ${props => props.theme.fontSize};
   margin: 2px 0;
   min-height: 30px;
-  max-width: 85%;
+  max-width: 87.36%;
   text-align: left;
   padding: 7px 13px;
   border-radius: 15px;
@@ -204,13 +204,14 @@ class Chat extends React.Component {
         case "button":
           const quickReplies = buttons.map((button, index) => {
             const { text } = button;
+
             return (
-                <QuickReply onClick={() => {this._handleButtonPress(text)}} key={index}>{text}</QuickReply>
+                <QuickReply onClick={() => {this._handleButtonPress(text)}} key={index} style={{ float: 'none', display: 'inline-block' }}>{text}</QuickReply>
             );
           })
           return (
             <Row type="flex" justify="left">
-              <Col span={20}>
+              <Col span={21} style={{textAlign: 'center' }} >
                 {quickReplies}
               </Col>
             </Row>
@@ -318,7 +319,7 @@ class Chat extends React.Component {
     return (
       <ThemeProvider theme={theme}>
         <Row type="flex" justify="center">
-          <Col span={24} md={10} >
+          <Col id="chatContainer" span={24} md={10} >
             {messageRows}
             {this._renderInputRow()}
           </Col>

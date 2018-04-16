@@ -41,20 +41,25 @@ switch(browserLanguage) {
 
 const storeInitialState = {
   messages: [{
-    content: 'Hey'
+    content: '¡Enhorabuena! Acabas de dar con la mejor asesora financiera de España 👍',
+  }, {
+    content: 'Por ahora puedo ayudarte a buscar el préstamo que mejor se ajuste a tus necesidades o a invertir tus ahorros en función de tus necesidades.'
   }],
   input: {
-    type: 'text',
+    type: 'button',
     text: {
       size: 30,
       placeholder: 'Escribe aqui ...',
     },
     buttons: [{
-      text: 'Que servicios ofreces?',
+      text: 'Necesito un préstamo',
       value: 'b1'
     }, {
-      text: 'Quiero hablar...',
+      text: 'Quiero invertir',
       value: 'b2'
+    }, {
+      text: 'Quiero más información',
+      value: 'b3'
     }],
     cards: [{
       title: 'Card 1',
