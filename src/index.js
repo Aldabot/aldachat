@@ -35,8 +35,9 @@ switch(browserLanguage) {
     dict = esDict;
     break;
   default:
-    language = 'en';
-    dict = enDict;
+    // language DEFAULT LANGUAGE SHOULD BE EN
+    language = 'es';
+    dict = esDict;
 }
 
 const storeInitialState = {

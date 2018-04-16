@@ -19,7 +19,8 @@ case 'es-ES':
     language = 'es';
     break;
 default:
-    language = 'en';
+    // DEFAULT LANGUAGE SHOULD BE EN
+    language = 'es';
 }
 
 const dialogflow = apiai('9f8ab0fe92fa4de0bc4a47bb586cbb19', { language });
