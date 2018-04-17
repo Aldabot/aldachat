@@ -10,6 +10,7 @@ import {
 } from '../actions/index.js';
 import Promise from 'bluebird';
 import apiai from 'apiai';
+import { v4 as uuidV4 } from 'uuid';
 
 // Select language of Dialogflow from browser settings
 var browserLanguage = window.navigator.userLanguage || window.navigator.language;
@@ -24,6 +25,7 @@ default:
 }
 
 const dialogflow = apiai('9f8ab0fe92fa4de0bc4a47bb586cbb19', { language });
+const uuid = uuidV4();
 
 // configuration
 const messageDelay = 500;
@@ -65,7 +67,7 @@ function* messageGenerator(message) {
 // wrap Apiai V1 Node API into Promise
 function dialogflowV1Request(text) {
     return new Promise((resolve, reject) => {
-        const request = dialogflow.textRequest(text, { sessionId: '1' });
+        const request = dialogflow.textRequest(text, { sessionId: uuid });
 
         request.on('response', function(dialogflowResponse) {
             resolve(dialogflowResponse);
