@@ -5,6 +5,7 @@ import { Row, Col, Card, Button, InputNumber, Icon } from 'antd';
 import styled, { ThemeProvider }from 'styled-components';
 import { Motion, spring } from 'react-motion';
 import ReactMarkdown from 'react-markdown';
+import { animateScroll as scroll } from 'react-scroll';
 // Intl
 import { injectIntl, defineMessages } from 'react-intl';
 const { Meta } = Card;
@@ -157,6 +158,10 @@ class Chat extends React.Component {
     }
 
     this._handleNumberInputOnChange = this._handleNumberInputOnChange.bind(this);
+  }
+
+  componentDidUpdate() {
+    scroll.scrollToBottom();
   }
 
   _sendHumanMessage(text) {
