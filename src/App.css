@@ -1,6 +1,10 @@
 body {
   /* background: linear-gradient(#00c6ff, #0072ff); */
-  padding: 16px 16px 0 16px;
+  padding: 16px;
+}
+
+#root {
+  padding-bottom: 30px;
 }
 
 .App {
