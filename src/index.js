@@ -47,11 +47,7 @@ switch(browserLanguage) {
 }
 
 const storeInitialState = {
-  messages: [{
-    content: '¡Enhorabuena! Acabas de dar con la mejor asesora financiera de España 👍',
-  }, {
-    content: 'Por ahora puedo ayudarte a buscar el préstamo que mejor se ajusta a tus necesidades o a invertir tus ahorros en función de tu perfil.'
-  }],
+  messages: [],
   input: {
     type: 'button',
     text: {

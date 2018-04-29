@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
 import { Route } from 'react-router'
 import { Link, withRouter } from 'react-router-dom'
-import { Layout, Row, Col, Menu, Spin } from 'antd'
+import { Layout, Menu, Spin } from 'antd'
 
 // Components
 import Chat from './containers/Chat.js'
@@ -14,7 +14,6 @@ import Amplify, { Auth } from 'aws-amplify'
 import aws_exports from './aws-exports'
 
 // Styling
-import styled from 'styled-components';
 import './App.css';
 import 'antd/dist/antd.css';
 
@@ -40,8 +39,11 @@ class App extends Component {
     const user = await Auth.currentUserInfo()
     if( user === null ) {
       this.setState({ isLoading: false })
+      this.props.addMessage({ content: '¡Enhorabuena! Acabas de dar con la mejor asesora financiera de España' })
+      this.props.addMessage({ content: 'Por ahora puedo ayudarte a buscar el préstamo que mejor se ajusta a tus necesidades o a invertir tus ahorros en función de tu perfil.' })
     } else {
-      this.props.addMessage({ content: `No te lo pierdas, ${user.username}💪` })
+      this.props.addMessage({ content: `Hola, ${user.username} 😍😍😍` })
+      this.props.addMessage({ content: '¿En que puedo ayudarte?' })
       this.setState({
         isLoading: false,
         user,
@@ -52,10 +54,7 @@ class App extends Component {
 
   async signOut() {
     await Auth.signOut()
-    this.setState({
-      isLoggedIn: false,
-      user: {}
-    })
+    window.location.reload()
   }
 
   handleMenu(item) {
