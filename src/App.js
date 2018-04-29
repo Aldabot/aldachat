@@ -47,10 +47,17 @@ class App extends Component {
 
   async signOut() {
     await Auth.signOut()
+    this.setState({
+      isLoggedIn: false,
+      user: {}
+    })
   }
 
-  handleMenu() {
-    this.signOut()
+  handleMenu(item) {
+    const { key } = item
+    if(key === 'signOut') {
+      this.signOut()
+    }
   }
 
   renderAuthentificationMenuItem() {
