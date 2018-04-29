@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+// Router
+import createHistory from 'history/createBrowserHistory'
+import { ConnectedRouter, routerMiddleware } from 'react-router-redux'
 // Intl
 import { IntlProvider, addLocaleData } from 'react-intl';
 import en from 'react-intl/locale-data/en';
@@ -15,7 +18,10 @@ import chatApp from './reducers/index';
 // Sagas
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas/index.js';
-const sagaMiddleware = createSagaMiddleware();
+
+const history = createHistory()
+const reactRouterMiddleware = routerMiddleware(history)
+const sagaMiddleware = createSagaMiddleware()
 
 addLocaleData([...en, ...es]);
 const enDict = {
@@ -80,6 +86,7 @@ const store = createStore(
   storeInitialState,
   applyMiddleware(
     sagaMiddleware,
+    reactRouterMiddleware,
     logger
   )
 );
@@ -89,7 +96,9 @@ sagaMiddleware.run(rootSaga);
 ReactDOM.render(
   <Provider store={store}>
     <IntlProvider locale={language} messages={dict}>
-      <App />
+      <ConnectedRouter history={history}>
+        <App />
+      </ConnectedRouter>
     </IntlProvider>
   </Provider>,
   document.getElementById('root'));

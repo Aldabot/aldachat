@@ -1,4 +1,5 @@
-import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux'
+import { combineReducers } from 'redux'
 import {
     ADD_MESSAGE,
     SHOW_INPUT,
@@ -55,7 +56,8 @@ function input(state = [], action) {
 
 const chatApp = combineReducers({
     messages,
-    input
+    input,
+    router: routerReducer,
 });
 
 export default chatApp;
