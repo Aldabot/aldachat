@@ -13,6 +13,12 @@ import { addMessage } from './actions/index'
 import Amplify, { Auth } from 'aws-amplify'
 import aws_exports from './aws-exports'
 
+// Redux
+import {
+  signIn,
+  signOut
+} from './actions/authenticator'
+
 // Styling
 import './App.css';
 import 'antd/dist/antd.css';
@@ -37,11 +43,14 @@ class App extends Component {
     // chk if user logged in
     // -> send greeting
     const user = await Auth.currentUserInfo()
+
     if( user === null ) {
-      this.setState({ isLoading: false })
+      this.props.signOut()
       this.props.addMessage({ content: '¡Enhorabuena! Acabas de dar con la mejor asesora financiera de España' })
       this.props.addMessage({ content: 'Por ahora puedo ayudarte a buscar el préstamo que mejor se ajusta a tus necesidades o a invertir tus ahorros en función de tu perfil.' })
+      this.setState({ isLoading: false })
     } else {
+      this.props.signIn(user)
       this.props.addMessage({ content: `Hola, ${user.username} 😍😍😍` })
       this.props.addMessage({ content: '¿En que puedo ayudarte?' })
       this.setState({
@@ -54,7 +63,7 @@ class App extends Component {
 
   async signOut() {
     await Auth.signOut()
-    window.location.reload()
+    this.props.signOut()
   }
 
   handleMenu(item) {
@@ -65,7 +74,7 @@ class App extends Component {
   }
 
   renderAuthentificationMenuItem() {
-    const { isLoggedIn } = this.state
+    const { isLoggedIn } = this.props.user
     if(isLoggedIn) {
       return <Menu.Item key="signOut">Sign Out</Menu.Item>
     }
@@ -87,6 +96,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <Layout>
         <Header>
@@ -111,10 +121,17 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  return { router: state.router }
+  return {
+    router: state.router,
+    user: state.user
+  }
 }
 function mapDispatchToProps(dispatch) {
-  return { addMessage: (message) => {dispatch(addMessage(message))}}
+  return {
+    addMessage: (message) => {dispatch(addMessage(message))},
+    signIn: () => dispatch(signIn()),
+    signOut: () => dispatch(signOut())
+  }
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

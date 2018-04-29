@@ -36,6 +36,6 @@ body {
 }
 
 /* withAuthenticator: hide sign up phone number */
-.phone_number {
-  display: none
+input[name="phone_number"] {
+  display: none !important;
 }

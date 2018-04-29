@@ -1,5 +1,6 @@
 import { routerReducer } from 'react-router-redux'
 import { combineReducers } from 'redux'
+import { user } from './authenticate.js'
 import {
     ADD_MESSAGE,
     SHOW_INPUT,
@@ -58,6 +59,7 @@ const chatApp = combineReducers({
     messages,
     input,
     router: routerReducer,
+    user
 });
 
 export default chatApp;
