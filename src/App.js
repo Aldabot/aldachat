@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux'
 import { Route } from 'react-router'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { Layout, Row, Col, Menu, Spin } from 'antd'
 
 // Components
@@ -77,7 +78,7 @@ class App extends Component {
     return (
       <Fragment>
         <Route exact path="/" component={Chat}/>
-        <Route exact path="/authenticator" component={Authenticator}/>
+        <Route exact path="/authenticator" component={Authenticator} />
       </Fragment>
     )
   }
@@ -106,4 +107,8 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return { router: state.router }
+}
+
+export default withRouter(connect(mapStateToProps)(App));

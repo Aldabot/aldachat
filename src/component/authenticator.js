@@ -1,18 +1,15 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { withAuthenticator } from 'aws-amplify-react'
 
 class Authenticator extends Component {
     componentWillMount() {
         this.redirectIfLoggedIn()
     }
-    componentWillUpdate(nextProps) {
-        console.log(nextProps)
-    }
 
     redirectIfLoggedIn() {
-        const { authState, history } = this.props
+        const { authState } = this.props
         if (authState === 'signedIn') {
-            this.props.history.push('/')
+          window.location.href = '/'
         }
     }
 
