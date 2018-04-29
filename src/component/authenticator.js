@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Spin } from 'antd'
 import { withAuthenticator } from 'aws-amplify-react'
 
 class Authenticator extends Component {
@@ -14,8 +15,8 @@ class Authenticator extends Component {
     }
 
     render() {
-        return (null)
+        return <Spin size="large" />
     }
 }
 
-export default withAuthenticator(Authenticator, { includeGreetings: true })
+export default withAuthenticator(Authenticator)

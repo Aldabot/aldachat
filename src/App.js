@@ -7,6 +7,7 @@ import { Layout, Row, Col, Menu, Spin } from 'antd'
 // Components
 import Chat from './containers/Chat.js'
 import Authenticator from './component/authenticator'
+import { addMessage } from './actions/index'
 
 // Amplify
 import Amplify, { Auth } from 'aws-amplify'
@@ -34,10 +35,13 @@ class App extends Component {
   }
 
   async componentDidMount() {
+    // chk if user logged in
+    // -> send greeting
     const user = await Auth.currentUserInfo()
     if( user === null ) {
       this.setState({ isLoading: false })
     } else {
+      this.props.addMessage({ content: `No te lo pierdas, ${user.username}💪` })
       this.setState({
         isLoading: false,
         user,
@@ -110,5 +114,8 @@ class App extends Component {
 function mapStateToProps(state) {
   return { router: state.router }
 }
+function mapDispatchToProps(dispatch) {
+  return { addMessage: (message) => {dispatch(addMessage(message))}}
+}
 
-export default withRouter(connect(mapStateToProps)(App));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

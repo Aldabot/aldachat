@@ -34,3 +34,8 @@ body {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+/* withAuthenticator: hide sign up phone number */
+.phone_number {
+  display: none
+}
