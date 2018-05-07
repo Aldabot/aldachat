@@ -2,12 +2,14 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
 import { Route } from 'react-router'
 import { Link, withRouter } from 'react-router-dom'
-import { Layout, Menu, Spin } from 'antd'
+import { Layout, Spin, Row, Col } from 'antd'
+import styled from 'styled-components'
 
 // Components
 import Chat from './containers/Chat.js'
 import Authenticator from './component/authenticator'
 import { addMessage } from './actions/index'
+import MyMenu from './component/menu'
 
 // Amplify
 import Amplify, { Auth } from 'aws-amplify'
@@ -20,11 +22,24 @@ import {
 } from './actions/authenticator'
 
 // Styling
-import './App.css';
-import 'antd/dist/antd.css';
+import './App.less';
 
 Amplify.configure(aws_exports)
 const { Header, Content } = Layout
+
+const MyHeader = styled(Header)`
+  background-color: white !important;
+`
+/* function AppearBottomTop(props) {
+ *   return (
+ *     <Motion defaultStyle={{x: 20, y: 0}} style={{x: spring(0), y: spring(1)}}>
+ *       {({x, y}) => {
+ *          const style = {position: 'relative', top: x, opacity: y}
+ *          return React.cloneElement(props.children, {style})
+ *       }}
+ *     </Motion>
+ *   )
+ * } */
 
 class App extends Component {
   constructor(props) {
@@ -35,8 +50,6 @@ class App extends Component {
       user: {},
       isLoading: true
     }
-
-    this.handleMenu = this.handleMenu.bind(this)
   }
 
   async componentDidMount() {
@@ -66,21 +79,6 @@ class App extends Component {
     this.props.signOut()
   }
 
-  handleMenu(item) {
-    const { key } = item
-    if(key === 'signOut') {
-      this.signOut()
-    }
-  }
-
-  renderAuthentificationMenuItem() {
-    const { isLoggedIn } = this.props.user
-    if(isLoggedIn) {
-      return <Menu.Item key="signOut">Sign Out</Menu.Item>
-    }
-    return <Menu.Item key="signIn"><Link to="/authenticator">Sign In</Link></Menu.Item>
-  }
-
   renderContent() {
     const { isLoading } = this.state
     if (isLoading) {
@@ -96,22 +94,20 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props)
+    const { isLoggedIn } = this.state
+
     return (
       <Layout>
-        <Header>
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={['alda']}
-            style={{lineHeight: '64px'}}
-            onClick={this.handleMenu}
-          >
-            <Menu.Item key="alda"><Link to="/">Alda</Link></Menu.Item>
-            <Menu.Item key="blog"><a href="https://medium.com/@rosinol.gabriel" rel="noopener noreferrer" target="_blank">Blog</a></Menu.Item>
-            {this.renderAuthentificationMenuItem()}
-          </Menu>
-        </Header>
+        <MyHeader>
+          <Row type="flex" justify="space-between">
+            <Col>
+              <h1>Alda</h1>
+            </Col>
+            <Col style={{lineHeight: '64px'}}>
+              <MyMenu isLoggedIn={isLoggedIn} signOut={this.signOut} />
+            </Col>
+          </Row>
+        </MyHeader>
         <Content style={{backgroundColor: 'white', paddingTop: '16px', textAlign: 'center'}}>
           {this.renderContent()}
         </Content>
