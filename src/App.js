@@ -10,6 +10,7 @@ import Chat from './containers/Chat.js'
 import Authenticator from './component/authenticator'
 import { addMessage } from './actions/index'
 import MyMenu from './component/menu'
+import IntroVideo from './component/introVideo'
 
 // Amplify
 import Amplify, { Auth } from 'aws-amplify'
@@ -87,7 +88,7 @@ class App extends Component {
 
     return (
       <Fragment>
-        <Route exact path="/" component={Chat}/>
+        <Route exact path="/" component={IntroVideo}/>
         <Route exact path="/authenticator" component={Authenticator} />
       </Fragment>
     )
