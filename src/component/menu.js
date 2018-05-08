@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import { StaggeredMotion, spring } from 'react-motion'
 import { Menu } from 'antd'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 class MyMenu extends Component {
-  handleMenu(item) {
+  menuSelect(item) {
     const { key } = item
     if(key === 'signOut') {
       this.props.signOut()
@@ -21,15 +22,28 @@ class MyMenu extends Component {
   }
 
   render() {
+    const { location } = this.props.router;
+    const selectedKeys = [];
+    switch(location.pathname) {
+      case '/':
+        selectedKeys.push('home')
+        break
+      case '/authenticator':
+        selectedKeys.push('signIn')
+        break;
+      default: break;
+    }
     const menuItems = [
-      <Menu.Item key={1}>
+      <Menu.Item key="home" >
         <Link to="/" >Home</Link>
       </Menu.Item>,
-      <Menu.Item key={2}>
+      <Menu.Item key="blog">
         <a target="_blank" rel="noopener noreferrer" href="https://medium.com/@alda_es" >Blog</a>
       </Menu.Item>,
       this.renderAuthentificationMenuItem()
     ]
+
+    console.log(this.props.router)
 
     return (
       <StaggeredMotion
@@ -42,8 +56,9 @@ class MyMenu extends Component {
         {interpolatingStyles =>
           <Menu
             mode="horizontal"
-            defaultSelectedKeys={['alda']}
-            onClick={this.handleMenu}
+            defaultSelectedKeys={['home']}
+            selectedKeys={selectedKeys}
+            onSelect={this.menuSelect}
             style={{lineHeight: '64px'}}
             >
             {interpolatingStyles.map((style, i) => {

@@ -95,6 +95,7 @@ class App extends Component {
 
   render() {
     const { isLoggedIn } = this.state
+    const { router } = this.props
 
     return (
       <Layout>
@@ -104,7 +105,7 @@ class App extends Component {
               <h1>Alda</h1>
             </Col>
             <Col style={{lineHeight: '64px'}}>
-              <MyMenu isLoggedIn={isLoggedIn} signOut={this.signOut} />
+              <MyMenu isLoggedIn={isLoggedIn} signOut={this.signOut} router={router} />
             </Col>
           </Row>
         </MyHeader>
