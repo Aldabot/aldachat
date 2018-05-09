@@ -68,7 +68,7 @@ class IntroVideo extends Component {
                     <h1>Alda</h1>
                     <p>Disfruta de tu propio asesor financiero y mejora ya tu situación financiera.</p>
                     <p>Regístrate gratis con solo un clic.</p>
-                    <Link to="/"><Button>Sign In</Button></Link>
+                    {/* <Link to="/"><Button>Sign In</Button></Link> */}
                   </RightCol>
                 )}
               </Transition>

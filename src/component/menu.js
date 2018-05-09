@@ -15,7 +15,6 @@ class MyMenu extends Component {
 
   renderAuthentificationMenuItem() {
     const { isLoggedIn } = this.props
-    return (null) // no login for now
     if(isLoggedIn) {
       return <Menu.Item key="signOut">Sign Out</Menu.Item>
     }
@@ -40,11 +39,8 @@ class MyMenu extends Component {
       </Menu.Item>,
       <Menu.Item key="blog">
         <a target="_blank" rel="noopener noreferrer" href="https://medium.com/@alda_es" >Blog</a>
-      </Menu.Item>,
-      this.renderAuthentificationMenuItem()
+      </Menu.Item>
     ]
-
-    console.log(this.props.router)
 
     return (
       <StaggeredMotion
