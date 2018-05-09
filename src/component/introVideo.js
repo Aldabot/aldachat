@@ -31,8 +31,9 @@ const Diamond = styled.img`
   z-index: -1;
 `
 const Diamond2 = Diamond.extend`
-  top: 50vw;
-  right: -30vw;
+  top: 33vw;
+  left: auto;
+  right: -36vw;
   width: 60vw;
 `
 
@@ -41,9 +42,11 @@ class IntroVideo extends Component {
         return (
           <Fragment>
             <Transition from={{ opacity: 0, left: '-80vw' }} enter={{ opacity: 1, left: '-60vw' }} config={{friction: 50}}>
-              { styles => <Diamond style={styles} src={diamond} />}
+              { styles => <Diamond style={styles} src={diamond} /> }
             </Transition>
-            <Diamond2 src={diamond} />
+            <Transition from={{ opacity: 0, right: '-80vw' }} enter={{ opacity: 1, right: '-36vw' }} config={{friction: 40}}>
+              { styles => <Diamond2 src={diamond} style={styles} /> }
+            </Transition>
             <Row type="flex" justify="center" align="middle">
               <Transition from={{ top: -100 }} enter={{ top: 0 }} config={{friction: 50}}>
                 { styles => (
