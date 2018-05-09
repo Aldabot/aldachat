@@ -39,7 +39,8 @@ class MyMenu extends Component {
       </Menu.Item>,
       <Menu.Item key="blog">
         <a target="_blank" rel="noopener noreferrer" href="https://medium.com/@alda_es" >Blog</a>
-      </Menu.Item>
+      </Menu.Item>,
+      this.renderAuthentificationMenuItem()
     ]
 
     return (
