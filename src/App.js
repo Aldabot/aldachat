@@ -39,7 +39,6 @@ const MyLayout = styled(Layout)`
   background-color: rgba(0, 0, 0, 0) !important;
 `
 const MyContent = styled(Content)`
-  background-color: white;
   text-align: center;
   margin-top: 20px;
 `
