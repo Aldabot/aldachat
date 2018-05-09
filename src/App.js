@@ -29,8 +29,21 @@ Amplify.configure(aws_exports)
 const { Header, Content } = Layout
 
 const MyHeader = styled(Header)`
-  background-color: white !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+  z-index: 0;
 `
+const HeaderH1 = styled.h1`
+  color: white;
+`
+const MyLayout = styled(Layout)`
+  background-color: rgba(0, 0, 0, 0) !important;
+`
+const MyContent = styled(Content)`
+  background-color: white;
+  text-align: center;
+  margin-top: 20px;
+`
+
 /* function AppearBottomTop(props) {
  *   return (
  *     <Motion defaultStyle={{x: 20, y: 0}} style={{x: spring(0), y: spring(1)}}>
@@ -99,21 +112,21 @@ class App extends Component {
     const { router } = this.props
 
     return (
-      <Layout>
+      <MyLayout>
         <MyHeader>
           <Row type="flex" justify="space-between">
             <Col>
-              <h1>Alda</h1>
+              <HeaderH1>Alda</HeaderH1>
             </Col>
             <Col style={{lineHeight: '64px'}}>
               <MyMenu isLoggedIn={isLoggedIn} signOut={this.signOut} router={router} />
             </Col>
           </Row>
         </MyHeader>
-        <Content style={{backgroundColor: 'white', paddingTop: '16px', textAlign: 'center'}}>
+        <MyContent>
           {this.renderContent()}
-        </Content>
-      </Layout>
+        </MyContent>
+      </MyLayout>
     )
   }
 }
