@@ -21,6 +21,10 @@ const Video = styled.video`
 
 const RightCol = styled(Col)`
   text-align: left;
+  @media (max-width: 768px) {
+    text-align: center;
+    padding-bottom: 30px;
+  }
 `
 
 const Diamond = styled.img`
@@ -50,7 +54,7 @@ class IntroVideo extends Component {
             <Row type="flex" justify="center" align="middle">
               <Transition from={{ top: -100 }} enter={{ top: 0 }} config={{friction: 50}}>
                 { styles => (
-                  <Col span={8} style={styles}>
+                  <Col span={22} order={2} md={{ span: 8, order: 1}} style={styles}>
                     <Phone src={phone} alt="movil" />
                     <Video autoPlay>
                       <source src={video} type="video/mp4"/>
@@ -60,7 +64,7 @@ class IntroVideo extends Component {
               </Transition>
               <Transition from={{ top: 100 }} enter={{ top: 0 }} config={{friction: 50}}>
                 { styles => (
-                  <RightCol span={8} style={styles}>
+                  <RightCol span={22} order={1} md={{span: 8, order: 2}} style={styles}>
                     <h1>Alda</h1>
                     <p>Disfruta de tu propio asesor financiero y mejora ya tu situación financiera.</p>
                     <p>Regístrate gratis con solo un clic.</p>
