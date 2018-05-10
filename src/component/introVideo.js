@@ -7,6 +7,10 @@ import phone from '../media/phone.png'
 import video from '../media/300-loan.mp4'
 import diamond from '../media/diamond.svg'
 
+const MySection = styled.section`
+  margin-bottom: 40px;
+`
+
 const Phone = styled.img`
   width: 100%;
   z-index: 1;
@@ -44,7 +48,7 @@ const Diamond2 = Diamond.extend`
 class IntroVideo extends Component {
     render() {
         return (
-          <Section>
+          <MySection>
             <Transition from={{ opacity: 0, left: '-80vw' }} enter={{ opacity: 1, left: '-60vw' }} config={{friction: 50}}>
               { styles => <Diamond style={styles} src={diamond} /> }
             </Transition>
@@ -73,7 +77,7 @@ class IntroVideo extends Component {
                 )}
               </Transition>
             </Row>
-          </Section>
+          </MySection>
         )
     }
 }

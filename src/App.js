@@ -10,7 +10,7 @@ import Chat from './containers/Chat.js'
 import Authenticator from './component/authenticator'
 import { addMessage } from './actions/index'
 import MyMenu from './component/menu'
-import IntroVideo from './component/introVideo'
+import Home from './component/home'
 
 // Amplify
 import Amplify, { Auth } from 'aws-amplify'
@@ -39,7 +39,6 @@ const MyLayout = styled(Layout)`
   background-color: rgba(0, 0, 0, 0) !important;
 `
 const MyContent = styled(Content)`
-  text-align: center;
   margin-top: 20px;
 `
 
@@ -100,7 +99,7 @@ class App extends Component {
 
     return (
       <Fragment>
-        <Route exact path="/" component={IntroVideo}/>
+        <Route exact path="/" component={Home}/>
         <Route exact path="/authenticator" component={Authenticator} />
       </Fragment>
     )
