@@ -54,6 +54,8 @@ class SecurtyCarousel extends Component {
       centerPadding: "60px",
       slidesToShow: 1,
       variableWidth: true,
+      focusOnSelect: true,
+      draggable: true,
       speed: 500,
     }
 

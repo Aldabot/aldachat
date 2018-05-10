@@ -29,6 +29,7 @@ Amplify.configure(aws_exports)
 const { Header, Content } = Layout
 
 const MyHeader = styled(Header)`
+  padding: 0 20px !important;
   background-color: rgba(0, 0, 0, 0) !important;
   z-index: 0;
 `
@@ -112,8 +113,8 @@ class App extends Component {
     return (
       <MyLayout>
         <MyHeader>
-          <Row type="flex" justify="space-between">
-            <Col>
+          <Row type="flex" justify="end">
+            <Col xs={0}>
               <HeaderH1>Alda</HeaderH1>
             </Col>
             <Col style={{lineHeight: '64px'}}>
