@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { Row, Col, Button } from 'antd'
 import { Link } from 'react-router-dom'
-import { Transition, Parallax, ParallaxLayer } from 'react-spring'
+import { Transition } from 'react-spring'
 import styled from 'styled-components'
 import phone from '../media/phone.png'
 import video from '../media/300-loan.mp4'
@@ -44,7 +44,7 @@ const Diamond2 = Diamond.extend`
 class IntroVideo extends Component {
     render() {
         return (
-          <Fragment>
+          <Section>
             <Transition from={{ opacity: 0, left: '-80vw' }} enter={{ opacity: 1, left: '-60vw' }} config={{friction: 50}}>
               { styles => <Diamond style={styles} src={diamond} /> }
             </Transition>
@@ -73,7 +73,7 @@ class IntroVideo extends Component {
                 )}
               </Transition>
             </Row>
-          </Fragment>
+          </Section>
         )
     }
 }
