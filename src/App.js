@@ -24,6 +24,12 @@ import {
 
 // Styling
 import './App.less';
+import WebFont from 'webfontloader';
+WebFont.load({
+  google: {
+    families: ['Open Sans', 'sans-serif']
+  }
+})
 
 Amplify.configure(aws_exports)
 const { Header, Content } = Layout

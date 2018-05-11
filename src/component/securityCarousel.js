@@ -5,17 +5,39 @@ import SaltedgeLogo from '../media/saltedge-logo.png'
 
 const MySection = styled.section`
 `
+const SectionHeader = styled.h1`
+  text-align: center;
+  font-size: 40px;
+  position: relative;
+  padding: 20px;
+  margin-bottom: 40px;
+  &:after {
+    content: "";
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 2px;
+    position: absolute;
+    background: linear-gradient(to right, #FFB3AA, #FFD0AA)
+  }
+`
 
 const SlickSlide = styled.div`
-  margin: 0 20px 0 10px;
   background: linear-gradient(#00c6ff, #0072ff);
-  padding: 25px;
+  margin: 0 10px 0 5px;
+  padding: 10px;
+  @media (min-width: 768px) {
+    margin: 0 20px 0 10px;
+    padding: 25px;
+  }
 `
 const Slide = styled.div`
-  padding: 30px;
+  padding: 2vw;
   background-color: white;
-  width: 60vw;
-  height: 500px;
+  width: 58vw;
+  height: 62vh;
+  @media
 `
 const SlideRow = styled(Row)`
   margin-bottom: 20px;
@@ -24,25 +46,39 @@ const SlideRow = styled(Row)`
 const SlideIconCol = styled(Col)`
 `
 const SlideIdCol = styled(Col)`
-  margin-right: 30px;
-  color: #0072ff;
   opacity: 0.1;
-  font-size: 100px;
+  color: #0072ff;
   text-align: right;
+  margin-right: 10px;
+  font-size: 50px;
+  @media (min-width: 768px) {
+    margin-right: 30px;
+    font-size: 100px;
+  }
 `
 const SlideIcon = styled(Icon)`
-  margin: 30px;
-  font-size: 100px;
+  margin: 10px;
+  font-size: 50px;
+  @media (min-width: 768px) {
+    margin: 30px;
+    font-size: 100px;
+  }
 `
 const SlideImage = styled.img`
-  margin: 10px;
   max-height: 140px;
+  max-width: 80%;
 `
 const SlideHeader = styled.h1`
-font-size: 40px;
+  font-size: 20px;
+  @media (min-width: 768px) {
+    font-size: 40px;
+  }
 `
 const SlideContent = styled.p`
-  font-size: 25px;
+  font-size: 15px;
+  @media (min-width: 768px) {
+    font-size: 25px;
+  }
 `
 
 class SecurtyCarousel extends Component {
@@ -51,7 +87,7 @@ class SecurtyCarousel extends Component {
       className: "center",
       centerMode: true,
       infinite: false,
-      centerPadding: "60px",
+      centerPadding: "20px",
       slidesToShow: 1,
       variableWidth: true,
       focusOnSelect: true,
@@ -61,6 +97,9 @@ class SecurtyCarousel extends Component {
 
     return (
       <MySection>
+        <div>
+        <SectionHeader>Seguridad de primera clase</SectionHeader>
+        </div>
         <Row type="flex" justify="center">
           <Col span={24}>
             <Carousel {...carouselSettings} arrows={true}>
