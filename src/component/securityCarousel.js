@@ -23,21 +23,19 @@ const SectionHeader = styled.h1`
   }
 `
 
-const SlickSlide = styled.div`
+const SlideContainer = styled.div`
   background: linear-gradient(#00c6ff, #0072ff);
-  margin: 0 10px 0 5px;
-  padding: 10px;
+  padding: 2vw;
   @media (min-width: 768px) {
     margin: 0 20px 0 10px;
     padding: 25px;
   }
 `
 const Slide = styled.div`
-  padding: 2vw;
+  padding: 4vw;
   background-color: white;
-  width: 58vw;
-  height: 62vh;
-  @media
+  width: 95vw;
+  height: 47vh;
 `
 const SlideRow = styled(Row)`
   margin-bottom: 20px;
@@ -87,12 +85,13 @@ class SecurtyCarousel extends Component {
       className: "center",
       centerMode: true,
       infinite: false,
-      centerPadding: "20px",
+      centerPadding: "0px",
       slidesToShow: 1,
       variableWidth: true,
       focusOnSelect: true,
       draggable: true,
       speed: 500,
+      arrows: false,
     }
 
     return (
@@ -103,7 +102,7 @@ class SecurtyCarousel extends Component {
         <Row type="flex" justify="center">
           <Col span={24}>
             <Carousel {...carouselSettings} arrows={true}>
-              <SlickSlide>
+              <SlideContainer>
                 <Slide>
                   <SlideRow type="flex" justify="space-between">
                     <SlideIconCol span={12}>
@@ -116,8 +115,8 @@ class SecurtyCarousel extends Component {
                     La seguridad de Alda es la misma que la de tu banco y está validada por los mayores especialistas en seguridad digital. Además, la información está protegida con nivel de seguridad bancaria de 256 bits, que es el mismo nivel de protección que tienen los bancos más avanzados.
                   </SlideContent>
                 </Slide>
-              </SlickSlide>
-              <SlickSlide>
+              </SlideContainer>
+              <SlideContainer>
                 <Slide>
                   <SlideRow type="flex" justify="space-between">
                     <SlideIconCol span={12}>
@@ -130,8 +129,8 @@ class SecurtyCarousel extends Component {
                     Para registrarte Alda solo te pide tu correo electrónico y tus claves de consulta (no las que utilizas para transacciones). Con las claves de lectura no se pueden realizar compras, transferencias ni demás operaciones bancarias.
                   </SlideContent>
                 </Slide>
-              </SlickSlide>
-              <SlickSlide>
+              </SlideContainer>
+              <SlideContainer>
                 <Slide>
                   <SlideRow type="flex" justify="space-between">
                     <SlideIconCol span={12}>
@@ -144,7 +143,7 @@ class SecurtyCarousel extends Component {
                     Detrás de Alda existe un equipo que siempre está a tu disposición para ayudarte con cualquier duda o consulta que puedas tener. Tenemos un sistema de soporte al cliente que te permite contactarnos en cualquier momento a hola@alda.bot o llamando al 665 933 852.
                   </SlideContent>
                 </Slide>
-              </SlickSlide>
+              </SlideContainer>
             </Carousel>
           </Col>
         </Row>
