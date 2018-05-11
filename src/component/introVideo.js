@@ -52,9 +52,11 @@ class IntroVideo extends Component {
             <Transition from={{ opacity: 0, left: '-80vw' }} enter={{ opacity: 1, left: '-60vw' }} config={{friction: 50}}>
               { styles => <Diamond style={styles} src={diamond} /> }
             </Transition>
-            <Transition from={{ opacity: 0, right: '-80vw' }} enter={{ opacity: 1, right: '-36vw' }} config={{friction: 40}}>
-              { styles => <Diamond2 src={diamond} style={styles} /> }
-            </Transition>
+            <Col xs={0}>
+              <Transition from={{ opacity: 0, right: '-80vw' }} enter={{ opacity: 1, right: '-36vw' }} config={{friction: 40}}>
+                { styles => <Diamond2 src={diamond} style={styles} /> }
+              </Transition>
+            </Col>
             <Row type="flex" justify="center" align="middle">
               <Transition from={{ top: -100 }} enter={{ top: 0 }} config={{friction: 50}}>
                 { styles => (
