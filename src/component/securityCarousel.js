@@ -26,7 +26,7 @@ const SectionHeader = styled.h1`
 const SlideContainer = styled.div`
   padding: 0 1vw 0 1vw;
   @media (min-width: 768px) {
-    padding: 0 4vw 0 4vw;
+    padding: 0 2vw 0 2vw;
   }
 `
 
@@ -96,7 +96,7 @@ class SecurtyCarousel extends Component {
       draggable: true,
       focusOnSelect: true,
       centerMode: true,
-      centerPadding: "100px",
+      centerPadding: "20%",
       responsive: [
         {
           breakpoint: 768,
