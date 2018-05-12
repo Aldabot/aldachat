@@ -66,7 +66,7 @@ const Messages = (props) => {
     if(message.cards) {
       const { cards } = message
       return (
-        <Row type="flex" justify="center">
+        <Row key={index} type="flex" justify="center">
           <Col span={24}>
             <CardCarousel cards={cards} />
           </Col>

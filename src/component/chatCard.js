@@ -121,7 +121,7 @@ class CardCarousel extends Component {
 
     const cardSlides = cards.map((card, index) => {
       return(
-        <div>
+        <div key={index}>
           <ChatCard {...card} />
         </div>
       )

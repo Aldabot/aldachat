@@ -284,7 +284,7 @@ class Chat extends React.Component {
       <ThemeProvider theme={theme}>
         <Row type="flex" justify="center">
           <Col id="chatContainer" span={24} md={10} >
-      <Messages messages={messages} />
+            <Messages messages={messages} />
             {this._renderInputRow()}
           </Col>
         </Row>
