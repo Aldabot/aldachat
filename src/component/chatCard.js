@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import image from '../media/diamond.svg'
 import styled from 'styled-components'
 import { Carousel, Row, Col, Button, Icon } from 'antd'
+import PropTypes from 'prop-types'
 
 const CardContainer = styled.div`
   border: solid 1px;
@@ -36,16 +37,31 @@ const LastCardButton = CardButton.extend`
 
 class ChatCard extends Component {
   render() {
+    const { title, subtitle, imgUrl, buttons } = this.props
+    console.log(buttons)
+    const renderedButtons = buttons.map((button, i) => {
+      const { title, postback } = button
+      if (i === buttons.length-1) {
+        return <LastCardButton>{title}</LastCardButton>
+      }
+      return <CardButton>{title}</CardButton>
+    })
+
     return (
       <CardContainer>
-        <Image src={image} />
-        <Title>Title</Title>
-        <SubTitle>SubTitle</SubTitle>
-        <CardButton>Test</CardButton>
-        <LastCardButton>Test</LastCardButton>
+        <Image src={imgUrl} />
+        <Title>{title}</Title>
+        <SubTitle>{subtitle}</SubTitle>
+        {renderedButtons}
       </CardContainer>
     )
   }
+}
+ChatCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string.isRequired,
+  imgUrl: PropTypes.string.isRequired,
+  buttons: PropTypes.array.isRequired
 }
 
 class Arrow extends Component {
@@ -102,12 +118,25 @@ class CardCarousel extends Component {
       nextArrow: <NextArrow type="next" />,
     }
 
+    const card = {
+      title: 'Title',
+      subtitle: 'Subtitle',
+      imgUrl: 'http://localhost:3000/static/media/diamond.3c082953.svg',
+      buttons: [{
+        title: 'Test Button',
+        postback: 'Test 1'
+      }, {
+        title: 'Test Button 2',
+        postback: 'Test 2'
+      }]
+    }
+
     return (
       <Row>
         <Col span={21}>
           <Carousel {...carouselSettings}>
-            <div><ChatCard /></div>
-            <div><ChatCard /></div>
+            <div><ChatCard {...card} /></div>
+            <div><ChatCard {...card} /></div>
           </Carousel>
         </Col>
       </Row>
