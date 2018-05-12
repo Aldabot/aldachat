@@ -35,28 +35,24 @@ function* messageGenerator(message) {
         const msg = { content: message.text.text[0]}
         yield put(addMessage(msg))
     }
+    if (message.quickReplies) {
+        const msg = { content: message.quickReplies.title}
+        yield put(addMessage(msg))
+        const quickReplies = message.quickReplies.quickReplies.map((quickReply) => {
+            return { text: quickReply };
+        });
+        const input = {
+            type: "button",
+            buttons: quickReplies
+        };
+        yield delay(500);
+        yield put(updateInput(input));
+    }
     // const type = message.type;
     // switch(type) {
-    // case 0:
-    //     const msg = {
-    //         content: message.
-    //     };
-    //     yield put(addMessage(msg));
-    //     break;
     // case 1:
     //     yield put(setInputCards(message.cards));
     //     break;
-    // case 2:
-    //     yield put(addMessage({ content: message.title}));
-    //     const quickReplies = message.replies.map((quickReply) => {
-    //         return { text: quickReply };
-    //     });
-    //     const input = {
-    //         type: "button",
-    //         buttons: quickReplies
-    //     };
-    //     yield delay(500);
-    //     yield put(updateInput(input));
     // case 'custom_payload':
     //     console.log(message);
     //     // if (message.payload.input && message.payload.input === 'input') {
@@ -73,7 +69,7 @@ const instance = axios.create({
 })
 // wrap Dialogflow V2 into Promise
 function dialogflowV2Request(text) {
-    return instance.post('dialogflow/detectIntent', { message: 'prestamo' })
+    return instance.post('dialogflow/detectIntent', { message: text })
         .then((response) => response.data)
         .catch((error) => {throw error})
 }
