@@ -37,6 +37,7 @@ function* messageGenerator(message) {
         yield put(addMessage(msg))
     }
     if (message.quickReplies) {
+        console.log("quick")
         const msg = { content: message.quickReplies.title}
         yield put(addMessage(msg))
         const quickReplies = message.quickReplies.quickReplies.map((quickReply) => {
@@ -84,38 +85,17 @@ export function* addMessageWithDelay(action) {
                 yield delay(500)
                 yield messageGenerator(carouselCards)
                 carouselCards.cards = []
-            } else {
-                yield delay(500)
-                yield messageGenerator(message)
             }
+            yield delay(500)
+            yield messageGenerator(message)
         }
     }
+    if(carouselCards.cards.length > 0) {
+        yield delay(500)
+        yield messageGenerator(carouselCards)
+        carouselCards.cards = []
+    }
 
-    // const cardMessage = {
-    //     type: 1,
-    //     cards: []
-    // };
-    // for (const message of messages) {
-    //     // if (message.platform && message.platform === platform) {
-    //         // if card, gather and send as one message
-    //         if (message.card) {
-    //             cardMessage.cards.push(message);
-    //         } else {
-    //             if (cardMessage.cards.length > 0) {
-    //                 yield delay(500);
-    //                 yield messageGenerator(cardMessage);
-    //                 cardMessage.cards = [];
-    //             }
-    //             yield delay(500);
-    //             yield messageGenerator(message);
-    //         }
-    //     // }
-    // }
-    // if (cardMessage.cards.length > 0) {
-    //     yield delay(500);
-    //     yield messageGenerator(cardMessage);
-    //     cardMessage.cards = [];
-    // }
     yield delay(500);
     yield put(showInput());
 }
