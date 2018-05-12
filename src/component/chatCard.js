@@ -38,13 +38,12 @@ const LastCardButton = CardButton.extend`
 class ChatCard extends Component {
   render() {
     const { title, subtitle, imgUrl, buttons } = this.props
-    console.log(buttons)
     const renderedButtons = buttons.map((button, i) => {
       const { title, postback } = button
       if (i === buttons.length-1) {
-        return <LastCardButton>{title}</LastCardButton>
+        return <LastCardButton key={i}>{title}</LastCardButton>
       }
-      return <CardButton>{title}</CardButton>
+      return <CardButton key={i}>{title}</CardButton>
     })
 
     return (

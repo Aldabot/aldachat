@@ -329,7 +329,6 @@ class Chat extends React.Component {
         <Row type="flex" justify="center">
           <Col id="chatContainer" span={24} md={10} >
             {messageRows}
-            <CardCarousel />
 
             {this._renderInputRow()}
           </Col>
