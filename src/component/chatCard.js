@@ -109,6 +109,8 @@ const NextArrow = PrevArrow.extend`
 
 class CardCarousel extends Component {
   render() {
+    const { cards } = this.props
+
     const carouselSettings = {
       draggable: true,
       dots: false,
@@ -130,12 +132,19 @@ class CardCarousel extends Component {
       }]
     }
 
+    const cardSlides = cards.map((card, index) => {
+      return(
+        <div>
+          <ChatCard {...card} />
+        </div>
+      )
+    })
+
     return (
       <Row>
         <Col span={21}>
           <Carousel {...carouselSettings}>
-            <div><ChatCard {...card} /></div>
-            <div><ChatCard {...card} /></div>
+            {cardSlides}
           </Carousel>
         </Col>
       </Row>

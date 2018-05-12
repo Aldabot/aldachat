@@ -3,6 +3,7 @@ import { Row, Col } from 'antd'
 import theme from '../theme'
 import styled from 'styled-components'
 import { Motion, spring } from 'react-motion';
+import CardCarousel from './chatCard'
 
 const BotMessage = styled.div`
   margin-left: ${props => props.x};
@@ -45,20 +46,35 @@ const AnimatedHumanMessage = (props) => {
 const Messages = (props) => {
   const { messages } = props
   const messageRows = messages.map((message, index) => {
-    const { text, human } = message;
-    const messageOutput = (!human) ? (
-      <AnimatedBotMessage text={text} />
-    ) : (
-      <AnimatedHumanMessage text={text} />
-    );
+    if(message.text) {
+      const { text, human } = message
+      const messageOutput = (!human) ? (
+        <AnimatedBotMessage text={text} />
+      ) : (
+        <AnimatedHumanMessage text={text} />
+      );
 
-    return (
-      <Row key={index} type="flex" justify="center">
-        <Col span={24}>
-          {messageOutput}
-        </Col>
-      </Row>
-    );
+      return (
+        <Row key={index} type="flex" justify="center">
+          <Col span={24}>
+            {messageOutput}
+          </Col>
+        </Row>
+      );
+    }
+
+    if(message.cards) {
+      const { cards } = message
+      return (
+        <Row type="flex" justify="center">
+          <Col span={24}>
+            <CardCarousel cards={cards} />
+          </Col>
+        </Row>
+      )
+    }
+
+    return (null)
   });
 
   return messageRows

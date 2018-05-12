@@ -47,17 +47,7 @@ switch(browserLanguage) {
 }
 
 const storeInitialState = {
-  messages: [{
-    cards: [{
-      title: 'Title',
-      subtitle: 'Subtitle',
-      imgUrl: 'test',
-      buttons: [{
-        title: 'button',
-        postback: 'button'
-      }]
-    }]
-  }],
+  messages: [],
   input: {
     type: 'button',
     text: {
