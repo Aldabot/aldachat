@@ -6,42 +6,20 @@ import styled, { ThemeProvider }from 'styled-components';
 import { Motion, spring } from 'react-motion';
 import ReactMarkdown from 'react-markdown';
 import { animateScroll as scroll } from 'react-scroll';
+// Design
+import theme from '../theme'
 // Intl
 import { injectIntl, defineMessages } from 'react-intl';
 // Components
 import CardCarousel from '../component/chatCard'
+import { AnimatedBotMessage, AnimatedHumanMessage } from '../component/chatMessages'
 const { Meta } = Card;
 
-const theme = {
-  fontSizeSmall: '16px',
-  fontSize: '20px',
-  primaryColor: '#0072ff',
-  gray: 'e9e9e9',
-};
+
 
 const AldaIcon = styled(Icon)`
   font-size: ${props => props.theme.fontSize};
   padding: 5px;
-`;
-
-const BotMessage = styled.div`
-  margin-left: ${props => props.x};
-  font-size: ${props => props.theme.fontSize};
-  margin: 2px 0;
-  min-height: 30px;
-  max-width: 87.36%;
-  text-align: left;
-  padding: 7px 13px;
-  border-radius: 15px;
-  color: black;
-  background-color: #f1f0f0;
-  float: left;
-`;
-
-const HumanMessage = BotMessage.extend`
-  float: right;
-  color: white;
-  background-color: #0072ff;
 `;
 
 const InputRow = styled(Row)`
@@ -169,7 +147,7 @@ class Chat extends React.Component {
   _sendHumanMessage(text) {
     if (text !== '') {
       this.props.addMessageWithDelay({
-        content: text,
+        text,
         human: true
       });
       this.setState({inputText: ''});
@@ -303,15 +281,11 @@ class Chat extends React.Component {
     const { messages } = this.props;
 
     const messageRows = messages.map((message, index) => {
-      const { content, human } = message;
+      const { text, human } = message;
       const messageOutput = (!human) ? (
-        <Motion defaultStyle={{x: -100, y:0}} style={{x: spring(0, {stiffness: 90, damping: 10}), y: spring(1, {stiffness: 70, damping: 17})}}>
-          {motionState => <BotMessage style={{transform: `translate3d(${motionState.x}px, 0, 0)`, opacity: motionState.y}}>{content}</BotMessage>}
-        </Motion>
+        <AnimatedBotMessage text={text} />
       ) : (
-        <Motion defaultStyle={{x: 100, y:0}} style={{x: spring(0, {stiffness: 90, damping: 10}), y: spring(1, {stiffness: 70, damping: 17})}}>
-          {motionState => <HumanMessage style={{transform: `translate3d(${motionState.x}px, 0, 0)`, opacity: motionState.y}}>{content}</HumanMessage>}
-        </Motion>
+        <AnimatedHumanMessage text={text} />
       );
 
       return (

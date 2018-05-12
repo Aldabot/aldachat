@@ -32,7 +32,7 @@ const platform = 'facebook';
 
 function* messageGenerator(message) {
     if (message.text) {
-        const msg = { content: message.text.text[0]}
+        const msg = { text: message.text.text[0]}
         yield put(addMessage(msg))
     }
     if (message.quickReplies) {
@@ -81,8 +81,8 @@ export function* addMessageWithDelay(action) {
     yield put(hideInput());
     yield put(setInputTypeToText());
     yield put(addMessage(action.msg));
-    console.log(action.msg.content);
-    const dialogflowV2Response = yield call(dialogflowV2Request, action.msg.content);
+    console.log(action.msg.text);
+    const dialogflowV2Response = yield call(dialogflowV2Request, action.msg.text);
     console.log(dialogflowV2Response)
     const messages = dialogflowV2Response.fulfillmentMessages;
 

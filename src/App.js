@@ -77,13 +77,13 @@ class App extends Component {
 
     if( user === null ) {
       this.props.signOut()
-      this.props.addMessage({ content: '¡Enhorabuena! Acabas de dar con la mejor asesora financiera de España' })
-      this.props.addMessage({ content: 'Por ahora puedo ayudarte a buscar el préstamo que mejor se ajusta a tus necesidades o a invertir tus ahorros en función de tu perfil.' })
+      this.props.addMessage({ text: '¡Enhorabuena! Acabas de dar con la mejor asesora financiera de España' })
+      this.props.addMessage({ text: 'Por ahora puedo ayudarte a buscar el préstamo que mejor se ajusta a tus necesidades o a invertir tus ahorros en función de tu perfil.' })
       this.setState({ isLoading: false })
     } else {
       this.props.signIn(user)
-      this.props.addMessage({ content: `Hola, ${user.username} 😍😍😍` })
-      this.props.addMessage({ content: '¿En que puedo ayudarte?' })
+      this.props.addMessage({ text: `Hola, ${user.username} 😍😍😍` })
+      this.props.addMessage({ text: '¿En que puedo ayudarte?' })
       this.setState({
         isLoading: false,
         user,
