@@ -48,6 +48,9 @@ function* messageGenerator(message) {
         yield delay(500);
         yield put(updateInput(input));
     }
+    if (message.cards) {
+        console.log('display cards')
+    }
     // const type = message.type;
     // switch(type) {
     // case 1:
@@ -82,7 +85,24 @@ export function* addMessageWithDelay(action) {
     const dialogflowV2Response = yield call(dialogflowV2Request, action.msg.content);
     console.log(dialogflowV2Response)
     const messages = dialogflowV2Response.fulfillmentMessages;
-    yield messageGenerator(messages[0])
+
+    const carouselCards = { cards: [] }
+    for(const message of messages) {
+        // gather cards
+        if(message.card) {
+            carouselCards.cards.push(message.card)
+        } else {
+            if (carouselCards.cards.length > 0) {
+                yield delay(500)
+                yield messageGenerator(carouselCards)
+                carouselCards.cards = []
+            } else {
+                yield delay(500)
+                yield messageGenerator(message)
+            }
+        }
+    }
+
     // const cardMessage = {
     //     type: 1,
     //     cards: []
