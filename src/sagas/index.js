@@ -2,6 +2,7 @@ import { delay } from 'redux-saga';
 import { call, put, takeEvery, all } from 'redux-saga/effects';
 import {
     addMessage,
+    addCardMessage,
     hideInput,
     showInput,
     updateInput,
@@ -49,21 +50,9 @@ function* messageGenerator(message) {
         yield put(updateInput(input));
     }
     if (message.cards) {
-        console.log('display cards')
+        yield delay(500);
+        yield put(addCardMessage(message.cards))
     }
-    // const type = message.type;
-    // switch(type) {
-    // case 1:
-    //     yield put(setInputCards(message.cards));
-    //     break;
-    // case 'custom_payload':
-    //     console.log(message);
-    //     // if (message.payload.input && message.payload.input === 'input') {
-    //     //     yield put(updateInput({ type: 'nuber' }));
-    //     // }
-    // default:
-    //     return null;
-    // }
 };
 
 const instance = axios.create({

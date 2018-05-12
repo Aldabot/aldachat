@@ -1,14 +1,15 @@
 import { routerReducer } from 'react-router-redux'
 import { combineReducers } from 'redux'
-import { user } from './authenticate.js'
+import { user } from './authenticate'
 import {
     ADD_MESSAGE,
+    ADD_CARD_MESSAGE,
     SHOW_INPUT,
     HIDE_INPUT,
     UPDATE_INPUT,
     SET_INPUT_CARDS,
     SET_INPUT_TYPE_TO_TEXT
-} from '../actions/index';
+} from '../actions/index'
 
 function messages(state = [], action) {
     switch (action.type) {
@@ -17,6 +18,11 @@ function messages(state = [], action) {
             ...state,
             action.msg
         ];
+    case ADD_CARD_MESSAGE:
+        return [
+            ...state,
+            action.cards
+        ]
     default:
         return state;
     }
