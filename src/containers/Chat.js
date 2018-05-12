@@ -12,7 +12,7 @@ import theme from '../theme'
 import { injectIntl, defineMessages } from 'react-intl';
 // Components
 import CardCarousel from '../component/chatCard'
-import { AnimatedBotMessage, AnimatedHumanMessage } from '../component/chatMessages'
+import Messages from '../component/chatMessages'
 const { Meta } = Card;
 
 
@@ -280,30 +280,11 @@ class Chat extends React.Component {
   render() {
     const { messages } = this.props;
 
-    const messageRows = messages.map((message, index) => {
-      const { text, human } = message;
-      const messageOutput = (!human) ? (
-        <AnimatedBotMessage text={text} />
-      ) : (
-        <AnimatedHumanMessage text={text} />
-      );
-
-      return (
-        <Row key={index} type="flex" justify="center">
-          <Col span={24}>
-            {messageOutput}
-          </Col>
-        </Row>
-      );
-    });
-
-
     return (
       <ThemeProvider theme={theme}>
         <Row type="flex" justify="center">
           <Col id="chatContainer" span={24} md={10} >
-            {messageRows}
-
+      <Messages messages={messages} />
             {this._renderInputRow()}
           </Col>
         </Row>

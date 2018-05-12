@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Row, Col } from 'antd'
 import theme from '../theme'
 import styled from 'styled-components'
 import { Motion, spring } from 'react-motion';
@@ -23,7 +24,7 @@ const HumanMessage = BotMessage.extend`
   background-color: #0072ff;
 `;
 
-export const AnimatedBotMessage = (props) => {
+const AnimatedBotMessage = (props) => {
     const { text } = props
     return (
       <Motion defaultStyle={{x: -100, y:0}} style={{x: spring(0, {stiffness: 90, damping: 10}), y: spring(1, {stiffness: 70, damping: 17})}}>
@@ -32,7 +33,7 @@ export const AnimatedBotMessage = (props) => {
     )
 }
 
-export const AnimatedHumanMessage = (props) => {
+const AnimatedHumanMessage = (props) => {
   const { text } = props
   return (
     <Motion defaultStyle={{x: 100, y:0}} style={{x: spring(0, {stiffness: 90, damping: 10}), y: spring(1, {stiffness: 70, damping: 17})}}>
@@ -40,3 +41,27 @@ export const AnimatedHumanMessage = (props) => {
     </Motion>
   )
 }
+
+const Messages = (props) => {
+  const { messages } = props
+  const messageRows = messages.map((message, index) => {
+    const { text, human } = message;
+    const messageOutput = (!human) ? (
+      <AnimatedBotMessage text={text} />
+    ) : (
+      <AnimatedHumanMessage text={text} />
+    );
+
+    return (
+      <Row key={index} type="flex" justify="center">
+        <Col span={24}>
+          {messageOutput}
+        </Col>
+      </Row>
+    );
+  });
+
+  return messageRows
+}
+
+export default Messages
