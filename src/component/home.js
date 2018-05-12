@@ -14,6 +14,7 @@ class Home extends Component {
         <Divider />
         <SectionHeader>Pruebalo!</SectionHeader>
         <Chat />
+        <div style={{ paddingBottom: '5vh' }} />
       </Fragment>
     )
   }
