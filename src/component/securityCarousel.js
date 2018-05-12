@@ -2,25 +2,9 @@ import React, { Component } from 'react'
 import { Row, Col, Carousel, Button, Icon } from 'antd'
 import styled from 'styled-components'
 import SaltedgeLogo from '../media/saltedge-logo.png'
+import { SectionHeader } from './sectionHeader'
 
 const MySection = styled.section`
-`
-const SectionHeader = styled.h1`
-  text-align: center;
-  font-size: 40px;
-  position: relative;
-  padding: 20px;
-  margin-bottom: 40px;
-  &:after {
-    content: "";
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 2px;
-    position: absolute;
-    background: linear-gradient(to right, #FFB3AA, #FFD0AA)
-  }
 `
 
 const SlideContainer = styled.div`

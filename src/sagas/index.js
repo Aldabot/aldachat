@@ -70,9 +70,7 @@ export function* addMessageWithDelay(action) {
     yield put(hideInput());
     yield put(setInputTypeToText());
     yield put(addMessage(action.msg));
-    console.log(action.msg.text);
     const dialogflowV2Response = yield call(dialogflowV2Request, action.msg.text);
-    console.log(dialogflowV2Response)
     const messages = dialogflowV2Response.fulfillmentMessages;
 
     const carouselCards = { cards: [] }
