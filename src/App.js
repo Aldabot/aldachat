@@ -6,7 +6,6 @@ import { Layout, Spin, Row, Col } from 'antd'
 import styled from 'styled-components'
 
 // Components
-import Chat from './containers/Chat.js'
 import Authenticator from './component/authenticator'
 import { addMessage } from './actions/index'
 import MyMenu from './component/menu'

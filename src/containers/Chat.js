@@ -8,6 +8,8 @@ import ReactMarkdown from 'react-markdown';
 import { animateScroll as scroll } from 'react-scroll';
 // Intl
 import { injectIntl, defineMessages } from 'react-intl';
+// Components
+import CardCarousel from '../component/chatCard'
 const { Meta } = Card;
 
 const theme = {
@@ -321,11 +323,14 @@ class Chat extends React.Component {
       );
     });
 
+
     return (
       <ThemeProvider theme={theme}>
         <Row type="flex" justify="center">
           <Col id="chatContainer" span={24} md={10} >
             {messageRows}
+            <CardCarousel />
+
             {this._renderInputRow()}
           </Col>
         </Row>
@@ -333,6 +338,7 @@ class Chat extends React.Component {
     );
   }
 }
+
 
 const mapStateToProps = state => {
   return state;
