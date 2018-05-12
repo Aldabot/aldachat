@@ -37,18 +37,18 @@ const LastCardButton = CardButton.extend`
 
 class ChatCard extends Component {
   render() {
-    const { title, subtitle, imgUrl, buttons } = this.props
+    const { title, subtitle, imageUri, buttons } = this.props
     const renderedButtons = buttons.map((button, i) => {
-      const { title, postback } = button
+      const { text, postback } = button
       if (i === buttons.length-1) {
-        return <LastCardButton key={i}>{title}</LastCardButton>
+        return <LastCardButton key={i}>{text}</LastCardButton>
       }
-      return <CardButton key={i}>{title}</CardButton>
+      return <CardButton key={i}>{text}</CardButton>
     })
 
     return (
       <CardContainer>
-        <Image src={imgUrl} />
+        <Image src={imageUri} />
         <Title>{title}</Title>
         <SubTitle>{subtitle}</SubTitle>
         {renderedButtons}
@@ -59,7 +59,7 @@ class ChatCard extends Component {
 ChatCard.propTypes = {
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string.isRequired,
-  imgUrl: PropTypes.string.isRequired,
+  imageUri: PropTypes.string.isRequired,
   buttons: PropTypes.array.isRequired
 }
 
@@ -117,19 +117,6 @@ class CardCarousel extends Component {
       arrows: true,
       prevArrow: <PrevArrow type="prev" />,
       nextArrow: <NextArrow type="next" />,
-    }
-
-    const card = {
-      title: 'Title',
-      subtitle: 'Subtitle',
-      imgUrl: 'http://localhost:3000/static/media/diamond.3c082953.svg',
-      buttons: [{
-        title: 'Test Button',
-        postback: 'Test 1'
-      }, {
-        title: 'Test Button 2',
-        postback: 'Test 2'
-      }]
     }
 
     const cardSlides = cards.map((card, index) => {
