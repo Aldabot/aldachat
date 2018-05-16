@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
 import { Route } from 'react-router'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { Layout, Spin, Row, Col } from 'antd'
 import styled from 'styled-components'
 
@@ -33,7 +33,7 @@ WebFont.load({
 })
 
 Amplify.configure(aws_exports)
-const { Header, Content } = Layout
+const { Header, Content, Footer } = Layout
 
 const MyHeader = styled(Header)`
   padding: 0 20px !important;
@@ -49,6 +49,9 @@ const MyLayout = styled(Layout)`
 const MyContent = styled(Content)`
   padding: 0 5vw 0 5vw;
   margin-top: 20px;
+`
+const MyFooter = styled(Footer)`
+  padding: 0 5vw;
 `
 
 /* function AppearBottomTop(props) {
@@ -139,6 +142,11 @@ class App extends Component {
         <MyContent>
           {this.renderContent()}
         </MyContent>
+        <MyFooter>
+          <p>
+            Copyright Alda Financial Technologies, SL. 2018. All rights reserved.
+          </p>
+        </MyFooter>
       </MyLayout>
     )
   }
