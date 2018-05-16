@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
 import { StaggeredMotion, spring } from 'react-motion'
-import { Menu, Icon, Row, Col } from 'antd'
+import { Menu, Icon, Row, Col, Popover } from 'antd'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import { throttle } from 'lodash'
 
 const TabBar = styled(Row)`
   position: fixed !important;
@@ -57,6 +58,74 @@ export class TabBarMenu extends Component {
   }
 }
 
+const BurgerIcon = styled(Icon)`
+  font-size: 1.5rem;
+  padding: 10px;
+`
+
+class ResponsiveNav extends Component {
+  state = {
+    viewportWidth: 0,
+    isMenuVisible: false
+  }
+
+  componentDidMount() {
+    this.saveViewportDimensions()
+    window.addEventListener('resize', this.saveViewportDimensions)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.saveViewportDimensions)
+  }
+
+  handleMenuVisibility = (isMenuVisible) => {
+    this.setState({ isMenuVisible })
+  }
+
+  saveViewportDimensions = throttle(() => {
+    this.setState({
+      viewportWidth: window.innerWidth
+    })
+  }, this.props.applyViewPortChange)
+
+  render() {
+    const {isLoggedIn, signOut, router} = this.props
+    const { isMenuVisible, viewportWidth } = this.state
+    const mobileBreakpoint = 767
+
+    if (viewportWidth > mobileBreakpoint) {
+      return <MyMenu
+               isLoggedIn={isLoggedIn}
+               signOut={signOut}
+               router={router}/>
+    }
+
+    return (
+      <Popover
+        content={
+          <MyMenu
+            isLoggedIn={isLoggedIn}
+                       signOut={signOut}
+                       router={router}
+          mobileVersion={true}
+          />
+        }
+        trigger='click'
+        visible={isMenuVisible}
+        placement="topLeft"
+        onVisibleChange={this.handleMenuVisibility}
+      >
+        {isMenuVisible ? <BurgerIcon type='menu-fold' /> : <BurgerIcon type='menu-unfold' />}
+      </Popover>
+    )
+  }
+}
+ResponsiveNav.propTypes = {
+  mobileBreakPoint: PropTypes.number.isRequired
+}
+
+
+
 class MyMenu extends Component {
   menuSelect(item) {
     const { key } = item
@@ -74,7 +143,9 @@ class MyMenu extends Component {
   }
 
   render() {
-    const { location } = this.props.router;
+    const { mobileVersion, router} = this.props
+    const { location } = router;
+
     const selectedKeys = [];
     switch(location.pathname) {
       case '/':
@@ -85,6 +156,7 @@ class MyMenu extends Component {
         break;
       default: break;
     }
+
     const menuItems = [
       <Menu.Item key="home" >
         <Link to="/" >Home</Link>
@@ -105,11 +177,12 @@ class MyMenu extends Component {
         })}>
         {interpolatingStyles =>
           <Menu
-            mode="horizontal"
+            mode={mobileVersion ? 'vertical' : 'horizontal'}
             defaultSelectedKeys={['home']}
             selectedKeys={selectedKeys}
             onSelect={this.menuSelect}
             style={{lineHeight: '64px'}}
+            inlineCollapsed={false}
             >
             {interpolatingStyles.map((style, i) => {
                const compStyle = {position: 'relative', top: style.y, opacity: style.opacity}
@@ -127,5 +200,5 @@ MyMenu.propTypes = {
   signOut: PropTypes.func.isRequired
 }
 
-export default MyMenu
+export default ResponsiveNav
 

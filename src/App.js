@@ -8,7 +8,7 @@ import styled from 'styled-components'
 // Components
 import Authenticator from './component/authenticator'
 import { addMessage } from './actions/index'
-import MyMenu, { TabBarMenu } from './component/menu'
+import Menu from './component/menu'
 import Home from './component/home'
 
 // Amplify
@@ -123,14 +123,13 @@ class App extends Component {
               <HeaderH1>Alda</HeaderH1>
             </Col>
             <Col style={{lineHeight: '64px'}}>
-              <MyMenu isLoggedIn={isLoggedIn} signOut={this.signOut} router={router} />
+              <Menu isLoggedIn={isLoggedIn} signOut={this.signOut} router={router} />
             </Col>
           </Row>
         </MyHeader>
-        <MyContent>
+        <MyContent id="content-wrap">
           {this.renderContent()}
         </MyContent>
-        <TabBarMenu />
       </MyLayout>
     )
   }
@@ -151,3 +150,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+
