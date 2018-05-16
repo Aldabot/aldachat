@@ -10,6 +10,7 @@ import Authenticator from './component/authenticator'
 import { addMessage } from './actions/index'
 import Menu from './component/menu'
 import Home from './component/home'
+import Company from './component/company'
 
 // Amplify
 import Amplify, { Auth } from 'aws-amplify'
@@ -45,6 +46,7 @@ const MyLayout = styled(Layout)`
   background-color: rgba(0, 0, 0, 0) !important;
 `
 const MyContent = styled(Content)`
+  padding: 0 5vw 0 5vw;
   margin-top: 20px;
 `
 
@@ -106,6 +108,7 @@ class App extends Component {
     return (
       <Fragment>
         <Route exact path="/" component={Home}/>
+        <Route exact path="/company" component={Company} />
         <Route exact path="/authenticator" component={Authenticator} />
       </Fragment>
     )
@@ -115,19 +118,23 @@ class App extends Component {
     const { isLoggedIn } = this.state
     const { router } = this.props
 
+    // if home, title.color = white else black
+    console.log(router.location, router.location === '/')
+    const headerStyle = router.location.pathname === '/' ? {color: 'white'} : {color: 'black'}
+
     return (
       <MyLayout>
         <MyHeader>
-          <Row type="flex" justify="end">
-            <Col xs={0}>
-              <HeaderH1>Alda</HeaderH1>
+          <Row type="flex" justify="space-between">
+            <Col span={6}>
+              <HeaderH1 style={headerStyle}>Alda</HeaderH1>
             </Col>
-            <Col style={{lineHeight: '64px'}}>
+            <Col span={6} style={{lineHeight: '64px'}}>
               <Menu isLoggedIn={isLoggedIn} signOut={this.signOut} router={router} />
             </Col>
           </Row>
         </MyHeader>
-        <MyContent id="content-wrap">
+        <MyContent>
           {this.renderContent()}
         </MyContent>
       </MyLayout>

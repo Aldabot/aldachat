@@ -159,7 +159,12 @@ class MyMenu extends Component {
 
     const menuItems = [
       <Menu.Item key="home" >
-        <Link to="/" >Home</Link>
+        <Link to="/" >Inicio</Link>
+      </Menu.Item>,
+      <Menu.Item key="company">
+        <Link to="/company">
+          Empresa
+        </Link>
       </Menu.Item>,
       <Menu.Item key="blog">
         <a target="_blank" rel="noopener noreferrer" href="https://medium.com/@alda_es" >Blog</a>
