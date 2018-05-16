@@ -11,6 +11,7 @@ import { addMessage } from './actions/index'
 import Menu from './component/menu'
 import Home from './component/home'
 import Company from './component/company'
+import FAQ from './component/faq'
 
 // Amplify
 import Amplify, { Auth } from 'aws-amplify'
@@ -109,6 +110,7 @@ class App extends Component {
       <Fragment>
         <Route exact path="/" component={Home}/>
         <Route exact path="/company" component={Company} />
+        <Route exact path="/faq" component={FAQ} />
         <Route exact path="/authenticator" component={Authenticator} />
       </Fragment>
     )
@@ -126,10 +128,10 @@ class App extends Component {
       <MyLayout>
         <MyHeader>
           <Row type="flex" justify="space-between">
-            <Col span={6}>
+            <Col>
               <HeaderH1 style={headerStyle}>Alda</HeaderH1>
             </Col>
-            <Col span={6} style={{lineHeight: '64px'}}>
+            <Col style={{lineHeight: '64px'}}>
               <Menu isLoggedIn={isLoggedIn} signOut={this.signOut} router={router} />
             </Col>
           </Row>

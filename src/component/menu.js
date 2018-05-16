@@ -162,9 +162,10 @@ class MyMenu extends Component {
         <Link to="/" >Inicio</Link>
       </Menu.Item>,
       <Menu.Item key="company">
-        <Link to="/company">
-          Empresa
-        </Link>
+        <Link to="/company">Empresa</Link>
+      </Menu.Item>,
+      <Menu.Item key="faq">
+        <Link to="/faq">FAQ</Link>
       </Menu.Item>,
       <Menu.Item key="blog">
         <a target="_blank" rel="noopener noreferrer" href="https://medium.com/@alda_es" >Blog</a>
@@ -174,7 +175,7 @@ class MyMenu extends Component {
 
     return (
       <StaggeredMotion
-        defaultStyles={[{y: 30, opacity: 0}, {y: 30, opacity: 0}, {y: 30, opacity: 0}]}
+        defaultStyles={[{y: 30, opacity: 0}, {y: 30, opacity: 0}, {y: 30, opacity: 0}, {y: 30, opacity: 0}, {y: 30, opacity: 0}]}
         styles={prevInterpolatedStyles => prevInterpolatedStyles.map((_, i) => {
             return i === 0
                  ? {y: spring(0), opacity: spring(1) }

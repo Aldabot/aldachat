@@ -27,6 +27,9 @@ const CompanyText = styled.p`
   font-size: 1.1rem;
 `
 
+const TeamCol = styled(Col)`
+  margin-bottom: 16px;
+`
 const TeamUl = styled.ul`
   list-style-image: linear-gradient(45deg,#FFB3AA,#FFD0AA);
   padding: 10px;
@@ -56,7 +59,7 @@ class Company extends Component {
         <Section>
           <SectionHeader>Nuestro Equipo</SectionHeader>
           <Row gutter={16}>
-            <Col span={8}>
+            <TeamCol span={24} md={{span: 8}} >
               <Card
                 hoverable
                 cover={<img src={Gabriel} alt="Gabriel Rosiñol" />}
@@ -72,8 +75,8 @@ class Company extends Component {
                   <li>Ingeniero industrial (Cum Laude, IQS)</li>
                 </TeamUl>
               </Card>
-            </Col>
-            <Col span={8}>
+            </TeamCol>
+            <TeamCol span={24} md={{span: 8}}>
               <Card
                 hoverable
                 cover={<img src={Dirk} alt="Dirk Hornung" />}
@@ -89,8 +92,8 @@ class Company extends Component {
                   <li>Doctorando en fisica teorica (UAB)</li>
                 </TeamUl>
               </Card>
-            </Col>
-            <Col span={8}>
+            </TeamCol>
+            <TeamCol span={24} md={{span: 8}}>
               <Card
                 hoverable
                 cover={<img src={Toni} alt="Toni Rosiñol" />}
@@ -105,7 +108,7 @@ class Company extends Component {
                   <li>Doctorando en visión computacional (MIT)</li>
                 </TeamUl>
               </Card>
-            </Col>
+            </TeamCol>
           </Row>
         </Section>
       </Fragment>
