@@ -1,9 +1,61 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import styled from 'styled-components'
 import { StaggeredMotion, spring } from 'react-motion'
-import { Menu } from 'antd'
+import { Menu, Icon, Row, Col } from 'antd'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+
+const TabBar = styled(Row)`
+  position: fixed !important;
+  bottom: 0;
+  left: 0;
+  background-color: red;
+  width: 100vw;
+  z-index: 100;
+`
+
+const Tab = styled(Col)`
+  padding: 5px !important;
+  text-align: center !important;
+`
+
+const TabIcon = styled(Icon)`
+  font-size: 2rem;
+`
+
+export class TabBarMenu extends Component {
+  render() {
+    return (
+      <TabBar type="flex" justify="space-between" align="middle">
+        <Tab span={4}>
+          <Link to="/">
+            <TabIcon type="home" />
+          </Link>
+        </Tab>
+        <Tab span={4}>
+          <Link to="/authenticator">
+            <TabIcon type="question" />
+          </Link>
+        </Tab>
+        <Tab span={4}>
+          <Link to="/authenticator">
+            <TabIcon type="team" />
+          </Link>
+        </Tab>
+        <Tab span={4}>
+          <Link to="/authenticator">
+            <TabIcon type="book" />
+          </Link>
+        </Tab>
+        <Tab span={4}>
+          <Link to="/authenticator">
+            <TabIcon type="unlock" />
+          </Link>
+        </Tab>
+      </TabBar>
+    )
+  }
+}
 
 class MyMenu extends Component {
   menuSelect(item) {
@@ -76,3 +128,4 @@ MyMenu.propTypes = {
 }
 
 export default MyMenu
+

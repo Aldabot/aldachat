@@ -8,7 +8,7 @@ import styled from 'styled-components'
 // Components
 import Authenticator from './component/authenticator'
 import { addMessage } from './actions/index'
-import MyMenu from './component/menu'
+import MyMenu, { TabBarMenu } from './component/menu'
 import Home from './component/home'
 
 // Amplify
@@ -130,6 +130,7 @@ class App extends Component {
         <MyContent>
           {this.renderContent()}
         </MyContent>
+        <TabBarMenu />
       </MyLayout>
     )
   }
