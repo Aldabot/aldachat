@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
 import { Route } from 'react-router'
 import { withRouter } from 'react-router-dom'
-import { Layout, Spin, Row, Col } from 'antd'
+import { Divider, Layout, Spin, Row, Col } from 'antd'
 import styled from 'styled-components'
 
 // Components
@@ -51,6 +51,7 @@ const MyContent = styled(Content)`
   margin-top: 20px;
 `
 const MyFooter = styled(Footer)`
+  background-color: white !important;
   padding: 0 5vw;
 `
 
@@ -143,6 +144,7 @@ class App extends Component {
           {this.renderContent()}
         </MyContent>
         <MyFooter>
+          <Divider />
           <p>
             Copyright Alda Financial Technologies, SL. 2018. All rights reserved.
           </p>
