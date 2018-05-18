@@ -12,6 +12,7 @@ import Menu from './component/menu'
 import Home from './component/home'
 import Company from './component/company'
 import FAQ from './component/faq'
+import Footer from './component/footer'
 
 // Amplify
 import Amplify, { Auth } from 'aws-amplify'
@@ -33,7 +34,7 @@ WebFont.load({
 })
 
 Amplify.configure(aws_exports)
-const { Header, Content, Footer } = Layout
+const { Header, Content } = Layout
 
 const MyHeader = styled(Header)`
   padding: 0 20px !important;
@@ -49,10 +50,6 @@ const MyLayout = styled(Layout)`
 const MyContent = styled(Content)`
   padding: 0 5vw 0 5vw;
   margin-top: 20px;
-`
-const MyFooter = styled(Footer)`
-  background-color: white !important;
-  padding: 0 5vw;
 `
 
 /* function AppearBottomTop(props) {
@@ -143,12 +140,7 @@ class App extends Component {
         <MyContent>
           {this.renderContent()}
         </MyContent>
-        <MyFooter>
-          <Divider />
-          <p>
-            Copyright Alda Financial Technologies, SL. 2018. All rights reserved.
-          </p>
-        </MyFooter>
+        <Footer />
       </MyLayout>
     )
   }
