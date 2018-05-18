@@ -26,15 +26,23 @@ const Video = styled.video`
   width: 74.8%;
 `
 
+const FeatureItemCol = styled(Col)`
+  @media (min-width: 768px) {
+    margin-bottom: 5vh;
+  }
+`
+const FeatureItemRow = styled(Row)`
+  cursor: pointer;
+  opacity: ${props => props.active ? 1.0 : 0.3 };
+`
 const FeatureItem = styled.div`
   font-size: 2rem;
-  opacity: ${props => props.active ? 1.0 : 0.3 };
   &:after {
     content: "";
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 120%;
+    width: 100%;
     height: 5px;
     position: absolute;
     background: linear-gradient(to right, #FFB3AA, #FFD0AA);
@@ -44,6 +52,16 @@ const FeatureItem = styled.div`
 const MobileDescription = styled.div`
   text-align: center;
   margin-bottom: 3vh;
+  @media (min-width: 768px) {
+    display: none;
+  }
+`
+const DesktopDescription = styled.span`
+  display: none;
+  margin-left: 3vw;
+  @media (min-width: 768px) {
+    display: block;
+  }
 `
 
 const CarouselCol = styled(Col)`
@@ -66,18 +84,54 @@ class Features extends Component {
     return (
       <section>
         <SectionHeader>Features</SectionHeader>
-        <Row type="flex" justify="space-around">
-          <Col span={24} md={{span: 8}}>
-            <Row type="flex" justify="space-around" align="middle">
-              <Col md={{span: 24}}>
-                <FeatureItem active={activeSlide === 0} onClick={() => this.goToFeature(0)}>01</FeatureItem>
-              </Col>
-              <Col md={{span: 24}}>
-                <FeatureItem active={activeSlide === 1} onClick={() => this.goToFeature(1)}>02</FeatureItem>
-              </Col>
-              <Col md={{span: 24}}>
-                <FeatureItem active={activeSlide === 2} onClick={() => this.goToFeature(2)}>03</FeatureItem>
-              </Col>
+        <Row type="flex" justify="space-around" align="middle">
+          <Col span={24} md={{span: 10}}>
+            <Row type="flex" justify="space-around">
+              <FeatureItemCol md={{span: 24}}>
+                <FeatureItemRow type="flex" justify="start" active={activeSlide === 0} onClick={() => this.goToFeature(0)}>
+                  <Col>
+                    <FeatureItem>
+                      01
+                    </FeatureItem>
+                  </Col>
+                  <Col>
+                    <DesktopDescription>
+                      <h3>Prestamo</h3>
+                      <p>Alda te busca el mejor prestamo personalizado por tu perfil.</p>
+                    </DesktopDescription>
+                  </Col>
+                </FeatureItemRow>
+              </FeatureItemCol>
+              <FeatureItemCol md={{span: 24}}>
+                <FeatureItemRow type="flex" justify="start" active={activeSlide === 1} onClick={() => this.goToFeature(1)}>
+                  <Col>
+                    <FeatureItem>
+                      02
+                    </FeatureItem>
+                  </Col>
+                  <Col>
+                    <DesktopDescription>
+                      <h3>Inversion</h3>
+                      <p>Alda te busca las mejores possibilidades adaptado a tu estilo de riesgo.</p>
+                    </DesktopDescription>
+                  </Col>
+                </FeatureItemRow>
+              </FeatureItemCol>
+              <FeatureItemCol md={{span: 24}}>
+                <FeatureItemRow type="flex" justify="start" onClick={() => this.goToFeature(2)} active={activeSlide === 2}>
+                  <Col>
+                    <FeatureItem >
+                      03
+                    </FeatureItem>
+                  </Col>
+                  <Col>
+                    <DesktopDescription>
+                      <h3>Entendimiento</h3>
+                      <p>Alda te ayuda entender y tomar control sobre tus finanzas</p>
+                    </DesktopDescription>
+                  </Col>
+                </FeatureItemRow>
+              </FeatureItemCol>
             </Row>
           </Col>
           <CarouselCol span={24} md={{span: 8}}>
