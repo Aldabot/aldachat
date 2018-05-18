@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { Menu, Icon } from 'antd';
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
 
 class SocialMenu extends Component {
   render() {
@@ -15,6 +13,11 @@ class SocialMenu extends Component {
         <Menu.Item key="instagram">
           <a href="https://www.instagram.com/alda.bot/" target="_blanc">
             <Icon type="instagram" />
+          </a>
+        </Menu.Item>
+        <Menu.Item key="twitter">
+          <a href="https://twitter.com/Alda_bot" target="_blanc">
+            <Icon type="twitter" />
           </a>
         </Menu.Item>
         <Menu.Item key="youtube">

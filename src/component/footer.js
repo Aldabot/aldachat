@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Layout, Divider, Row, Col } from 'antd'
 import styled from 'styled-components'
 import SocialMenu from './socialMenu'
+import FooterMenu from './footerMenu'
 
 const MyFooter = styled(Layout.Footer)`
   background-color: white !important;
@@ -17,6 +18,9 @@ class Footer extends Component {
             <p>
               Copyright Alda Financial Technologies, SL. 2018. All rights reserved.
             </p>
+          </Col>
+          <Col>
+            <FooterMenu />
           </Col>
           <Col>
             <SocialMenu />
