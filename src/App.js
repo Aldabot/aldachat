@@ -13,6 +13,7 @@ import Home from './component/home'
 import Company from './component/company'
 import FAQ from './component/faq'
 import Privacy from './component/privacy'
+import Security from './component/security'
 import Footer from './component/footer'
 
 // Amplify
@@ -115,7 +116,7 @@ class App extends Component {
         <Route exact path="/faq" component={FAQ} />
         <Route exact path="/authenticator" component={Authenticator} />
         <Route exact path="/privacy" component={Privacy} />
-        <Route exact path="/security" component={Privacy} />
+        <Route exact path="/security" component={Security} />
       </Fragment>
     )
   }
