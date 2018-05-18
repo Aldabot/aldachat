@@ -22,6 +22,11 @@ class SocialMenu extends Component {
             <Icon type="youtube" />
           </a>
         </Menu.Item>
+        <Menu.Item key="medium">
+          <a href="https://medium.com/@alda_es" target="_blanc">
+            <Icon type="medium" />
+          </a>
+        </Menu.Item>
       </Menu>
     );
   }
