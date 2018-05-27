@@ -11,6 +11,12 @@ const MyMenu = styled(Menu)`
     display: inline-block;
     padding: 4vw;
   }
+  @media (min-width: 768px){
+    font-size: 1rem !important;
+    li {
+      padding: 1vw;
+    }
+  }
 `
 
 class FooterMenu extends Component {
