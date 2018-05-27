@@ -47,6 +47,8 @@ const HeaderH1 = styled.h1`
   color: white;
 `
 const MyLayout = styled(Layout)`
+  position: relative;
+  overflow: hidden;
   background-color: rgba(0, 0, 0, 0) !important;
 `
 const MyContent = styled(Content)`
