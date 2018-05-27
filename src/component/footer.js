@@ -14,15 +14,15 @@ class Footer extends Component {
       <MyFooter>
         <Divider />
         <Row type="flex" justify="space-between">
-          <Col>
+          <Col md={8}>
             <p>
               Copyright Alda Financial Technologies, SL. 2018. All rights reserved.
             </p>
           </Col>
-          <Col>
+          <Col span="24" md={8}>
             <FooterMenu />
           </Col>
-          <Col>
+          <Col md={8}>
             <SocialMenu />
           </Col>
         </Row>

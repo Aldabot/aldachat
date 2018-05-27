@@ -1,13 +1,22 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
 import { Menu } from 'antd';
 import { Link } from 'react-router-dom'
+
+const MyMenu = styled(Menu)`
+  float: left;
+  font-size: 1rem !important;
+  li {
+    padding: 4vw;
+  }
+`
 
 class FooterMenu extends Component {
   render() {
     return (
-      <Menu mode="horizontal">
+      <MyMenu mode="horizontal">
         <Menu.Item key="faq">
-          <Link to="faq">Preguntas Frequentes</Link>
+          <Link to="faq">FAQ</Link>
         </Menu.Item>
         <Menu.Item key="privacy">
           <Link to="privacy">Privacidad</Link>
@@ -15,7 +24,7 @@ class FooterMenu extends Component {
         <Menu.Item key="security">
           <Link to="security">Seguridad</Link>
         </Menu.Item>
-      </Menu>
+      </MyMenu>
     );
   }
 }
