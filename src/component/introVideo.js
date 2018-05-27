@@ -24,19 +24,33 @@ const Video = styled.video`
 `
 
 const RightCol = styled(Col)`
-  text-align: left;
-  @media (max-width: 768px) {
+  text-align: center;
+  padding-bottom: 30px;
+  color: white;
+  h1 {
+    color: white;
+  }
+  @media (min-width: 768px) {
+    color: black;
+    text-align: left;
     text-align: center;
     padding-bottom: 30px;
+    h1 {
+      color: black;
+    }
   }
 `
 
 const Diamond = styled.img`
   position: absolute;
-  top: -70vw;
+  top: -40vw;
   left: -60vw;
-  width: 100vw;
+  width: 175vw;
   z-index: -1;
+  @media (min-width: 768px) {
+    width: 100vw;
+    top: -70vw;
+  }
 `
 const Diamond2 = Diamond.extend`
   top: 33vw;
