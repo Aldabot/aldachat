@@ -75,6 +75,9 @@ class Features extends Component {
 
   goToFeature(id) {
     this.slider.goTo(id)
+  }
+
+  handleChange = (id) => {
     this.setState({activeSlide: id})
   }
 
@@ -135,7 +138,7 @@ class Features extends Component {
             </Row>
           </Col>
           <CarouselCol span={24} md={{span: 8}}>
-            <Carousel dots={false} ref={slider => (this.slider = slider)}>
+            <Carousel dots={false} ref={slider => (this.slider = slider)} afterChange={this.handleChange}>
               <Slide>
                 <MobileDescription>
                   <h3>Prestamo</h3>
