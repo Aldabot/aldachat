@@ -17,6 +17,7 @@ const SlideContainer = styled.div`
 const SlideFrame = styled.div`
   background: linear-gradient(#00c6ff, #0072ff);
   padding: 6vw;
+  height: 100%;
   @media (min-width: 768px) {
     padding: 2.5vw;
   }
@@ -24,10 +25,7 @@ const SlideFrame = styled.div`
 const SlideContent = styled.div`
   padding: 3vw;
   background-color: white;
-  height: 50vh;
-  @media (min-width: 768px) {
-  height: 70vh;
-  }
+  height: 100%;
 `
 
 const SlideRow = styled(Row)`
