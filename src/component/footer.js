@@ -19,10 +19,10 @@ class Footer extends Component {
               Copyright Alda Financial Technologies, SL. 2018. All rights reserved.
             </p>
           </Col>
-          <Col span="24" md={8}>
+          <Col span={24} md={8}>
             <FooterMenu />
           </Col>
-          <Col md={8}>
+          <Col span={24} md={8}>
             <SocialMenu />
           </Col>
         </Row>

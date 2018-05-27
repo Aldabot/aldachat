@@ -4,9 +4,11 @@ import { Menu } from 'antd';
 import { Link } from 'react-router-dom'
 
 const MyMenu = styled(Menu)`
-  float: left;
+  text-align: center;
   font-size: 1rem !important;
   li {
+    float: none !important;
+    display: inline-block;
     padding: 4vw;
   }
 `

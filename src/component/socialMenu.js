@@ -1,10 +1,21 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
 import { Menu, Icon } from 'antd';
+
+const MyMenu = styled(Menu)`
+  text-align: center;
+  font-size: 1rem !important;
+  li {
+    float: none !important;
+    display: inline-block;
+    padding: 4vw;
+  }
+`
 
 class SocialMenu extends Component {
   render() {
     return (
-      <Menu mode="horizontal">
+      <MyMenu mode="horizontal">
         <Menu.Item key="facebook">
           <a href="https://www.facebook.com/www.alda.bot/" target="_blanc">
             <Icon type="facebook" />
@@ -25,12 +36,12 @@ class SocialMenu extends Component {
             <Icon type="youtube" />
           </a>
         </Menu.Item>
-        <Menu.Item key="medium">
-          <a href="https://medium.com/@alda_es" target="_blanc">
+        {/* <Menu.Item key="medium">
+            <a href="https://medium.com/@alda_es" target="_blanc">
             <Icon type="medium" />
-          </a>
-        </Menu.Item>
-      </Menu>
+            </a>
+            </Menu.Item> */}
+      </MyMenu>
     );
   }
 }
