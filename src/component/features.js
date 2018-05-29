@@ -58,7 +58,6 @@ const MobileDescription = styled.div`
 `
 const DesktopDescription = styled.span`
   display: none;
-  margin-left: 3vw;
   @media (min-width: 768px) {
     display: block;
   }
@@ -91,13 +90,13 @@ class Features extends Component {
           <Col span={24} md={{span: 10}}>
             <Row type="flex" justify="space-around">
               <FeatureItemCol md={{span: 24}}>
-                <FeatureItemRow type="flex" justify="start" active={activeSlide === 0} onClick={() => this.goToFeature(0)}>
+                <FeatureItemRow type="flex" justify="space-between" active={activeSlide === 0} onClick={() => this.goToFeature(0)}>
                   <Col>
                     <FeatureItem>
                       01
                     </FeatureItem>
                   </Col>
-                  <Col>
+                  <Col span={21}>
                     <DesktopDescription>
                       <h3>Prestamo</h3>
                       <p>Alda te busca el mejor prestamo personalizado por tu perfil.</p>
@@ -106,13 +105,13 @@ class Features extends Component {
                 </FeatureItemRow>
               </FeatureItemCol>
               <FeatureItemCol md={{span: 24}}>
-                <FeatureItemRow type="flex" justify="start" active={activeSlide === 1} onClick={() => this.goToFeature(1)}>
+                <FeatureItemRow type="flex" justify="space-between" active={activeSlide === 1} onClick={() => this.goToFeature(1)}>
                   <Col>
                     <FeatureItem>
                       02
                     </FeatureItem>
                   </Col>
-                  <Col>
+                  <Col span={21}>
                     <DesktopDescription>
                       <h3>Inversion</h3>
                       <p>Alda te busca las mejores possibilidades adaptado a tu estilo de riesgo.</p>
@@ -121,13 +120,13 @@ class Features extends Component {
                 </FeatureItemRow>
               </FeatureItemCol>
               <FeatureItemCol md={{span: 24}}>
-                <FeatureItemRow type="flex" justify="start" onClick={() => this.goToFeature(2)} active={activeSlide === 2}>
+                <FeatureItemRow type="flex" justify="space-between" onClick={() => this.goToFeature(2)} active={activeSlide === 2}>
                   <Col>
                     <FeatureItem >
                       03
                     </FeatureItem>
                   </Col>
-                  <Col>
+                  <Col span={21}>
                     <DesktopDescription>
                       <h3>Entendimiento</h3>
                       <p>Alda te ayuda entender y tomar control sobre tus finanzas</p>

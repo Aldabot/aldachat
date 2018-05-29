@@ -151,6 +151,12 @@ class MyMenu extends Component {
       case '/':
         selectedKeys.push('home')
         break
+      case '/company':
+        selectedKeys.push('company')
+        break
+      case '/faq':
+        selectedKeys.push('faq')
+        break
       case '/authenticator':
         selectedKeys.push('signIn')
         break;
