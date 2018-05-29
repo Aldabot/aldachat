@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { animateScroll } from 'react-scroll'
 import { Menu } from 'antd';
 import { Link } from 'react-router-dom'
 
@@ -20,9 +21,34 @@ const MyMenu = styled(Menu)`
 `
 
 class FooterMenu extends Component {
+  handleMenuClick() {
+    animateScroll.scrollToTop();
+  }
+
   render() {
+    const { location } = this.props.router
+
+    const selectedKeys = [];
+    switch(location.pathname) {
+      case '/faq':
+        selectedKeys.push('faq')
+        break
+      case '/privacy':
+        selectedKeys.push('privacy')
+        break
+      case '/security':
+        selectedKeys.push('security')
+        break;
+      default: break;
+    }
+
     return (
-      <MyMenu mode="horizontal">
+      <MyMenu
+        mode="horizontal"
+        onClick={this.handleMenuClick}
+        defaultSelectedKeys={[]}
+        selectedKeys={selectedKeys}
+      >
         <Menu.Item key="faq">
           <Link to="faq">FAQ</Link>
         </Menu.Item>

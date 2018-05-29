@@ -20,12 +20,14 @@ const Copyright = styled.p`
 
 class Footer extends Component {
   render() {
+    const { router } = this.props
+
     return (
       <MyFooter>
         <Divider style={{margin: 0}} />
         <Row type="flex" justify="space-between" align="middle">
           <Col oder={1} span={24} md={{span: 7, order: 2}}>
-            <FooterMenu />
+            <FooterMenu router={router} />
           </Col>
           <Col span={24} order={2} md={{span: 5, order: 3}}>
             <SocialMenu />

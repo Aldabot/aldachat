@@ -146,7 +146,7 @@ class App extends Component {
         <MyContent>
           {this.renderContent()}
         </MyContent>
-        <Footer />
+        <Footer router={router} />
       </MyLayout>
     )
   }
