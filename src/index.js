@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ReactGA from 'react-ga'
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
@@ -19,7 +20,13 @@ import chatApp from './reducers/index';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas/index.js';
 
+ReactGA.initialize('UA-110991818-1')
+
 const history = createHistory()
+history.listen( location => {
+  ReactGA.pageview(location.pathname)
+})
+
 const reactRouterMiddleware = routerMiddleware(history)
 const sagaMiddleware = createSagaMiddleware()
 

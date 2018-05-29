@@ -128,7 +128,6 @@ class App extends Component {
     const { router } = this.props
 
     // if home, title.color = white else black
-    console.log(router.location, router.location === '/')
     const headerStyle = router.location.pathname === '/' ? {color: 'white'} : {color: 'black'}
 
     return (

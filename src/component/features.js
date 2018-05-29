@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { SectionHeader } from './sectionHeader'
-import { Carousel, Button, Row, Col } from 'antd'
+import { Carousel, Row, Col } from 'antd'
 import styled from 'styled-components'
 import phone from '../media/phone.png'
 import loan from '../media/300-loan.mp4'
 import investment from '../media/featureInvestment.mp4'
-import insights from '../media/featureInsights.mov'
+import insights from '../media/featureInsights.mp4'
 
 
 
