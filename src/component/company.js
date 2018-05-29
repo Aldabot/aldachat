@@ -3,9 +3,9 @@ import { Row, Col, Card, Divider } from 'antd'
 import styled from 'styled-components'
 import { SectionHeader } from './sectionHeader'
 import Logo from '../media/Alda_Circle_Logo_410.png'
-import Gabriel from '../media/gabriel.png'
-import Dirk from '../media/dirk.png'
-import Toni from '../media/toni.png'
+import Gabriel from '../media/gabriel.jpeg'
+import Dirk from '../media/dirk.jpeg'
+import Toni from '../media/toni.jpeg'
 
 const { Meta } = Card
 
@@ -29,6 +29,9 @@ const CompanyText = styled.p`
 
 const TeamCol = styled(Col)`
   margin-bottom: 16px;
+`
+const TeamCard = styled(Card)`
+  height: 100%;
 `
 const TeamUl = styled.ul`
   list-style-image: linear-gradient(45deg,#FFB3AA,#FFD0AA);
@@ -58,9 +61,9 @@ class Company extends Component {
 
         <Section>
           <SectionHeader>Nuestro Equipo</SectionHeader>
-          <Row gutter={16}>
+          <Row type="flex" gutter={16}>
             <TeamCol span={24} md={{span: 8}} >
-              <Card
+              <TeamCard
                 hoverable
                 cover={<img src={Gabriel} alt="Gabriel Rosiñol" />}
               >
@@ -74,10 +77,10 @@ class Company extends Component {
                   <li>Anterioramente analista de riesgos en Wonga</li>
                   <li>Ingeniero industrial (Cum Laude, IQS)</li>
                 </TeamUl>
-              </Card>
+              </TeamCard>
             </TeamCol>
             <TeamCol span={24} md={{span: 8}}>
-              <Card
+              <TeamCard
                 hoverable
                 cover={<img src={Dirk} alt="Dirk Hornung" />}
               >
@@ -91,10 +94,10 @@ class Company extends Component {
                   <li>Experto en redes neuronales</li>
                   <li>Doctorando en fisica teorica (UAB)</li>
                 </TeamUl>
-              </Card>
+              </TeamCard>
             </TeamCol>
             <TeamCol span={24} md={{span: 8}}>
-              <Card
+              <TeamCard
                 hoverable
                 cover={<img src={Toni} alt="Toni Rosiñol" />}
               >
@@ -107,7 +110,7 @@ class Company extends Component {
                   <li>Experto en inteligencia artificial</li>
                   <li>Doctorando en visión computacional (MIT)</li>
                 </TeamUl>
-              </Card>
+              </TeamCard>
             </TeamCol>
           </Row>
         </Section>
