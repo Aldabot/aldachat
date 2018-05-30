@@ -180,7 +180,7 @@ class MyMenu extends Component {
         <Link to="/faq">FAQ</Link>
       </Menu.Item>,
       <Menu.Item key="blog">
-        <a target="_blank" rel="noopener noreferrer" href="https://medium.com/@alda_es" >Blog</a>
+        <a target="_blank" rel="noopener noreferrer" href="https://medium.com/@rosinol.gabriel/alda-bot-first-3-000-customers-get-a-free-premium-year-f8c5e7ce6e47" >Blog</a>
       </Menu.Item>,
       this.renderAuthentificationMenuItem()
     ]
