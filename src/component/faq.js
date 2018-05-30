@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Helmet } from 'react-helmet'
 import { Collapse } from 'antd'
 import styled from 'styled-components'
 import { SectionHeader } from './sectionHeader'
@@ -21,6 +22,11 @@ class FAQ extends Component {
   render() {
     return (
       <section>
+        <Helmet>
+          <title>Alda Preguntas Frequents.</title>
+          <meta name="description" content="Preguntas Frequentes como ¿Por qué Alda?, ¿Cómo funciona Alda?, ¿Qué seguridad ofrece Alda?, ..."/>
+        </Helmet>
+
         <SectionHeader>Preguntas Frequentes</SectionHeader>
         <Collapse bordered={false} defaultActiveKey={['1']}>
           <MyPanel header="¿Por qué Alda?" key="1">

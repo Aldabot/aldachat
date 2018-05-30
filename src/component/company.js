@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import { Helmet } from 'react-helmet'
 import { Row, Col, Card, Divider } from 'antd'
 import styled from 'styled-components'
 import { SectionHeader } from './sectionHeader'
@@ -42,6 +43,11 @@ class Company extends Component {
   render() {
     return (
       <Fragment>
+        <Helmet>
+          <title>Alda nuestra historia y la empresa.</title>
+          <meta name="description" content="Alda nacia en 2017 en un evento de Banco Santander y ayuda actualmente a más de 5.000 usuarios a tener una mejor relación con su dinero. Alda tiene un Equipo de tres personas: Gabriel, Dirk y Toni."/>
+        </Helmet>
+
         <Section>
           <Row type="flex" align="middle" justify="space-between" gutter={2}>
             <MyCol span={24} md={{span: 12}}>
