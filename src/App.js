@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
 import { Route } from 'react-router'
 import { withRouter } from 'react-router-dom'
-import { Divider, Layout, Spin, Row, Col } from 'antd'
+import { Layout, Spin, Row, Col } from 'antd'
 import styled from 'styled-components'
 
 // Components
@@ -10,6 +10,7 @@ import Authenticator from './component/authenticator'
 import { addMessage } from './actions/index'
 import Menu from './component/menu'
 import Home from './component/home'
+import Chat from './containers/chat.js'
 import Company from './component/company'
 import FAQ from './component/faq'
 import Privacy from './component/privacy'
@@ -114,6 +115,7 @@ class App extends Component {
     return (
       <Fragment>
         <Route exact path="/" component={Home}/>
+        <Route exact path="/chat" component={Chat}/>
         <Route exact path="/company" component={Company} />
         <Route exact path="/faq" component={FAQ} />
         <Route exact path="/authenticator" component={Authenticator} />

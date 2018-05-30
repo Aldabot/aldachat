@@ -151,6 +151,9 @@ class MyMenu extends Component {
       case '/':
         selectedKeys.push('home')
         break
+      case '/chat':
+        selectedKeys.push('chat')
+        break
       case '/company':
         selectedKeys.push('company')
         break
@@ -166,6 +169,9 @@ class MyMenu extends Component {
     const menuItems = [
       <Menu.Item key="home" >
         <Link to="/" >Inicio</Link>
+      </Menu.Item>,
+      <Menu.Item key="chat" >
+        <Link to="/chat" >Chat</Link>
       </Menu.Item>,
       <Menu.Item key="company">
         <Link to="/company">Empresa</Link>

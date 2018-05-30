@@ -3,7 +3,7 @@ import { Divider } from 'antd'
 import IntroVideo from './introVideo'
 import Features from './features'
 import SecurityCarousel from './securityCarousel'
-import Chat from '../containers/Chat.js'
+import Chat from '../containers/chat.js'
 import { SectionHeader } from './sectionHeader'
 
 class Home extends Component {
