@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { addMessageWithDelay } from '../actions/index.js';
 import { Row, Col, Card, Button, InputNumber, Icon } from 'antd';
 import styled, { ThemeProvider }from 'styled-components';
-import { Motion, spring } from 'react-motion';
 import ReactMarkdown from 'react-markdown';
 import { animateScroll as scroll } from 'react-scroll';
 // Design
@@ -11,7 +10,6 @@ import theme from '../theme'
 // Intl
 import { injectIntl, defineMessages } from 'react-intl';
 // Components
-import CardCarousel from '../component/chatCard'
 import Messages from '../component/chatMessages'
 const { Meta } = Card;
 

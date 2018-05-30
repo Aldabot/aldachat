@@ -54,9 +54,32 @@ switch(browserLanguage) {
 }
 
 const storeInitialState = {
-  messages: [],
+  messages: [{
+    cards: [{
+      title: 'Card 1',
+      subtitle: 'subtitle',
+      imageUri: 'https://s3-eu-west-1.amazonaws.com/aldachatbot/vivus.png',
+      buttons: [{
+        text: 'test',
+      }]
+    }, {
+      title: 'Card 1',
+      subtitle: 'subtitle',
+      imageUri: 'https://s3-eu-west-1.amazonaws.com/aldachatbot/vivus.png',
+      buttons: [{
+        text: 'test',
+      }]
+    }, {
+      title: 'Card 1',
+      subtitle: 'subtitle',
+      imageUri: 'https://s3-eu-west-1.amazonaws.com/aldachatbot/vivus.png',
+      buttons: [{
+        text: 'test',
+      }]
+    }]
+  }],
   input: {
-    type: 'button',
+    type: 'text',
     text: {
       size: 30,
       placeholder: 'Escribe aqui ...',
@@ -70,15 +93,6 @@ const storeInitialState = {
     }, {
       text: 'Quiero más información',
       value: 'b3'
-    }],
-    cards: [{
-      title: 'Card 1',
-    }, {
-      title: 'Cards 2'
-    }, {
-      title: 'Card 1',
-    }, {
-      title: 'Cards 2'
     }],
     show: true
   }

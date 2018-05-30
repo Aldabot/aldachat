@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import image from '../media/diamond.svg'
 import styled from 'styled-components'
 import { Carousel, Row, Col, Button, Icon } from 'antd'
 import PropTypes from 'prop-types'
@@ -20,12 +19,16 @@ const SubTitle = styled.h4`
 `
 const Image = styled.img`
   width: 100%
-  height: 15vw;
+  height: 40vw;
   object-fit: cover;
+  border-radius: 20px;
+  @media (min-width: 768px) {
+    height: 15vw;
+  }
 `
 const CardButton = styled(Button)`
-width: 100%;
-font-size: 1.2rem !important;
+  width: 100%;
+  font-size: 1.2rem !important;
   border-radius: 0px !important;
   border-right-width: 0 !important;
   border-left-width: 0 !important;
@@ -86,10 +89,10 @@ const PrevArrow = styled(Arrow)`
   font-size: 1.7rem !important;
   display: block !important;
   background: #f1f0f0 !important;
-  width: 3vw !important;
-  height: 3vw !important;
+  width: 9vw !important;
+  height: 9vw !important;
   color: black !important;
-  line-height: 3vw !important;
+  line-height: 9vw !important;
   text-align: center !important;
   left: 0 !important;
   border-color: #DDDDDD !important;
@@ -97,6 +100,11 @@ const PrevArrow = styled(Arrow)`
   border-width: 1px !important;
   border-radius: 0 5px 5px 0 !important;
   z-index: 10;
+  @media (min-width: 768px) {
+    width: 3vw !important;
+    height: 3vw !important;
+    line-height: 3vw !important;
+  }
 `
 const NextArrow = PrevArrow.extend`
   left: auto !important;
@@ -129,7 +137,7 @@ class CardCarousel extends Component {
 
     return (
       <Row>
-        <Col span={21}>
+        <Col span={24} md={21}>
           <Carousel {...carouselSettings}>
             {cardSlides}
           </Carousel>
