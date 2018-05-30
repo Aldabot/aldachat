@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col, Carousel, Button, Icon } from 'antd'
+import { Row, Col, Carousel, Icon } from 'antd'
 import styled from 'styled-components'
 import SaltedgeLogo from '../media/saltedge-logo.png'
 import { SectionHeader } from './sectionHeader'

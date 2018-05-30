@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Row, Col } from 'antd'
-import theme from '../theme'
 import styled from 'styled-components'
 import { Motion, spring } from 'react-motion';
 import CardCarousel from './chatCard'

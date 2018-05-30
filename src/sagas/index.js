@@ -6,30 +6,21 @@ import {
     hideInput,
     showInput,
     updateInput,
-    setInputCards,
     setInputTypeToText
 } from '../actions/index.js';
-import Promise from 'bluebird';
-import { v4 as uuidV4 } from 'uuid';
 import axios from 'axios'
 
 // Select language of Dialogflow from browser settings
-var browserLanguage = window.navigator.userLanguage || window.navigator.language;
-let language;
-switch(browserLanguage) {
-case 'es-ES':
-    language = 'es';
-    break;
-default:
-    // DEFAULT LANGUAGE SHOULD BE EN
-    language = 'es';
-}
-
-const uuid = uuidV4();
-
-// configuration
-const messageDelay = 500;
-const platform = 'facebook';
+// var browserLanguage = window.navigator.userLanguage || window.navigator.language;
+// let language;
+// switch(browserLanguage) {
+// case 'es-ES':
+//     language = 'es';
+//     break;
+// default:
+//     // DEFAULT LANGUAGE SHOULD BE EN
+//     language = 'es';
+// }
 
 function* messageGenerator(message) {
     if (message.text) {

@@ -42,7 +42,7 @@ class ChatCard extends Component {
   render() {
     const { title, subtitle, imageUri, buttons } = this.props
     const renderedButtons = buttons.map((button, i) => {
-      const { text, postback } = button
+      const { text } = button // also contains postback!
       if (i === buttons.length-1) {
         return <LastCardButton key={i}>{text}</LastCardButton>
       }
