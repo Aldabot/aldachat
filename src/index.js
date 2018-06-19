@@ -54,32 +54,34 @@ switch(browserLanguage) {
 }
 
 const storeInitialState = {
-  messages: [{
-    cards: [{
-      title: 'Card 1',
-      subtitle: 'subtitle',
-      imageUri: 'https://s3-eu-west-1.amazonaws.com/aldachatbot/vivus.png',
-      buttons: [{
-        text: 'test',
-      }]
-    }, {
-      title: 'Card 1',
-      subtitle: 'subtitle',
-      imageUri: 'https://s3-eu-west-1.amazonaws.com/aldachatbot/vivus.png',
-      buttons: [{
-        text: 'test',
-      }]
-    }, {
-      title: 'Card 1',
-      subtitle: 'subtitle',
-      imageUri: 'https://s3-eu-west-1.amazonaws.com/aldachatbot/vivus.png',
-      buttons: [{
-        text: 'test',
-      }]
-    }]
-  }],
+  messages: [
+    /* {
+     * cards: [{
+     *   title: 'Card 1',
+     *   subtitle: 'subtitle',
+     *   imageUri: 'https://s3-eu-west-1.amazonaws.com/aldachatbot/vivus.png',
+     *   buttons: [{
+     *     text: 'test',
+     *   }]
+     * }, {
+     *   title: 'Card 1',
+     *   subtitle: 'subtitle',
+     *   imageUri: 'https://s3-eu-west-1.amazonaws.com/aldachatbot/vivus.png',
+     *   buttons: [{
+     *     text: 'test',
+     *   }]
+     * }, {
+     *   title: 'Card 1',
+     *   subtitle: 'subtitle',
+     *   imageUri: 'https://s3-eu-west-1.amazonaws.com/aldachatbot/vivus.png',
+     *   buttons: [{
+     *     text: 'test',
+     *   }]
+     * }]
+       } */
+  ],
   input: {
-    type: 'text',
+    type: 'button',
     text: {
       size: 30,
       placeholder: 'Escribe aqui ...',

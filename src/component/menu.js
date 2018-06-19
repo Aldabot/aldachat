@@ -187,7 +187,7 @@ class MyMenu extends Component {
 
     return (
       <StaggeredMotion
-        defaultStyles={[{y: 30, opacity: 0}, {y: 30, opacity: 0}, {y: 30, opacity: 0}, {y: 30, opacity: 0}, {y: 30, opacity: 0}]}
+        defaultStyles={[{y: 30, opacity: 0}, {y: 30, opacity: 0}, {y: 30, opacity: 0}, {y: 30, opacity: 0}, {y: 30, opacity: 0}, {y: 30, opacity: 0}]}
         styles={prevInterpolatedStyles => prevInterpolatedStyles.map((_, i) => {
             return i === 0
                  ? {y: spring(0), opacity: spring(1) }
