@@ -68,9 +68,9 @@ export function* addMessageWithDelay(action) {
     const carouselCards = { cards: [] }
     for(const message of messages) {
         // exclude messages other than for facebook
-        if(message.platform === 'FACEBOOK') {
-            continue
-        }
+        // if(message.platform === 'FACEBOOK') {
+        //     continue
+        // }
 
         // gather cards
         if(message.card) {
