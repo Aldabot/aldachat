@@ -48,7 +48,7 @@ const Diamond = styled.img`
   z-index: -1;
   @media (min-width: 768px) {
     width: 100vw;
-    top: -70vw;
+    top: -50vw;
   }
 `
 const Diamond2 = Diamond.extend`
@@ -62,7 +62,7 @@ class IntroVideo extends Component {
     render() {
         return (
           <MySection>
-            <Transition from={{ opacity: 0, left: '-80vw' }} enter={{ opacity: 1, left: '-60vw' }} config={{friction: 50}}>
+            <Transition from={{ opacity: 0, left: '-80vw' }} enter={{ opacity: 1, left: '-50vw' }} config={{friction: 50}}>
               { styles => <Diamond style={styles} src={diamond} /> }
             </Transition>
             <Col xs={0}>
@@ -84,7 +84,6 @@ class IntroVideo extends Component {
               <Transition from={{ top: 100 }} enter={{ top: 0 }} config={{friction: 50}}>
                 { styles => (
                   <RightCol span={22} order={1} md={{span: 8, order: 2}} style={styles}>
-                    <h1>Alda</h1>
                     <p>Disfruta de tu propio asesor financiero y mejora ya tu situación financiera.</p>
                     <p>Regístrate gratis con solo un clic.</p>
                     <a href="#try"><Button>Hablar con Alda!</Button></a>

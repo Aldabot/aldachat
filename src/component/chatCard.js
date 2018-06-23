@@ -41,13 +41,17 @@ const LastCardButton = CardButton.extend`
 class ChatCard extends Component {
   render() {
     const { title, subtitle, imageUri, buttons } = this.props
-    const renderedButtons = buttons.map((button, i) => {
-      const { text } = button // also contains postback!
-      if (i === buttons.length-1) {
-        return <LastCardButton key={i}>{text}</LastCardButton>
-      }
-      return <CardButton key={i}>{text}</CardButton>
-    })
+
+    let renderedButtons = []
+    if(buttons) {
+      renderedButtons = buttons.map((button, i) => {
+        const { text } = button // also contains postback!
+        if (i === buttons.length-1) {
+          return <LastCardButton key={i}>{text}</LastCardButton>
+        }
+        return <CardButton key={i}>{text}</CardButton>
+      })
+    }
 
     return (
       <CardContainer>
@@ -63,7 +67,6 @@ ChatCard.propTypes = {
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string.isRequired,
   imageUri: PropTypes.string.isRequired,
-  buttons: PropTypes.array.isRequired
 }
 
 class Arrow extends Component {

@@ -44,9 +44,6 @@ const MyHeader = styled(Header)`
   background-color: rgba(0, 0, 0, 0) !important;
   z-index: 0;
 `
-const HeaderH1 = styled.h1`
-  color: white;
-`
 const MyLayout = styled(Layout)`
   position: relative;
   overflow: hidden;
@@ -55,6 +52,15 @@ const MyLayout = styled(Layout)`
 const MyContent = styled(Content)`
   padding: 0 5vw 0 5vw;
   margin-top: 20px;
+`
+
+const Alda = styled.h1`
+  color: ${props => props.path === '/' ? 'white' : 'black'};
+  @media (min-width: 768px) {
+    font-size: 4rem;
+    margin-left: 2vw;
+    margin-top: 2vw;
+  }
 `
 
 /* function AppearBottomTop(props) {
@@ -130,14 +136,19 @@ class App extends Component {
     const { router } = this.props
 
     // if home, title.color = white else black
-    const headerStyle = router.location.pathname === '/' ? {color: 'white'} : {color: 'black'}
+    const headerStyle = router.location.pathname === '/' ? {
+      fontSize: '4rem',
+      color: 'white',
+      marginTop: '2vw',
+      marginLeft: '2vw'
+    } : {color: 'black'}
 
     return (
       <MyLayout>
         <MyHeader>
           <Row type="flex" justify="space-between">
             <Col>
-              <HeaderH1 style={headerStyle}>Alda</HeaderH1>
+              <Alda path={router.location.pathname}>Alda</Alda>
             </Col>
             <Col style={{lineHeight: '64px'}}>
               <Menu isLoggedIn={isLoggedIn} signOut={this.signOut} router={router} />
