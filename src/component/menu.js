@@ -134,16 +134,8 @@ class MyMenu extends Component {
     }
   }
 
-  renderAuthentificationMenuItem() {
-    const { isLoggedIn } = this.props
-    if(isLoggedIn) {
-      return <Menu.Item key="signOut">Sign Out</Menu.Item>
-    }
-    return <Menu.Item key="signIn"><Link to="/authenticator">Sign In</Link></Menu.Item>
-  }
-
   render() {
-    const { mobileVersion, router} = this.props
+    const { mobileVersion, router, isLoggedIn} = this.props
     const { location } = router;
 
     const selectedKeys = [];
@@ -166,7 +158,7 @@ class MyMenu extends Component {
       default: break;
     }
 
-    const menuItems = [
+    let menuItems = [
       <Menu.Item key="home" >
         <Link to="/" >Inicio</Link>
       </Menu.Item>,
@@ -182,8 +174,30 @@ class MyMenu extends Component {
       <Menu.Item key="blog">
         <a target="_blank" rel="noopener noreferrer" href="https://medium.com/@rosinol.gabriel/alda-bot-first-3-000-customers-get-a-free-premium-year-f8c5e7ce6e47" >Blog</a>
       </Menu.Item>,
-      this.renderAuthentificationMenuItem()
+      <Menu.Item key="signIn"><Link to="/authenticator">Sign In</Link></Menu.Item>
     ]
+
+    if(isLoggedIn) {
+      menuItems = [
+        <Menu.Item key="home" >
+          <Link to="/" >Inicio</Link>
+        </Menu.Item>,
+        <Menu.Item key="chat" >
+          <Link to="/chat" >Chat</Link>
+        </Menu.Item>,
+        <Menu.Item key="company">
+          <Link to="/company">Empresa</Link>
+        </Menu.Item>,
+        <Menu.Item key="faq">
+          <Link to="/faq">FAQ</Link>
+        </Menu.Item>,
+        <Menu.Item key="blog">
+          <a target="_blank" rel="noopener noreferrer" href="https://medium.com/@rosinol.gabriel/alda-bot-first-3-000-customers-get-a-free-premium-year-f8c5e7ce6e47" >Blog</a>
+        </Menu.Item>,
+        <Menu.Item key="signOut">Sign Out</Menu.Item>
+      ]
+    }
+
 
     return (
       <StaggeredMotion

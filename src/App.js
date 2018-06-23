@@ -135,14 +135,6 @@ class App extends Component {
     const { isLoggedIn } = this.state
     const { router } = this.props
 
-    // if home, title.color = white else black
-    const headerStyle = router.location.pathname === '/' ? {
-      fontSize: '4rem',
-      color: 'white',
-      marginTop: '2vw',
-      marginLeft: '2vw'
-    } : {color: 'black'}
-
     return (
       <MyLayout>
         <MyHeader>
