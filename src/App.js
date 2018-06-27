@@ -20,6 +20,7 @@ import Footer from './component/footer'
 // Amplify
 import Amplify, { Auth } from 'aws-amplify'
 import aws_exports from './aws-exports'
+import Instagram from './utils/authentificationTheme.js'
 
 // Redux
 import {
@@ -83,6 +84,8 @@ class App extends Component {
       user: {},
       isLoading: true
     }
+
+    this.signOut = this.signOut.bind(this)
   }
 
   async componentDidMount() {
@@ -124,7 +127,7 @@ class App extends Component {
         <Route exact path="/chat" component={Chat}/>
         <Route exact path="/company" component={Company} />
         <Route exact path="/faq" component={FAQ} />
-        <Route exact path="/authenticator" component={Authenticator} />
+        <Route exact path="/authenticator" render={() => <Authenticator theme={Instagram} />} />
         <Route exact path="/privacy" component={Privacy} />
         <Route exact path="/security" component={Security} />
       </Fragment>

@@ -5,6 +5,7 @@ import { Menu, Icon, Row, Col, Popover } from 'antd'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { throttle } from 'lodash'
+import { connect } from 'react-redux'
 
 const TabBar = styled(Row)`
   position: fixed !important;
@@ -127,8 +128,15 @@ ResponsiveNav.propTypes = {
 
 
 class MyMenu extends Component {
+  constructor(props) {
+    super(props)
+
+    this.menuSelect = this.menuSelect.bind(this)
+  }
+
   menuSelect(item) {
     const { key } = item
+    console.log(this.props)
     if(key === 'signOut') {
       this.props.signOut()
     }

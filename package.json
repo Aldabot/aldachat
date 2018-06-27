@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "a-theme-react": "^0.0.5",
     "antd": "^3.4.0",
     "apiai": "https://github.com/Aldabot/dialogflow-nodejs-client",
     "autoprefixer": "7.1.6",
