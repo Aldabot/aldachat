@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+// redux
 import { connect } from 'react-redux';
-import { addMessageWithDelay } from '../actions/index.js';
-import { Row, Col, Card, Button, InputNumber, Icon } from 'antd';
+import { Row, Col, Card, InputNumber } from 'antd';
 import styled, { ThemeProvider }from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 import { animateScroll as scroll } from 'react-scroll';
@@ -12,33 +12,6 @@ import { injectIntl, defineMessages } from 'react-intl';
 // Components
 import Messages from '../component/chatMessages'
 const { Meta } = Card;
-
-
-
-const AldaIcon = styled(Icon)`
-  font-size: ${props => props.theme.fontSize};
-  padding: 5px;
-`;
-
-const InputRow = styled(Row)`
-  margin-top: 10px;
-`;
-
-const InputText = styled.input`
-  font-size: ${props => props.theme.fontSize};
-  width: 100%;
-  outline: none;
-  border-width: 0 0 1px 0;
-  border-bottom-color: #0072ff;
-`;
-const InputButton = styled(Button)`
-                & span {
-                  font-size: ${props => props.theme.fontSize};
-                }
-  &:hover span {
-    color: ${props => props.theme.primaryColor};
-  }
-`;
 
 const InputNumberStyled = styled(InputNumber)`
   width: 100% !important;
@@ -128,46 +101,8 @@ const messages = defineMessages({
 });
 
 class Chat extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      inputText: ''
-    }
-
-    this._handleNumberInputOnChange = this._handleNumberInputOnChange.bind(this);
-  }
-
   componentDidUpdate() {
     scroll.scrollToBottom();
-  }
-
-  _sendHumanMessage(text) {
-    if (text !== '') {
-      this.props.addMessageWithDelay({
-        text,
-        human: true
-      });
-      this.setState({inputText: ''});
-    }
-  }
-
-  _handleNumberInputOnChange(value) {
-    this.setState({ inputText: value+'€' });
-  }
-
-  _handleTextInputOnChange = (e) => {
-    this.setState({inputText: e.target.value});
-  }
-
-  _handleTextInputOnKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      this._sendHumanMessage(this.state.inputText);
-    }
-  }
-
-  _handleButtonPress(text) {
-    this._sendHumanMessage(text);
   }
 
   _handleCardButtonPress(text, postback) {
@@ -178,7 +113,6 @@ class Chat extends React.Component {
   }
 
   _renderInputRow() {
-    const { inputText } = this.state;
     const { input } = this.props;
     const { show, type, buttons } = input;
 
@@ -199,37 +133,8 @@ class Chat extends React.Component {
               </Col>
             </Row>
           );
-        case "number":
-          return (
-            <InputRow type="flex" justify="center">
-              <Col span={16}>
-                <InputNumberStyled
-                  defaultValue={0}
-                  formatter={value => `${value}€`}
-                  parser={value => value.replace('€', '')}
-                  onChange={this._handleNumberInputOnChange}
-                  onKeyPress={this._handleInputOnKeyPress}
-                />
-              </Col>
-              <Col span={4}>
-                <InputButton onClick={() => {this._sendHumanMessage(inputText)}}><AldaIcon type="mail" /></InputButton>
-              </Col>
-            </InputRow>
-          );
-        case "card":
-          return this._renderCards();
         default:
-          return (
-            <InputRow type="flex" justify="center">
-              <Col span={16}>
-                <InputText type="text" value={inputText} placeholder={this.props.intl.formatMessage(messages.textInputPlaceholder)} autoFocus
-                  onChange={this._handleTextInputOnChange} onKeyPress={this._handleTextInputOnKeyPress} />
-              </Col>
-              <Col span={4}>
-                <InputButton onClick={() => {this._sendHumanMessage(inputText)}}><AldaIcon type="mail" /></InputButton>
-              </Col>
-            </InputRow>
-          );
+          return null
       }
     }
   }
@@ -280,31 +185,31 @@ class Chat extends React.Component {
 
     return (
       <ThemeProvider theme={theme}>
-        <Row type="flex" justify="center">
-          <Col id="chatContainer" span={24} md={10} >
-            <Messages messages={messages} />
-            {this._renderInputRow()}
-          </Col>
-        </Row>
+        <Fragment>
+          <Row type="flex" justify="center">
+            <Col id="chatContainer" span={24} md={10} >
+              <Messages messages={messages} />
+            </Col>
+          </Row>
+          <Row type="flex" justify="center" style={{ position: 'fixed', bottom: 16}} >
+            <Col id="chatContainer" span={24} md={10} >
+              {this._renderInputRow()}
+            </Col>
+          </Row>
+        </Fragment>
       </ThemeProvider>
     );
   }
 }
 
 
-const mapStateToProps = state => {
-  return state;
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    addMessageWithDelay: msg => { dispatch(addMessageWithDelay(msg)) }
-  };
-}
+const mapStateToProps = state => ({
+  input: state.input,
+  messages: state.messages,
+})
 
 const ConnectedChat = connect(
   mapStateToProps,
-  mapDispatchToProps
 )(Chat);
 
 export default injectIntl(ConnectedChat);

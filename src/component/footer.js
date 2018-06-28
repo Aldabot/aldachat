@@ -1,13 +1,9 @@
-import React, { Component } from 'react'
-import { Layout, Divider, Row, Col } from 'antd'
+import React, { Component, Fragment } from 'react'
+import { Divider, Row, Col } from 'antd'
 import styled from 'styled-components'
 import SocialMenu from './socialMenu'
 import FooterMenu from './footerMenu'
 
-const MyFooter = styled(Layout.Footer)`
-  background-color: white !important;
-  padding: 0 5vw;
-`
 const Copyright = styled.p`
   margin-top: 2vh;
   text-align: center;
@@ -23,7 +19,7 @@ class Footer extends Component {
     const { router } = this.props
 
     return (
-      <MyFooter>
+      <Fragment>
         <Divider style={{margin: 0}} />
         <Row type="flex" justify="space-between" align="middle">
           <Col oder={1} span={24} md={{span: 7, order: 2}}>
@@ -38,7 +34,7 @@ class Footer extends Component {
             </Copyright>
           </Col>
         </Row>
-      </MyFooter>
+      </Fragment>
     )
   }
 }

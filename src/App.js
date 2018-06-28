@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
-import { Route } from 'react-router'
+import { Switch, Route } from 'react-router'
 import { withRouter } from 'react-router-dom'
 import { Layout, Spin, Row, Col } from 'antd'
 import styled from 'styled-components'
@@ -16,6 +16,7 @@ import FAQ from './component/faq'
 import Privacy from './component/privacy'
 import Security from './component/security'
 import Footer from './component/footer'
+import TextInput from './containers/textInput.js'
 
 // Amplify
 import Amplify, { Auth } from 'aws-amplify'
@@ -56,6 +57,10 @@ const MyLayout = styled(Layout)`
 const MyContent = styled(Content)`
   padding: 0 5vw 0 5vw;
   margin-top: 20px;
+`
+const MyFooter = styled(Layout.Footer)`
+  background-color: white !important;
+  padding: 0 5vw;
 `
 
 const Alda = styled.h1`
@@ -138,6 +143,18 @@ class App extends Component {
     )
   }
 
+  renderFooter() {
+    const { router } = this.props
+    return (
+      <Fragment>
+        <Switch>
+          <Route path="/chat" render={() => <TextInput />}/>
+          <Route path="/" render={() => <Footer router={router} />}/>
+        </Switch>
+      </Fragment>
+    )
+  }
+
   render() {
     const { isLoggedIn } = this.state
     const { router } = this.props
@@ -157,7 +174,9 @@ class App extends Component {
         <MyContent>
           {this.renderContent()}
         </MyContent>
-        <Footer router={router} />
+        <MyFooter>
+          {this.renderFooter()}
+        </MyFooter>
       </MyLayout>
     )
   }
