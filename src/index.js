@@ -8,6 +8,7 @@ import registerServiceWorker from './registerServiceWorker';
 import createHistory from 'history/createBrowserHistory'
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux'
 // Intl
+import { I18n } from 'aws-amplify'
 import { IntlProvider, addLocaleData } from 'react-intl';
 import en from 'react-intl/locale-data/en';
 import es from 'react-intl/locale-data/es';
@@ -19,6 +20,7 @@ import chatApp from './reducers/index';
 // Sagas
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas/index.js';
+I18n.setLanguage('es')
 
 ReactGA.initialize('UA-110991818-1')
 
