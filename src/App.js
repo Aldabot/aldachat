@@ -27,6 +27,9 @@ import {
   signIn,
   signOut
 } from './actions/authenticator'
+import {
+  setInputTypeToText
+} from './actions/index.js'
 
 // Styling
 import './App.less';
@@ -102,6 +105,7 @@ class App extends Component {
       this.props.signIn(user)
       this.props.addMessage({ text: `Hola, ${user.username} 😍😍😍` })
       this.props.addMessage({ text: '¿En que puedo ayudarte?' })
+      this.props.setInputTypeToText()
       this.setState({
         isLoading: false,
         user,
@@ -169,7 +173,8 @@ function mapDispatchToProps(dispatch) {
   return {
     addMessage: (message) => {dispatch(addMessage(message))},
     signIn: () => dispatch(signIn()),
-    signOut: () => dispatch(signOut())
+    signOut: () => dispatch(signOut()),
+    setInputTypeToText: () => dispatch(setInputTypeToText()),
   }
 }
 
