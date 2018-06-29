@@ -16,7 +16,7 @@ import FAQ from './component/faq'
 import Privacy from './component/privacy'
 import Security from './component/security'
 import Footer from './component/footer'
-import TextInput from './containers/textInput.js'
+import ChatFooter from './component/chatFooter.js'
 
 // Amplify
 import Amplify, { Auth } from 'aws-amplify'
@@ -60,7 +60,7 @@ const MyContent = styled(Content)`
 `
 const MyFooter = styled(Layout.Footer)`
   background-color: white !important;
-  padding: 0 5vw;
+  padding: 0 !important;
 `
 
 const Alda = styled.h1`
@@ -148,7 +148,7 @@ class App extends Component {
     return (
       <Fragment>
         <Switch>
-          <Route path="/chat" render={() => <TextInput />}/>
+          <Route path="/chat" render={() => <ChatFooter />}/>
           <Route path="/" render={() => <Footer router={router} />}/>
         </Switch>
       </Fragment>

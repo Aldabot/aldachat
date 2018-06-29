@@ -7,32 +7,18 @@ import { connect } from 'react-redux'
 import { Row, Col, Icon, Button } from 'antd';
 // Design
 import theme from '../theme'
-const AldaIcon = styled(Icon)`
-  font-size: ${props => props.theme.fontSize};
-  padding: 5px;
-`;
 const InputRow = styled(Row)`
   margin-top: 10px;
-  position: fixed;
-  bottom: 10px;
 `;
-const InputText = styled.input`
+const MyInputText = styled.input`
   font-size: ${props => props.theme.fontSize};
   width: 100%;
   outline: none;
   border-width: 0 0 1px 0;
   border-bottom-color: #0072ff;
 `;
-const InputButton = styled(Button)`
-                & span {
-                  font-size: ${props => props.theme.fontSize};
-                }
-  &:hover span {
-    color: ${props => props.theme.primaryColor};
-  }
-`;
 
-class TextInput extends Component {
+class InputText extends Component {
   state = {
     inputText: ''
   }
@@ -67,19 +53,21 @@ class TextInput extends Component {
     return (
       <ThemeProvider theme={theme}>
         <InputRow type="flex" justify="center">
-          <Col span={16}>
-            <InputText
+          <Col span={22}>
+            <MyInputText
               type="text" value={inputText}
               placeholder="Escribe aqui ..." autoFocus
               onChange={this.handleTextInputOnChange}
               onKeyPress={this.handleTextInputOnKeyPress} />
           </Col>
-          <Col span={4}>
-            <InputButton
+          <Col span={2} style={{textAlign: 'right'}}>
+            <Button
               onClick={() => {this.sendHumanMessage(inputText)}}
-            >
-              <AldaIcon type="mail" />
-            </InputButton>
+              size="large"
+              type="primary"
+              shape="circle"
+              icon="mail"
+            />
           </Col>
         </InputRow>
       </ThemeProvider>
@@ -93,4 +81,4 @@ const mapDispatchToProps = dispatch => ({
   addMessageWithDelay: msg => { dispatch(addMessageWithDelay(msg)) }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(TextInput)
+export default connect(mapStateToProps, mapDispatchToProps)(InputText)
