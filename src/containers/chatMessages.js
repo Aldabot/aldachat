@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { Fragment } from 'react'
+// antd
 import { Row, Col } from 'antd'
-import styled from 'styled-components'
+// Design
+import styled, { ThemeProvider } from 'styled-components'
+import theme from '../theme.js'
 import { Motion, spring } from 'react-motion';
-import CardCarousel from './chatCard'
+import CardCarousel from '../components/chatCard'
+// redux
+import { connect } from 'react-redux'
 
 const BotMessage = styled.div`
   margin-left: ${props => props.x};
@@ -76,7 +81,15 @@ const Messages = (props) => {
     return (null)
   });
 
-  return messageRows
+  return (
+    <ThemeProvider theme={theme}>
+      <Fragment>
+        {messageRows}
+      </Fragment>
+    </ThemeProvider>
+  )
 }
 
-export default Messages
+const mapStateToProps = state => ({ messages: state.messages })
+
+export default connect(mapStateToProps)(Messages)

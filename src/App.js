@@ -6,17 +6,17 @@ import { Layout, Spin, Row, Col } from 'antd'
 import styled from 'styled-components'
 
 // Components
-import Authenticator from './component/authenticator'
+import Authenticator from './components/authenticator'
 import { addMessage } from './actions/index'
-import Menu from './component/menu'
-import Home from './component/home'
-import Chat from './containers/chat.js'
-import Company from './component/company'
-import FAQ from './component/faq'
-import Privacy from './component/privacy'
-import Security from './component/security'
-import Footer from './component/footer'
-import ChatFooter from './component/chatFooter.js'
+import Menu from './components/menu'
+import Home from './components/home'
+import ChatMessages from './containers/chatMessages.js'
+import Company from './components/company'
+import FAQ from './components/faq'
+import Privacy from './components/privacy'
+import Security from './components/security'
+import Footer from './components/footer'
+import ChatFooter from './components/chatFooter.js'
 
 // Amplify
 import Amplify, { Auth } from 'aws-amplify'
@@ -72,17 +72,6 @@ const Alda = styled.h1`
   }
 `
 
-/* function AppearBottomTop(props) {
- *   return (
- *     <Motion defaultStyle={{x: 20, y: 0}} style={{x: spring(0), y: spring(1)}}>
- *       {({x, y}) => {
- *          const style = {position: 'relative', top: x, opacity: y}
- *          return React.cloneElement(props.children, {style})
- *       }}
- *     </Motion>
- *   )
- * } */
-
 class App extends Component {
   constructor(props) {
     super(props)
@@ -133,7 +122,7 @@ class App extends Component {
     return (
       <Fragment>
         <Route exact path="/" component={Home}/>
-        <Route exact path="/chat" component={Chat}/>
+        <Route exact path="/chat" component={ChatMessages}/>
         <Route exact path="/company" component={Company} />
         <Route exact path="/faq" component={FAQ} />
         <Route exact path="/authenticator" render={() => <Authenticator theme={Instagram} />} />
