@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import styled from 'styled-components'
+import ChatHeader from '../components/chatHeader.js'
 import ChatMessages from '../containers/chatMessages.js'
 import InputText from '../containers/inputText.js'
 import InputAction from '../containers/inputAction.js'
@@ -9,7 +10,7 @@ const Grid = styled.div`
   padding: 2vw;
   width: 100%;
   display: grid;
-  grid-template-rows: 1fr auto auto;
+  grid-template-rows: 7% 1fr auto auto;
 `
 
 const StickyInput = styled.div`
@@ -24,13 +25,16 @@ const StickyInput = styled.div`
 export default class Chat extends Component {
   render() {
     return (
-      <Grid>
-        <ChatMessages />
-        <InputAction />
-        <StickyInput>
-          <InputText />
-        </StickyInput>
-      </Grid>
+      <Fragment>
+        <Grid>
+          <ChatHeader />
+          <ChatMessages />
+          <InputAction />
+          <StickyInput>
+            <InputText />
+          </StickyInput>
+        </Grid>
+      </Fragment>
     )
   }
 }
