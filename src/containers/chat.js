@@ -16,6 +16,7 @@ const StickyInput = styled.div`
   overflow: hidden;
   position: sticky;
   bottom: 0;
+  width: 100%;
 `
 
 export default class Chat extends Component {

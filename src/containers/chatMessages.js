@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Component } from 'react'
 // antd
 import { Row, Col } from 'antd'
 // Design
@@ -6,6 +6,8 @@ import styled, { ThemeProvider } from 'styled-components'
 import theme from '../theme.js'
 import { Motion, spring } from 'react-motion';
 import CardCarousel from '../components/chatCard'
+import { animateScroll as scroll } from 'react-scroll'
+
 // redux
 import { connect } from 'react-redux'
 
@@ -47,47 +49,54 @@ const AnimatedHumanMessage = (props) => {
   )
 }
 
-const ChatMessages = (props) => {
-  const { messages } = props
-  const messageRows = messages.map((message, index) => {
-    if(message.text) {
-      const { text, human } = message
-      const messageOutput = (!human) ? (
-        <AnimatedBotMessage text={text} />
-      ) : (
-        <AnimatedHumanMessage text={text} />
-      );
-
-      return (
-        <Row key={index} type="flex" justify="center">
-          <Col span={24}>
-            {messageOutput}
-          </Col>
-        </Row>
-      );
-    }
-
-    if(message.cards) {
-      const { cards } = message
-      return (
-        <CardCarousel cards={cards} />
-      )
-    }
-
-    return (null)
-  });
-
-  if(messageRows.length === 0) {
-    return <div />
+class ChatMessages extends Component {
+  componentDidUpdate() {
+    // scroll to bottom on every new message
+    scroll.scrollToBottom();
   }
 
-  return (
-    <ThemeProvider theme={theme}>
-      <div style={{overflow: 'hidden'}}>
-        {messageRows}
-      </div>
-    </ThemeProvider>
-  )
+  render() {
+    const { messages } = this.props
+    const messageRows = messages.map((message, index) => {
+      if(message.text) {
+        const { text, human } = message
+        const messageOutput = (!human) ? (
+          <AnimatedBotMessage text={text} />
+        ) : (
+          <AnimatedHumanMessage text={text} />
+        );
+
+        return (
+          <Row key={index} type="flex" justify="center">
+            <Col span={24}>
+              {messageOutput}
+            </Col>
+          </Row>
+        );
+      }
+
+      if(message.cards) {
+        const { cards } = message
+        return (
+          <CardCarousel cards={cards} />
+        )
+      }
+
+      return (null)
+    });
+
+    if(messageRows.length === 0) {
+      return <div />
+    }
+
+    return (
+      <ThemeProvider theme={theme}>
+        <div style={{overflow: 'hidden'}}>
+          {messageRows}
+        </div>
+      </ThemeProvider>
+    )
+  }
 }
 
 const mapStateToProps = state => ({ messages: state.messages })
