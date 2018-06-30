@@ -77,11 +77,15 @@ const ChatMessages = (props) => {
     return (null)
   });
 
+  if(messageRows.length === 0) {
+    return <div />
+  }
+
   return (
     <ThemeProvider theme={theme}>
-      <Fragment>
+      <div style={{overflow: 'hidden'}}>
         {messageRows}
-      </Fragment>
+      </div>
     </ThemeProvider>
   )
 }

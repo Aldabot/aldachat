@@ -39,7 +39,6 @@ class InputAction extends Component {
   render() {
     const { input, className } = this.props;
     const { show, type, buttons } = input;
-    console.log(this.props)
 
     if ( show ) {
       switch(type) {
@@ -57,6 +56,7 @@ class InputAction extends Component {
             );
           })
           return (
+            <div style={{overflow: 'hidden'}}>
             <Carousel
               dots={false}
               variableWidth={true}
@@ -65,6 +65,7 @@ class InputAction extends Component {
             >
               {quickReplies}
             </Carousel>
+            </div>
           )
         default:
           return null
