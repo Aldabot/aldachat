@@ -32,6 +32,8 @@ const CardButton = styled(Button)`
   font-size: 1.2rem !important;
   border-radius: 0px !important;
   border-right-width: 0 !important;
+  border-left-width: 0 !important;
+  border-bottom-width: 0 !important;
 `
 const LastCardButton = CardButton.extend`
   border-radius: 0 0 15px 15px !important;
