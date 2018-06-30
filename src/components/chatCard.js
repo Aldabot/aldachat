@@ -43,9 +43,14 @@ const CardButton = styled(Button)`
   width: 100%;
   font-size: 1.2rem !important;
   border-radius: 0px !important;
+  border-bottom-width: 0px !important;
+  &:hover {
+    border-bottom-width: 1px !important;
+  }
 `
 const LastCardButton = CardButton.extend`
   border-radius: 0 0 15px 15px !important;
+  border-bottom-width: 1px !important;
 `
 
 class ChatCard extends Component {
