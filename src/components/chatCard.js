@@ -4,25 +4,37 @@ import { Carousel, Button, Icon } from 'antd'
 import PropTypes from 'prop-types'
 
 const CardContainer = styled.div`
-  border: solid 1px;
-  border-color: #DDDDDD;
   border-radius: 15px;
   margin-left: 5vw;
   min-height: 100%
+  margin-bottom: 20px;
 `
 const Title = styled.h3`
-  margin: 1vw;
+  padding: 10px;
   font-size: 1rem;
+  border-style: solid;
+  border-color: #DDDDDD;
+  border-width: 1px 1px 0px 1px;
+  margin-bottom: 0;
 `
 const SubTitle = styled.h4`
-  margin: 1vw;
+  padding: 10px;
   font-size: 0.8rem;
+  border-style: solid;
+  border-color: #DDDDDD;
+  border-width: 1px 1px 0px 1px;
+  border-radius: ${props => props.hasButtons ? '0' : '0 0 15px 15px'}
+  border-bottom: ${props => props.hasButtons ? '0px' : 'solid 1px #DDDDDD'}
+  margin-bottom: 0;
 `
 const Image = styled.img`
   width: 100%
   height: 52.63%;
   object-fit: cover;
-  border-radius: 20px;
+  border-style: solid;
+  border-radius: 15px 15px 0 0;
+  border-width: 1px 1px 0 1px !important;
+  border-color: #DDDDDD;
   @media (min-width: 768px) {
     height: 15vw;
   }
@@ -31,9 +43,6 @@ const CardButton = styled(Button)`
   width: 100%;
   font-size: 1.2rem !important;
   border-radius: 0px !important;
-  border-right-width: 0 !important;
-  border-left-width: 0 !important;
-  border-bottom-width: 0 !important;
 `
 const LastCardButton = CardButton.extend`
   border-radius: 0 0 15px 15px !important;
@@ -66,7 +75,7 @@ class ChatCard extends Component {
       <CardContainer>
         <Image src={imageUri} />
         <Title>{title}</Title>
-        <SubTitle>{subtitle}</SubTitle>
+        <SubTitle hasButtons={renderedButtons.length > 0}>{subtitle}</SubTitle>
         {renderedButtons}
       </CardContainer>
     )
@@ -130,17 +139,29 @@ const NextArrow = PrevArrow.extend`
 class CardCarousel extends Component {
   render() {
     const { cards } = this.props
-
-    const carouselSettings = {
+    let carouselSettings = {
       draggable: true,
       dots: false,
       arrows: true,
       slidesToShow: 1.2,
+      slidesToScroll: 1,
       infinite: false,
       centerMode: true,
-      /* prevArrow: <PrevArrow type="prev" />,
-       * nextArrow: <NextArrow type="next" />, */
     }
+    if (window.innerWidth > 768) {
+      carouselSettings = {
+        draggable: true,
+        dots: false,
+        arrows: true,
+        slidesToShow: 3.5,
+        slidesToScroll: 3,
+        infinite: false,
+        centerMode: false,
+        prevArrow: <PrevArrow type="prev" />,
+        nextArrow: <NextArrow type="next" />,
+      }
+    }
+
 
     const cardSlides = cards.map((card, index) => {
       return(
