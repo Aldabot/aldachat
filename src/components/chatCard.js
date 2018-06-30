@@ -4,53 +4,43 @@ import { Carousel, Button, Icon } from 'antd'
 import PropTypes from 'prop-types'
 
 const CardContainer = styled.div`
-  border-radius: 15px;
-  margin-left: 5vw;
+  border-radius: 15px
   min-height: 100%
-  margin-bottom: 20px;
-`
-const Title = styled.h3`
-  padding: 10px;
-  font-size: 1rem;
-  border-style: solid;
-  border-color: #DDDDDD;
-  border-width: 1px 1px 0px 1px;
-  margin-bottom: 0;
-`
-const SubTitle = styled.h4`
-  padding: 10px;
-  font-size: 0.8rem;
-  border-style: solid;
-  border-color: #DDDDDD;
-  border-width: 1px 1px 0px 1px;
-  border-radius: ${props => props.hasButtons ? '0' : '0 0 15px 15px'}
-  border-bottom: ${props => props.hasButtons ? '0px' : 'solid 1px #DDDDDD'}
-  margin-bottom: 0;
+  border: solid 1px #DDDDDD;
 `
 const Image = styled.img`
   width: 100%
   height: 52.63%;
   object-fit: cover;
-  border-style: solid;
   border-radius: 15px 15px 0 0;
-  border-width: 1px 1px 0 1px !important;
-  border-color: #DDDDDD;
   @media (min-width: 768px) {
-    height: 15vw;
+  height: 15vw;
   }
+`
+const Title = styled.h3`
+  padding: 10px;
+  font-size: 0.8rem;
+  border-top: solid 1px #DDDDDD;
+  margin-bottom: 0;
+`
+const SubTitle = styled.h4`
+  padding: 10px;
+  font-size: 0.6rem;
+  border-top: solid 1px #DDDDDD;
+  margin-bottom: 0;
 `
 const CardButton = styled(Button)`
   width: 100%;
   font-size: 1.2rem !important;
   border-radius: 0px !important;
-  border-bottom-width: 0px !important;
+  border-width: 0px !important;
+  border-top-width: 1px !important;
   &:hover {
-    border-bottom-width: 1px !important;
+    border-width: 1px !important;
   }
 `
 const LastCardButton = CardButton.extend`
   border-radius: 0 0 15px 15px !important;
-  border-bottom-width: 1px !important;
 `
 
 class ChatCard extends Component {
@@ -148,7 +138,7 @@ class CardCarousel extends Component {
       draggable: true,
       dots: false,
       arrows: true,
-      slidesToShow: 1.2,
+      slidesToShow: 1.1,
       slidesToScroll: 1,
       infinite: false,
       centerMode: true,

@@ -42,8 +42,8 @@ class InputAction extends Component {
     this.sendHumanMessage(text);
   }
 
-  render() {
-    const { input, className } = this.props;
+  renderInputAction() {
+    const { input } = this.props;
     const { show, type, buttons } = input;
 
     if ( show ) {
@@ -62,22 +62,28 @@ class InputAction extends Component {
             );
           })
           return (
-            <div style={{overflow: 'hidden'}}>
             <Carousel
               dots={false}
               variableWidth={true}
               infinite={false}
-              className={className}
             >
               {quickReplies}
             </Carousel>
-            </div>
           )
         default:
           return null
       }
     }
     return null
+  }
+
+  render() {
+    const { className } = this.props
+    return (
+      <div className={className} style={{overflow: 'hidden', marginTop: '20px'}}>
+        {this.renderInputAction()}
+      </div>
+    )
   }
 }
 

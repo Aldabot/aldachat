@@ -13,10 +13,11 @@ const Grid = styled.div`
 `
 
 const StickyInput = styled.div`
-  overflow: hidden;
   position: sticky;
   bottom: 0;
   width: 100%;
+  overflow: hidden;
+  background-color: white;
 `
 
 export default class Chat extends Component {
