@@ -12,6 +12,7 @@ const MyInputText = styled.input`
   font-size: ${props => props.theme.fontSize};
   outline: none;
   border-width: 0 0 1px 0;
+  border: 
   border-bottom-color: #0072ff;
   width: 100%;
 `

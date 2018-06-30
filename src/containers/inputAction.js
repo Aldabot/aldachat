@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 // antd
 import { Carousel } from 'antd';
+import { animateScroll as scroll } from 'react-scroll'
 
 const QuickReply = styled.button`
   font-size: ${props => props.theme.fontSize};
@@ -22,6 +23,11 @@ const QuickReply = styled.button`
 `;
 
 class InputAction extends Component {
+  componentDidUpdate() {
+    // scroll to bottom on every new message
+    scroll.scrollToBottom();
+  }
+
   sendHumanMessage(text) {
     if (text !== '') {
       this.props.addMessageWithDelay({
