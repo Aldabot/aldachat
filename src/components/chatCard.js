@@ -8,7 +8,7 @@ const CardContainer = styled.div`
   border-color: #DDDDDD;
   border-radius: 15px;
   margin-left: 5vw;
-  height: 100%;
+  min-height: 100%
 `
 const Title = styled.h3`
   margin: 1vw;
