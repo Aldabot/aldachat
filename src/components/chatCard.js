@@ -46,11 +46,19 @@ class ChatCard extends Component {
     let renderedButtons = []
     if(buttons) {
       renderedButtons = buttons.map((button, i) => {
-        const { text } = button // also contains postback!
+        const { text, postback } = button // also contains postback!
         if (i === buttons.length-1) {
-          return <LastCardButton key={i}>{text}</LastCardButton>
+          return (
+            <LastCardButton key={i}>
+              <a href={postback} target="_blank">{text}</a>
+            </LastCardButton>
+          )
         }
-        return <CardButton key={i}>{text}</CardButton>
+        return (
+          <CardButton key={i}>
+            <a href={postback} target="_blank">{text}</a>
+          </CardButton>
+        )
       })
     }
 
