@@ -2,11 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactGA from 'react-ga'
 import './index.css';
-import App from './App';
+// Components
+import Web from './web.js';
+import Chat from './containers/chat.js'
 import registerServiceWorker from './registerServiceWorker';
 // Router
 import createHistory from 'history/createBrowserHistory'
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux'
+import { Route, Switch } from 'react-router-dom'
 // Intl
 import { I18n } from 'aws-amplify'
 import { IntlProvider, addLocaleData } from 'react-intl';
@@ -118,7 +121,10 @@ ReactDOM.render(
   <Provider store={store}>
     <IntlProvider locale={language} messages={dict}>
       <ConnectedRouter history={history}>
-        <App />
+        <Switch>
+          <Route exact path="/chat" component={Chat} />
+          <Route path="/" component={Web} />
+        </Switch>
       </ConnectedRouter>
     </IntlProvider>
   </Provider>,

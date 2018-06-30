@@ -47,7 +47,7 @@ const AnimatedHumanMessage = (props) => {
   )
 }
 
-const Messages = (props) => {
+const ChatMessages = (props) => {
   const { messages } = props
   const messageRows = messages.map((message, index) => {
     if(message.text) {
@@ -70,11 +70,7 @@ const Messages = (props) => {
     if(message.cards) {
       const { cards } = message
       return (
-        <Row key={index} type="flex" justify="center">
-          <Col span={24}>
-            <CardCarousel cards={cards} />
-          </Col>
-        </Row>
+        <CardCarousel cards={cards} />
       )
     }
 
@@ -92,4 +88,4 @@ const Messages = (props) => {
 
 const mapStateToProps = state => ({ messages: state.messages })
 
-export default connect(mapStateToProps)(Messages)
+export default connect(mapStateToProps)(ChatMessages)

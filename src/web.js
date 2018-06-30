@@ -72,7 +72,7 @@ const Alda = styled.h1`
   }
 `
 
-class App extends Component {
+class Web extends Component {
   constructor(props) {
     super(props)
 
@@ -186,5 +186,5 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Web));
 

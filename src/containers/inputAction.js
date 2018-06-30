@@ -37,8 +37,9 @@ class InputAction extends Component {
   }
 
   render() {
-    const { input } = this.props;
+    const { input, className } = this.props;
     const { show, type, buttons } = input;
+    console.log(this.props)
 
     if ( show ) {
       switch(type) {
@@ -47,10 +48,9 @@ class InputAction extends Component {
             const { text } = button;
 
             return (
-              <div>
+              <div key={index}>
                 <QuickReply
                   onClick={() => {this.handleButtonPress(text)}}
-                  key={index}
                   style={{ float: 'none', display: 'inline-block' }}>{text}
                 </QuickReply>
               </div>
@@ -61,10 +61,11 @@ class InputAction extends Component {
               dots={false}
               variableWidth={true}
               infinite={false}
+              className={className}
             >
               {quickReplies}
             </Carousel>
-          );
+          )
         default:
           return null
       }

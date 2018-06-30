@@ -139,13 +139,9 @@ class CardCarousel extends Component {
     })
 
     return (
-      <Row>
-        <Col span={24} md={21}>
-          <Carousel {...carouselSettings}>
-            {cardSlides}
-          </Carousel>
-        </Col>
-      </Row>
+      <Carousel {...carouselSettings}>
+        {cardSlides}
+      </Carousel>
     )
   }
 }

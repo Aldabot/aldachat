@@ -4,19 +4,19 @@ import styled, { ThemeProvider } from 'styled-components'
 // redux
 import { connect } from 'react-redux'
 // antd
-import { Row, Col, Icon, Button } from 'antd';
+import { Button } from 'antd';
 // Design
 import theme from '../theme'
-const InputRow = styled(Row)`
-  margin-top: 10px;
-`;
 const MyInputText = styled.input`
   font-size: ${props => props.theme.fontSize};
-  width: 100%;
+  width: 83%;
   outline: none;
   border-width: 0 0 1px 0;
   border-bottom-color: #0072ff;
 `;
+const MyButton = styled(Button)`
+  width: 17%;
+`
 
 class InputText extends Component {
   state = {
@@ -49,33 +49,30 @@ class InputText extends Component {
 
   render() {
     const { inputText } = this.state
+    const { className } = this.props
 
     return (
       <ThemeProvider theme={theme}>
-        <InputRow type="flex" justify="center">
-          <Col span={22}>
-            <MyInputText
-              type="text" value={inputText}
-              placeholder="Escribe aqui ..." autoFocus
-              onChange={this.handleTextInputOnChange}
-              onKeyPress={this.handleTextInputOnKeyPress} />
-          </Col>
-          <Col span={2} style={{textAlign: 'right'}}>
-            <Button
-              onClick={() => {this.sendHumanMessage(inputText)}}
-              size="large"
-              type="primary"
-              shape="circle"
-              icon="mail"
-            />
-          </Col>
-        </InputRow>
+        <div className={className}>
+          <MyInputText
+            type="text" value={inputText}
+            placeholder="Escribe aqui ..." autoFocus
+            onChange={this.handleTextInputOnChange}
+            onKeyPress={this.handleTextInputOnKeyPress} />
+          <MyButton
+            onClick={() => {this.sendHumanMessage(inputText)}}
+            size="large"
+            type="primary"
+            shape="circle"
+            icon="mail"
+          />
+        </div>
       </ThemeProvider>
     )
   }
 }
 
-const mapStateToProps = state => {}
+const mapStateToProps = state => ({})
 
 const mapDispatchToProps = dispatch => ({
   addMessageWithDelay: msg => { dispatch(addMessageWithDelay(msg)) }
