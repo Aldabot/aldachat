@@ -1,25 +1,26 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { Carousel, Row, Col, Button, Icon } from 'antd'
+import { Carousel, Button, Icon } from 'antd'
 import PropTypes from 'prop-types'
 
 const CardContainer = styled.div`
   border: solid 1px;
   border-color: #DDDDDD;
   border-radius: 15px;
-  width: 100%;
+  margin-left: 5vw;
+  height: 100%;
 `
 const Title = styled.h3`
   margin: 1vw;
-  font-size: 1.5rem;
+  font-size: 1rem;
 `
 const SubTitle = styled.h4`
   margin: 1vw;
-  font-size: 1.2rem;
+  font-size: 0.8rem;
 `
 const Image = styled.img`
   width: 100%
-  height: 40vw;
+  height: 52.63%;
   object-fit: cover;
   border-radius: 20px;
   @media (min-width: 768px) {
@@ -31,8 +32,6 @@ const CardButton = styled(Button)`
   font-size: 1.2rem !important;
   border-radius: 0px !important;
   border-right-width: 0 !important;
-  border-left-width: 0 !important;
-  border-bottom-width: 0 !important;
 `
 const LastCardButton = CardButton.extend`
   border-radius: 0 0 15px 15px !important;
@@ -126,8 +125,11 @@ class CardCarousel extends Component {
       draggable: true,
       dots: false,
       arrows: true,
-      prevArrow: <PrevArrow type="prev" />,
-      nextArrow: <NextArrow type="next" />,
+      slidesToShow: 1.2,
+      infinite: false,
+      centerMode: true,
+      /* prevArrow: <PrevArrow type="prev" />,
+       * nextArrow: <NextArrow type="next" />, */
     }
 
     const cardSlides = cards.map((card, index) => {
