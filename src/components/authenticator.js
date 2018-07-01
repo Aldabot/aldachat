@@ -21,11 +21,11 @@ class Authenticator extends Component {
 
   async redirectIfLoggedIn() {
     console.log(this.props)
-    const { authState, history } = this.props
+    const { authState } = this.props
     if (authState === 'signedIn') {
       const user = await Auth.currentUserInfo()
       this.props.signIn({ ...user })
-      history.push('/')
+      window.location.href = "/chat"
     }
   }
 

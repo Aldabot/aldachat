@@ -114,8 +114,8 @@ const store = createStore(
     logger
   )
 );
-
 sagaMiddleware.run(rootSaga);
+
 
 ReactDOM.render(
   <Provider store={store}>

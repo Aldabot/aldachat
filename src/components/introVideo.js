@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
+// Antd
 import { Row, Col, Button } from 'antd'
+// Router
+import { Link } from 'react-router-dom'
+// Design
 import { Transition } from 'react-spring'
 import styled from 'styled-components'
+// Media
 import phone from '../media/phone.png'
 import video from '../media/300-loan.mp4'
 import diamond from '../media/diamond.svg'
@@ -86,7 +91,7 @@ class IntroVideo extends Component {
                   <RightCol span={22} order={1} md={{span: 8, order: 2}} style={styles}>
                     <p>Disfruta de tu propio asesor financiero y mejora ya tu situación financiera.</p>
                     <p>Regístrate gratis con solo un clic.</p>
-                    <a href="#try"><Button>Hablar con Alda!</Button></a>
+                    <Link to="/chat"><Button>Hablar con Alda!</Button></Link>
                   </RightCol>
                 )}
               </Transition>

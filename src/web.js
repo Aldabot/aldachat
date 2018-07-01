@@ -92,21 +92,21 @@ class Web extends Component {
 
     if(user) {
       this.props.signIn(user)
-      this.props.addMessage({ text: `Hola, ${user.username} 😍😍😍` })
-      this.props.addMessage({ text: '¿En que puedo ayudarte?' })
-      this.props.setInputTypeToText()
+      if(!this.props.hasMessages) {
+        this.props.addMessage({ text: `Hola, ${user.username} 😍😍😍` })
+        this.props.addMessage({ text: '¿En que puedo ayudarte?' })
+      }
       this.setState({
         isLoading: false,
         user,
         isLoggedIn: true
       })
-    }
-    if(!this.props.hasMessages) {
-      this.props.signOut()
-      this.props.addMessage({ text: '¡Enhorabuena! Acabas de dar con la mejor asesora financiera de España' })
-      this.props.addMessage({ text: 'Por ahora puedo ayudarte a buscar el préstamo que mejor se ajusta a tus necesidades o a invertir tus ahorros en función de tu perfil.' })
-      this.setState({ isLoading: false })
     } else {
+      this.props.signOut()
+      if(!this.props.hasMessages) {
+        this.props.addMessage({ text: '¡Enhorabuena! Acabas de dar con la mejor asesora financiera de España' })
+        this.props.addMessage({ text: 'Por ahora puedo ayudarte a buscar el préstamo que mejor se ajusta a tus necesidades o a invertir tus ahorros en función de tu perfil.' })
+      }
       this.setState({ isLoading: false })
     }
   }
@@ -114,6 +114,7 @@ class Web extends Component {
   async signOut() {
     await Auth.signOut()
     this.props.signOut()
+    window.location.href = "/"
   }
 
   renderContent() {
