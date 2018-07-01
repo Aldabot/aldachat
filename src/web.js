@@ -89,8 +89,9 @@ class Web extends Component {
     // chk if user logged in
     // -> send greeting
     const user = await Auth.currentUserInfo()
+    console.log(user)
 
-    if( user === null ) {
+    if( typeof(user) === 'undefined' || user === null ) {
       this.props.signOut()
       this.props.addMessage({ text: '¡Enhorabuena! Acabas de dar con la mejor asesora financiera de España' })
       this.props.addMessage({ text: 'Por ahora puedo ayudarte a buscar el préstamo que mejor se ajusta a tus necesidades o a invertir tus ahorros en función de tu perfil.' })
