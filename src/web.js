@@ -89,14 +89,8 @@ class Web extends Component {
     // chk if user logged in
     // -> send greeting
     const user = await Auth.currentUserInfo()
-    console.log(user)
 
-    if( typeof(user) === 'undefined' || user === null ) {
-      this.props.signOut()
-      this.props.addMessage({ text: '¡Enhorabuena! Acabas de dar con la mejor asesora financiera de España' })
-      this.props.addMessage({ text: 'Por ahora puedo ayudarte a buscar el préstamo que mejor se ajusta a tus necesidades o a invertir tus ahorros en función de tu perfil.' })
-      this.setState({ isLoading: false })
-    } else {
+    if(user) {
       this.props.signIn(user)
       this.props.addMessage({ text: `Hola, ${user.username} 😍😍😍` })
       this.props.addMessage({ text: '¿En que puedo ayudarte?' })
@@ -106,6 +100,14 @@ class Web extends Component {
         user,
         isLoggedIn: true
       })
+    }
+    if(!this.props.hasMessages) {
+      this.props.signOut()
+      this.props.addMessage({ text: '¡Enhorabuena! Acabas de dar con la mejor asesora financiera de España' })
+      this.props.addMessage({ text: 'Por ahora puedo ayudarte a buscar el préstamo que mejor se ajusta a tus necesidades o a invertir tus ahorros en función de tu perfil.' })
+      this.setState({ isLoading: false })
+    } else {
+      this.setState({ isLoading: false })
     }
   }
 
@@ -175,7 +177,8 @@ class Web extends Component {
 function mapStateToProps(state) {
   return {
     router: state.router,
-    user: state.user
+    user: state.user,
+    hasMessages: (state.messages.length > 0),
   }
 }
 function mapDispatchToProps(dispatch) {
